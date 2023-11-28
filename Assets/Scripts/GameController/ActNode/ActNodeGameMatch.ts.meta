@@ -1,0 +1,34 @@
+fileFormatVersion: 2
+guid: 410e74dad96d88749b3a37b4bc341e4b
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    GameMain_1 = require(\"../../GameMain\");\r\nconst UIToast_1 = require(\"../../UI/UIToast\");\r\nconst
+    AudioController_1 = require(\"../AudioController\");\r\nconst ActNodeBase_1 =
+    require(\"./ActNodeBase\");\r\n/**\r\n * Behavior processing: Confirm transformation
+    model\r\n\r\n */\r\nclass ActNodeGameMatch extends ActNodeBase_1.default {\r\n   
+    Check() {\r\n        // if (GameMain.Instance.GetGameState() == GameState.GameWait)
+    {\r\n        //     this.StopCoroutine(this.CoRun());\r\n        //     return
+    true;\r\n        // }\r\n        return false;\r\n    }\r\n    *CoRun() {\r\n       
+    console.log(\"actnode  ActNodeGameMatch\");\r\n        AudioController_1.default.Instance.PlayTimeout();\r\n       
+    GameMain_1.default.Instance.mUIManager.OnGameReady();\r\n        UIToast_1.default.Instance.ShowReadyCountDown(GameMain_1.default.Instance.mGameInfo.GameMatchTime);\r\n   
+    }\r\n}\r\nexports.default = ActNodeGameMatch;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQWN0Tm9kZUdhbWVNYXRjaC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkFjdE5vZGVHYW1lTWF0Y2gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsNkNBQXNDO0FBQ3RDLDhDQUF1QztBQUN2Qyx3REFBaUQ7QUFDakQsK0NBQXdDO0FBQ3hDOzs7R0FHRztBQUNILE1BQXFCLGdCQUFpQixTQUFRLHFCQUFXO0lBQ3JELEtBQUs7UUFDRCxnRUFBZ0U7UUFDaEUsd0NBQXdDO1FBQ3hDLG1CQUFtQjtRQUNuQixJQUFJO1FBQ0osT0FBTyxLQUFLLENBQUM7SUFDakIsQ0FBQztJQUNELENBQUMsS0FBSztRQUNGLE9BQU8sQ0FBQyxHQUFHLENBQUMsMkJBQTJCLENBQUMsQ0FBQztRQUN6Qyx5QkFBZSxDQUFDLFFBQVEsQ0FBQyxXQUFXLEVBQUUsQ0FBQztRQUN2QyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsV0FBVyxFQUFFLENBQUM7UUFDM0MsaUJBQU8sQ0FBQyxRQUFRLENBQUMsa0JBQWtCLENBQUMsa0JBQVEsQ0FBQyxRQUFRLENBQUMsU0FBUyxDQUFDLGFBQWEsQ0FBQyxDQUFDO0lBQ25GLENBQUM7Q0FDSjtBQWRELG1DQWNDIn0=","assetPath":"Assets/Scripts/GameController/ActNode/ActNodeGameMatch.ts","manifest":{"properties":[],"name":"ActNodeGameMatch","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: dbe5ba0f96a4e078b33e1b31f9364888
+  onlyWriteTrigger: 0

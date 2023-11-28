@@ -1,0 +1,81 @@
+fileFormatVersion: 2
+guid: e7c6ac4000457684bbe8e41901e893cc
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    LeaderboardItem_1 = require(\"./LeaderboardItem\");\r\nconst PlayerManager_1
+    = require(\"../GameManager/PlayerManager\");\r\nconst AudioController_1 = require(\"../GameController/AudioController\");\r\nconst
+    ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\n/**\r\n
+    * Game Settlement Panel\r\n */\r\nclass UIGameOverPanel extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Awake() {\r\n        this.leaderboardItemObjs = [];\r\n        this.leaderboardItemObjs.push(this.mLeaderboardItem);\r\n       
+    this.mLeaderboardItem.SetActive(false);\r\n    }\r\n    Show(playerInfoMap) {\r\n       
+    // playerInfoMap.forEach((playerInfo, id) => {\r\n        //     console.error(\"playerInfo:\",
+    JSON.stringify(playerInfo), \"id:\", id);\r\n        // });\r\n        AudioController_1.default.Instance.PlayGameOver();\r\n       
+    let playerInfoArray = [];\r\n        playerInfoMap.forEach((playerInfo, id) =>
+    {\r\n            if (id != 0) {\r\n                // Remove an empty data\r\n               
+    playerInfoArray.push(playerInfo);\r\n            }\r\n        });\r\n       
+    playerInfoArray.sort((a, b) => {\r\n            return b.score - a.score;\r\n       
+    });\r\n        for (let i = 0; i < this.leaderboardItemObjs.length; i++) {\r\n           
+    const obj = this.leaderboardItemObjs[i];\r\n            obj.SetActive(false);\r\n       
+    }\r\n        let myRank = 0;\r\n        let myScore = 0;\r\n        for (let
+    i = 0; i < playerInfoArray.length; i++) {\r\n            var go;\r\n           
+    if (i > this.leaderboardItemObjs.length - 1) {\r\n                go = UnityEngine_1.GameObject.Instantiate(this.mLeaderboardItem,
+    this.mScrollView.content);\r\n                this.leaderboardItemObjs.push(go);\r\n           
+    }\r\n            else {\r\n                go = this.leaderboardItemObjs[i];\r\n           
+    }\r\n            let playerInfo = playerInfoArray[i];\r\n            if (playerInfo.sessionId
+    == PlayerManager_1.default.Instance.mSessionId) {\r\n                myScore
+    = playerInfo.score;\r\n                myRank = i + 1;\r\n            }\r\n           
+    let rank = i + 1;\r\n            go.GetComponent($typeof(LeaderboardItem_1.default)).SetPlayerInfoData(playerInfo,
+    rank);\r\n            go.SetActive(true);\r\n        }\r\n        this.mFirstName.text
+    = playerInfoArray[0].nickName;\r\n        this.ShowPlayer(playerInfoArray[0].sessionId);\r\n       
+    this.mMyRank.text = myRank.toString();\r\n        this.mMyScore.text = myScore.toString();\r\n   
+    }\r\n    /**\r\n     * Create a player model\r\n     * @param sessionId\r\n    
+    * @returns\r\n     */\r\n    ShowPlayer(sessionId) {\r\n        let zepetoPlayer
+    = PlayerManager_1.default.Instance.GetPlayer(sessionId);\r\n        if (!zepetoPlayer)
+    {\r\n            return;\r\n        }\r\n        let zepetoContext = zepetoPlayer.character.Context;\r\n       
+    let parent = zepetoContext.transform.parent;\r\n        let spawnInfo = new ZEPETO_Character_Controller_1.SpawnInfo();\r\n       
+    spawnInfo.position = parent.position;\r\n        spawnInfo.rotation = parent.rotation;\r\n       
+    ZEPETO_Character_Controller_1.ZepetoCharacterCreator.CreateModelByUserId(zepetoPlayer.userId,
+    spawnInfo, (go) => {\r\n            this.characterObj = go;\r\n            let
+    playerTransforms = this.characterObj.GetComponentsInChildren($typeof(UnityEngine_1.Transform));\r\n           
+    playerTransforms.forEach(e => {\r\n                e.gameObject.layer = UnityEngine_1.LayerMask.NameToLayer(\"RTPlayer\");\r\n           
+    });\r\n            go.transform.SetParent(parent);\r\n            go.transform.localPosition
+    = UnityEngine_1.Vector3.zero;\r\n            go.transform.localScale = UnityEngine_1.Vector3.one;\r\n           
+    go.transform.localRotation = UnityEngine_1.Quaternion.identity;\r\n           
+    // Set camera mount point\r\n            let cameraPos = new UnityEngine_1.GameObject(\"RTCameraPos\");\r\n           
+    cameraPos.transform.parent = this.characterObj.transform;\r\n            cameraPos.transform.localPosition
+    = UnityEngine_1.Vector3.zero;\r\n            cameraPos.transform.localRotation
+    = UnityEngine_1.Quaternion.identity;\r\n            this.mRTCamera.gameObject.transform.parent
+    = cameraPos.transform;\r\n            this.mRTCamera.gameObject.transform.localPosition
+    = new UnityEngine_1.Vector3(0, 0.62, 4.3);\r\n            this.mRTCamera.gameObject.transform.localEulerAngles
+    = new UnityEngine_1.Vector3(0, 180, 0);\r\n            this.PlayerCheerAnimation();\r\n       
+    });\r\n    }\r\n    /**\r\n     * Play player celebration animation\r\n     */\r\n   
+    PlayerCheerAnimation() {\r\n        let animator = this.characterObj.GetComponentInChildren($typeof(UnityEngine_1.Animator),
+    true);\r\n        if (animator) {\r\n            let overrideController = new
+    UnityEngine_1.AnimatorOverrideController();\r\n            overrideController.runtimeAnimatorController
+    = this.mCheerAnimatorController;\r\n            animator.runtimeAnimatorController
+    = overrideController;\r\n        }\r\n    }\r\n    OnEnable() {\r\n        this.mRTCamera.targetTexture
+    = this.mRawImage.texture;\r\n        this.mRTCamera.gameObject.SetActive(true);\r\n   
+    }\r\n    OnDisable() {\r\n        this.mRTCamera.targetTexture = null;\r\n       
+    this.mRTCamera.gameObject.SetActive(false);\r\n        UnityEngine_1.GameObject.DestroyImmediate(this.characterObj);\r\n   
+    }\r\n}\r\nexports.default = UIGameOverPanel;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlHYW1lT3ZlclBhbmVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlHYW1lT3ZlclBhbmVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQTRLO0FBQzVLLG1EQUE0RDtBQUM1RCxpREFBcUQ7QUFDckQsdURBQWdEO0FBRWhELGdFQUF3RDtBQUN4RCx1RUFBZ0U7QUFDaEUsNkVBQWdGO0FBRWhGOztHQUVHO0FBQ0gsTUFBcUIsZUFBZ0IsU0FBUSxxQ0FBcUI7SUFlOUQsS0FBSztRQUNELElBQUksQ0FBQyxtQkFBbUIsR0FBRyxFQUFFLENBQUM7UUFDOUIsSUFBSSxDQUFDLG1CQUFtQixDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsQ0FBQztRQUNyRCxJQUFJLENBQUMsZ0JBQWdCLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQzNDLENBQUM7SUFFTSxJQUFJLENBQUMsYUFBdUM7UUFDL0MsOENBQThDO1FBQzlDLDJFQUEyRTtRQUMzRSxNQUFNO1FBQ04seUJBQWUsQ0FBQyxRQUFRLENBQUMsWUFBWSxFQUFFLENBQUM7UUFDeEMsSUFBSSxlQUFlLEdBQUcsRUFBRSxDQUFDO1FBQ3pCLGFBQWEsQ0FBQyxPQUFPLENBQUMsQ0FBQyxVQUFVLEVBQUUsRUFBRSxFQUFFLEVBQUU7WUFDckMsSUFBSSxFQUFFLElBQUksQ0FBQyxFQUFFO2dCQUNULHVCQUF1QjtnQkFDdkIsZUFBZSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQzthQUNwQztRQUNMLENBQUMsQ0FBQyxDQUFDO1FBQ0gsZUFBZSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUMxQixPQUFPLENBQUMsQ0FBQyxLQUFLLEdBQUcsQ0FBQyxDQUFDLEtBQUssQ0FBQztRQUM3QixDQUFDLENBQUMsQ0FBQztRQUVILEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENB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","assetPath":"Assets/Scripts/UI/UIGameOverPanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"mFirstName","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mMyRank","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mMyScore","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mCoundDownTimer","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mLeaderboardItem","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mScrollView","type":"UnityEngine.UI.ScrollRect","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mRawImage","type":"UnityEngine.UI.RawImage","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mRTCamera","type":"UnityEngine.Camera","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.AnimationModule","name":"mCheerAnimatorController","type":"UnityEngine.RuntimeAnimatorController","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIGameOverPanel","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 550198490196a98ed86067d02744d9ef
+  onlyWriteTrigger: 0

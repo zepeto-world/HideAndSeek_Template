@@ -1,0 +1,36 @@
+fileFormatVersion: 2
+guid: 2c161c91e6d7a5c47af28da8ed6cdc80
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst Localization_1 = require(\"../Common/Localization/Scripts/Localization\");\r\n/**\r\n
+    * Toggle Component encapsulation\r\n */\r\nclass UIToggleImage extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.mChangeText
+    = false;\r\n    }\r\n    Start() {\r\n        this.toggle = this.GetComponent($typeof(UnityEngine_UI_1.Toggle));\r\n       
+    this.toggle.onValueChanged.AddListener((v) => {\r\n            if (v) {\r\n               
+    this.Target.sprite = this.OnImage;\r\n                if (this.mChangeText) {\r\n                   
+    this.mTargetText.text = Localization_1.default.Instance.GetLocalizedText(this.mOnTextKey);\r\n               
+    }\r\n            }\r\n            else {\r\n                this.Target.sprite
+    = this.OffImage;\r\n                if (this.mChangeText) {\r\n                   
+    this.mTargetText.text = Localization_1.default.Instance.GetLocalizedText(this.mOffTextKey);\r\n               
+    }\r\n            }\r\n        });\r\n    }\r\n}\r\nexports.default = UIToggleImage;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlUb2dnbGVJbWFnZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlVJVG9nZ2xlSW1hZ2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSxtREFBcUQ7QUFDckQsaURBQXFEO0FBQ3JELDhFQUF1RTtBQUV2RTs7R0FFRztBQUNILE1BQXFCLGFBQWMsU0FBUSxxQ0FBcUI7SUFBaEU7O1FBTVcsZ0JBQVcsR0FBWSxLQUFLLENBQUM7SUF1QnhDLENBQUM7SUFqQkcsS0FBSztRQUNELElBQUksQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLFlBQVksU0FBQyx1QkFBTSxFQUFHLENBQUM7UUFDMUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxjQUFjLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDekMsSUFBSSxDQUFDLEVBQUU7Z0JBQ0gsSUFBSSxDQUFDLE1BQU0sQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQztnQkFDbEMsSUFBSSxJQUFJLENBQUMsV0FBVyxFQUFFO29CQUNsQixJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7aUJBQ25GO2FBQ0o7aUJBQU07Z0JBQ0gsSUFBSSxDQUFDLE1BQU0sQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQztnQkFDbkMsSUFBSSxJQUFJLENBQUMsV0FBVyxFQUFFO29CQUNsQixJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLENBQUM7aUJBQ3BGO2FBQ0o7UUFDTCxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7Q0FFSjtBQTdCRCxnQ0E2QkMifQ==","assetPath":"Assets/Scripts/UI/UIToggleImage.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"Target","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"OnImage","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"OffImage","type":"UnityEngine.Sprite","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mChangeText","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mTargetText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mOnTextKey","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mOffTextKey","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIToggleImage","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 10932cab03aa175e5e530e6ebe4e55c9
+  onlyWriteTrigger: 0

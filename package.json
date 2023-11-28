@@ -1,0 +1,21 @@
+{
+	"name": "HideAndSeek_Template",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"dependencies": {
+		"@zepeto/sandbox": "file:Library/Packages/zepeto-sandbox.tgz",
+		"typescript": "^4.9.5",
+		"zepeto-script-compiler": "file:Library/Packages/zepeto-script-compiler.tgz"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://oss.navercorp.com/zaizai/ZZSH_HideAndSeek_Template.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}

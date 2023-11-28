@@ -1,0 +1,38 @@
+fileFormatVersion: 2
+guid: 0e7113e6942044d37a8be6c37b2e4340
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst TMPro_1 = require(\"TMPro\");\r\nconst ZEPETO_Script_1
+    = require(\"ZEPETO.Script\");\r\nconst Localization_1 = require(\"./Localization\");\r\nclass
+    TextMeshProLocalizer extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        this._isInitialized = false;\r\n   
+    }\r\n    Start() {\r\n        this._localization = Localization_1.default.Instance;\r\n       
+    if (!this.localizationKey || this.localizationKey == \"\") {\r\n            this._isInitialized
+    = false;\r\n            console.error(\"Text Localizer is not initialized. Enter
+    localization key first.\");\r\n            return;\r\n        }\r\n        else
+    {\r\n            this._isInitialized = true;\r\n        }\r\n        // When
+    UI text doesn''t exist\r\n        if (!this.gameObject.GetComponent($typeof(Text)))
+    {\r\n            console.error(\"Text Localizer is not initialized. There''s
+    no UI Text.\");\r\n            return;\r\n        }\r\n        let _uiText =
+    this.gameObject.GetComponent($typeof(TMPro_1.TextMeshPro));\r\n        // Set
+    Localized Text\r\n        _uiText.text = this._localization.GetLocalizedText(this.localizationKey);\r\n   
+    }\r\n}\r\nexports.default = TextMeshProLocalizer;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGV4dE1lc2hQcm9Mb2NhbGl6ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJUZXh0TWVzaFByb0xvY2FsaXplci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlDQUFvQztBQUNwQyxpREFBcUQ7QUFDckQsaURBQTBDO0FBRTFDLE1BQXFCLG9CQUFxQixTQUFRLHFDQUFxQjtJQUF2RTs7UUFJWSxtQkFBYyxHQUFZLEtBQUssQ0FBQztJQTBCNUMsQ0FBQztJQXZCRyxLQUFLO1FBQ0QsSUFBSSxDQUFDLGFBQWEsR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQztRQUUzQyxJQUFJLENBQUMsSUFBSSxDQUFDLGVBQWUsSUFBSSxJQUFJLENBQUMsZUFBZSxJQUFJLEVBQUUsRUFBRTtZQUNyRCxJQUFJLENBQUMsY0FBYyxHQUFHLEtBQUssQ0FBQztZQUM1QixPQUFPLENBQUMsS0FBSyxDQUFDLGtFQUFrRSxDQUFDLENBQUM7WUFDbEYsT0FBTztTQUNWO2FBQU07WUFDSCxJQUFJLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQztTQUM5QjtRQUVELDZCQUE2QjtRQUM3QixJQUFJLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLFNBQUMsSUFBSSxFQUFHLEVBQUU7WUFDdkMsT0FBTyxDQUFDLEtBQUssQ0FBQyx3REFBd0QsQ0FBQyxDQUFDO1lBQ3hFLE9BQU87U0FDVjtRQUVELElBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsWUFBWSxTQUFDLG1CQUFXLEVBQUcsQ0FBQztRQUUxRCxxQkFBcUI7UUFDckIsT0FBTyxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQztJQUM3RSxDQUFDO0NBRUo7QUE5QkQsdUNBOEJDIn0=","assetPath":"Assets/Scripts/Common/Localization/Scripts/TextMeshProLocalizer.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"localizationKey","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"TextMeshProLocalizer","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 782a6e33029a57cd0b16c178e31091cf
+  onlyWriteTrigger: 0

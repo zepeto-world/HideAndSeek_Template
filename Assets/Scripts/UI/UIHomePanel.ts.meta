@@ -1,0 +1,125 @@
+fileFormatVersion: 2
+guid: 1263cc19d801ee5479f66a61d2a33a25
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst UnityEngine_1
+    = require(\\\"UnityEngine\\\");\\r\\nconst UIManager_1 = require(\\\"../GameManager/UIManager\\\");\\r\\nconst
+    UIHPBar_1 = require(\\\"../UI/UIHPBar\\\");\\r\\nconst UIModelRandomPanel_1 =
+    require(\\\"../UI/UIModelRandomPanel\\\");\\r\\nconst UIToast_1 = require(\\\"./UIToast\\\");\\r\\nconst
+    NetManager_1 = require(\\\"../GameManager/NetManager\\\");\\r\\nconst PlayerManager_1
+    = require(\\\"../GameManager/PlayerManager\\\");\\r\\n/**\\r\\n * Game main interface\\r\\n
+    */\\r\\nclass UIHomePanel extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n   
+    constructor() {\\r\\n        super(...arguments);\\r\\n        this.mBuffCD =
+    20;\\r\\n        this.BUF_HIDE = 1;\\r\\n    }\\r\\n    Awake() {\\r\\n       
+    this.mLockViewToggle.onValueChanged.AddListener((v) => {\\r\\n            UIManager_1.default.Instance.OnLockView(v);\\r\\n       
+    });\\r\\n        this.mFreeCameraToggle.onValueChanged.AddListener((v) => {\\r\\n           
+    UIManager_1.default.Instance.OnFreeCamra(v);\\r\\n            // From a free
+    perspective hide Lock button\\r\\n            this.mLockViewToggle.gameObject.SetActive(!v);\\r\\n       
+    });\\r\\n        this.mHPBar = this.mHP.GetComponent($typeof(UIHPBar_1.default));\\r\\n       
+    this.mBuffBtn.onClick.AddListener(() => {\\r\\n            this.OnBuffCD();\\r\\n           
+    UIManager_1.default.Instance.OnUseBuff(this.BUF_HIDE);\\r\\n        });\\r\\n   
+    }\\r\\n    Update() {\\r\\n        if (UnityEngine_1.Input.GetKeyDown(UnityEngine_1.KeyCode.Q))
+    {\\r\\n            this.mHunterOptionPanel.SetActive(true);\\r\\n        }\\r\\n       
+    this.UpdateBuffCD();\\r\\n    }\\r\\n    Init() {\\r\\n        this.mHunterOptionPanel.SetActive(false);\\r\\n       
+    this.mHiderOptionPanel.SetActive(false);\\r\\n        this.mMiddleGameInfo.SetActive(false);\\r\\n       
+    this.mFreeCameraToggle.gameObject.SetActive(false);\\r\\n        this.mFlashlightBtn.gameObject.SetActive(true);\\r\\n       
+    this.mBuffBtn.gameObject.SetActive(false);\\r\\n        this.mHiderNumText.text
+    = \\\"0\\\";\\r\\n        this.mBuffBtn.interactable = true;\\r\\n        this.mHP.SetActive(false);\\r\\n   
+    }\\r\\n    OnDie(data) {\\r\\n        let isSelf = data.isSelf;\\r\\n       
+    if (isSelf) {\\r\\n            this.mHiderOptionPanel.SetActive(false);\\r\\n           
+    UIToast_1.default.Instance.ShowHiderDead();\\r\\n            PlayerManager_1.default.Instance.DieFreeCamera();\\r\\n       
+    }\\r\\n    }\\r\\n    /**\\r\\n     * Update the number of invisible buffs\\r\\n    
+    * @param buffNum\\r\\n     */\\r\\n    UpdateBuff(buffNum) {\\r\\n        console.log(\\\"Update
+    the invisible buff quantity\\\", buffNum);\\r\\n        if (buffNum <= 0) {\\r\\n           
+    this.mBuffBtn.interactable = false;\\r\\n            this.mBuffBtn.gameObject.SetActive(false);\\r\\n           
+    this.mIsBuffCD = false;\\r\\n        }\\r\\n        else {\\r\\n            if
+    (!this.mIsBuffCD) {\\r\\n                this.mBuffBtn.interactable = true;\\r\\n               
+    this.mBuffBtn.gameObject.SetActive(true);\\r\\n                this.mImgBuffCD.fillAmount
+    = 1;\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n    OnBuffCD() {\\r\\n       
+    this.mImgBuffCD.fillAmount = 0;\\r\\n        this.mIsBuffCD = true;\\r\\n       
+    this.mCurBufCDTime = 0;\\r\\n        this.mBuffBtn.interactable = false;\\r\\n       
+    this.mTargetBufCDTime = this.mGameLeftTime - this.mBuffCD;\\r\\n    }\\r\\n   
+    /**\\r\\n     * Invisible BuffCD\\r\\n     */\\r\\n    UpdateBuffCD() {\\r\\n       
+    if (this.mIsBuffCD && this.mBuffBtn.enabled) {\\r\\n            this.mCurBufCDTime
+    += UnityEngine_1.Time.deltaTime;\\r\\n            this.mImgBuffCD.fillAmount
+    = this.mCurBufCDTime / this.mBuffCD;\\r\\n            if (this.mCurBufCDTime
+    >= this.mBuffCD || this.mGameLeftTime <= this.mTargetBufCDTime - 1) {\\r\\n               
+    this.mImgBuffCD.fillAmount = 1;\\r\\n                this.mIsBuffCD = false;\\r\\n               
+    this.mCurBufCDTime = 0;\\r\\n                this.mBuffBtn.interactable = true;\\r\\n           
+    }\\r\\n        }\\r\\n    }\\r\\n    InitMaxHP(maxHP, peakHP) {\\r\\n       
+    this.mHPBar.InitHPBar(maxHP, peakHP);\\r\\n    }\\r\\n    /**\\r\\n     * Update
+    Health\\r\\n     * @param curHP\\r\\n     * @returns\\r\\n     */\\r\\n    UpdateUP(curHP)
+    {\\r\\n        let isBeAttacked = false;\\r\\n        if (!this.mHP.activeSelf)
+    {\\r\\n            this.mHP.SetActive(true);\\r\\n        }\\r\\n        if (curHP
+    < this.mCurHP) {\\r\\n            isBeAttacked = true;\\r\\n        }\\r\\n       
+    this.mCurHP = curHP;\\r\\n        this.mHPBar.SetValue(curHP);\\r\\n        return
+    isBeAttacked;\\r\\n    }\\r\\n    /**\\r\\n     * Number of Hiders\\r\\n    
+    * @param findNumber\\r\\n     * @param hideNumber\\r\\n     */\\r\\n    UpdateUI(findNumber,
+    hideNumber) {\\r\\n        let showNumber = hideNumber.toString();\\r\\n       
+    if (hideNumber < 10 && hideNumber > 0) {\\r\\n            showNumber = \\\"0\\\"
+    + showNumber;\\r\\n        }\\r\\n        this.mHiderNumText.text = showNumber;\\r\\n   
+    }\\r\\n    OnGameWait() {\\r\\n        this.mChangeModelBtn.SetActive(true);\\r\\n   
+    }\\r\\n    OnGameReady() {\\r\\n        this.Init();\\r\\n    }\\r\\n    /**\\r\\n    
+    * Refresh UI based on camp\\r\\n     * @param gameInfo\\r\\n     * @param player\\r\\n    
+    * @returns\\r\\n     */\\r\\n    OnUpdateOperatePanel(gameInfo, player) {\\r\\n       
+    if (gameInfo == null)\\r\\n            return;\\r\\n        if (gameInfo.GameState
+    >= NetManager_1.GameState.GameStart) {\\r\\n            this.mMiddleGameInfo.SetActive(true);\\r\\n           
+    this.mChangeModelBtn.SetActive(false);\\r\\n            this.mChangeModelPanel.SetActive(false);\\r\\n           
+    if (player == null)\\r\\n                return;\\r\\n            if (!player.isHunter)
+    {\\r\\n                this.mHunterOptionPanel.SetActive(false);\\r\\n               
+    let isDie = player.HP <= 0;\\r\\n                this.mHiderOptionPanel.SetActive(!isDie);\\r\\n               
+    this.UpdateBuff(player.buffNum);\\r\\n            }\\r\\n            else {\\r\\n               
+    this.mHunterOptionPanel.SetActive(true);\\r\\n                this.mHiderOptionPanel.SetActive(false);\\r\\n           
+    }\\r\\n        }\\r\\n    }\\r\\n    OnGameStart(gameInfo, gameRule, player)
+    {\\r\\n        this.mBuffCD = gameRule.buffCD;\\r\\n        //this.mTutorialPanel.SetActive(false);\\r\\n       
+    this.mMiddleGameInfo.SetActive(true);\\r\\n        this.mChangeModelBtn.SetActive(false);\\r\\n       
+    this.mChangeModelPanel.SetActive(false);\\r\\n        this.mLockViewToggle.isOn
+    = false;\\r\\n        this.mFreeCameraToggle.isOn = false;\\r\\n        this.mIsHunter
+    = player.isHunter;\\r\\n        if (!this.mIsHunter) {\\r\\n            this.mHunterOptionPanel.SetActive(false);\\r\\n           
+    this.mHiderOptionPanel.SetActive(true);\\r\\n            this.UpdateBuff(player.buffNum);\\r\\n           
+    // console.error(\\\"Current Health\uFF1A\\\", player.HP, \\\"target model\\\",
+    player.targetModel);            \\r\\n            this.OpenRandomModelPanel(player.targetModel);\\r\\n           
+    this.mLockViewToggle.gameObject.SetActive(true);\\r\\n            this.InitMaxHP(gameRule.initHP,
+    gameRule.peekHP);\\r\\n        }\\r\\n        else {\\r\\n            this.mHunterOptionPanel.SetActive(true);\\r\\n           
+    this.mHiderOptionPanel.SetActive(false);\\r\\n        }\\r\\n        this.OnGameUpdate(gameInfo,
+    player);\\r\\n        this.StopAllCoroutines();\\r\\n    }\\r\\n    OnGameUpdate(gameInfo,
+    player) {\\r\\n        //console.log(\\\"Game turn time\\\" + gameInfo.GameLeftTime);\\r\\n       
+    this.OnUpdateOperatePanel(gameInfo, player);\\r\\n        if (gameInfo.GameLeftTime
+    != null) {\\r\\n            this.UpdateGameLeftTime(gameInfo.GameLeftTime);\\r\\n           
+    this.UpdateUI(gameInfo.HunterNum, gameInfo.HiderNum);\\r\\n        }\\r\\n   
+    }\\r\\n    OnPeakMoment(addHP) {\\r\\n        this.mCurHP += addHP;\\r\\n       
+    this.mHPBar.SetValue(this.mCurHP);\\r\\n        // Enable stealth buf\\r\\n       
+    this.mBuffBtn.gameObject.SetActive(true);\\r\\n    }\\r\\n    OpenRandomModelPanel(targetModelId)
+    {\\r\\n        this.mRandomModelPanel.GetComponent($typeof(UIModelRandomPanel_1.default)).Show(targetModelId);\\r\\n   
+    }\\r\\n    HideRandomModelPanel() {\\r\\n        this.mRandomModelPanel.GetComponent($typeof(UIModelRandomPanel_1.default)).Hide();\\r\\n   
+    }\\r\\n    UpdateGameLeftTime(time) {\\r\\n        this.mGameLeftTime = time;\\r\\n       
+    var min = Math.floor(time / 60);\\r\\n        var sec = time % 60;\\r\\n       
+    this.mTimerText.text = (min < 10 ? \\\"0\\\" + min : min) + \\\":\\\" + (sec
+    < 10 ? \\\"0\\\" + sec : sec);\\r\\n    }\\r\\n    OnGameOver() {\\r\\n       
+    this.StopAllCoroutines();\\r\\n        this.Init();\\r\\n        this.mHunterOptionPanel.SetActive(false);\\r\\n       
+    this.mHiderOptionPanel.SetActive(false);\\r\\n    }\\r\\n    OnRoundOver() {\\r\\n       
+    this.StopAllCoroutines();\\r\\n        this.Init();\\r\\n        this.SetTimerColor(false);\\r\\n   
+    }\\r\\n    /**\\r\\n     * The countdown to peak hour turns red\\r\\n     * @param
+    isPeak\\r\\n     */\\r\\n    SetTimerColor(isPeak) {\\r\\n        this.mTimerText.color
+    = isPeak ? new UnityEngine_1.Color(255, 0, 0) : new UnityEngine_1.Color(255,
+    255, 255);\\r\\n    }\\r\\n}\\r\\nexports.default = UIHomePanel;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlIb21lUGFuZWwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJVSUhvbWVQYW5lbC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCxtREFBNEQ7QUFDNUQsNkNBQXFFO0FBQ3JFLHdEQUFpRDtBQUVqRCwyQ0FBbUM7QUFDbkMsaUVBQXlEO0FBQ3pELHVDQUFnQztBQUNoQywwREFBc0Q7QUFDdEQsZ0VBQXlEO0FBR3pEOztHQUVHO0FBQ0gsTUFBcUIsV0FBWSxTQUFRLHFDQUFxQjtJQUE5RDs7UUFzQlksWUFBTyxHQUFXLEVBQUUsQ0FBQztRQUVaLGFBQVEsR0FBVyxDQUFDLENBQUM7SUFzUDFDLENBQUM7SUFwUEcsS0FBSztRQUNELElBQUksQ0FBQyxlQUFlLENBQUMsY0FBYyxDQUFDLFdBQVcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFO1lBQ2xELG1CQUFTLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNyQyxDQUFDLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxjQUFjLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDcEQsbUJBQVMsQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ2xDLDJDQUEyQztZQUMzQyxJQUFJLENBQUMsZUFBZSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNsRCxDQUFDLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLEdBQUcsQ0FBQyxZQUFZLFNBQUMsaUJBQU8sRUFBRyxDQUFDO1FBRS9DLElBQUksQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDbkMsSUFBSSxDQUFDLFFBQVEsRUFBRSxDQUFDO1lBQ2hCLG1CQUFTLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxJQUFJ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\",\"assetPath\":\"Assets/Scripts/UI/UIHomePanel.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mHunterOptionPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mHiderOptionPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mRandomModelPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mMiddleGameInfo\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mChangeModelBtn\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mChangeModelPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mFlashlightBtn\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mBuffBtn\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mTimerText\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mHP\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mHiderNumText\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mLockViewToggle\",\"type\":\"UnityEngine.UI.Toggle\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mFreeCameraToggle\",\"type\":\"UnityEngine.UI.Toggle\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mImgBuffCD\",\"type\":\"UnityEngine.UI.Image\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"UIHomePanel\",\"description\":\"\",\"hasAnimatorMove\":false},\"isCompiled\":true}"
+  typescriptHash: c058c39c120181244e5d95c5c9fae00e
+  onlyWriteTrigger: 0

@@ -1,0 +1,43 @@
+fileFormatVersion: 2
+guid: 355fd6efc7403fe4bb97d4e3dfa5551e
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    FrameworkManager_1 = require(\"./GameManager/FrameworkManager\");\r\nconst GameMain_1
+    = require(\"./GameMain\");\r\nvar FWState;\r\n(function (FWState) {\r\n    FWState[FWState[\"NULL\"]
+    = 0] = \"NULL\";\r\n    FWState[FWState[\"DOAWAKE\"] = 1] = \"DOAWAKE\";\r\n   
+    FWState[FWState[\"DOSTART\"] = 2] = \"DOSTART\";\r\n    FWState[FWState[\"LOADING\"]
+    = 3] = \"LOADING\";\r\n    FWState[FWState[\"DOUPDATE\"] = 4] = \"DOUPDATE\";\r\n})(FWState
+    || (FWState = {}));\r\n/**\r\n * Program main entrance\r\n */\r\nclass FrameworkEnter
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Awake() {\r\n    }\r\n   
+    Start() {\r\n        this.FWState = FWState.DOAWAKE;\r\n    }\r\n    Update()
+    {\r\n        switch (this.FWState) {\r\n            case FWState.DOAWAKE:\r\n               
+    console.log(\"FrameworkEnter Init\");\r\n                // Framework initialization\r\n               
+    FrameworkManager_1.default.Init();\r\n                // Game initialization\r\n               
+    GameMain_1.default.Instance.DoInit();\r\n                console.log(\"FrameworkEnter
+    Init success\");\r\n                this.FWState = FWState.DOSTART;\r\n               
+    console.log(\"FrameworkEnter start running\");\r\n                break;\r\n           
+    case FWState.DOSTART:\r\n                GameMain_1.default.Instance.DoStart();\r\n               
+    this.FWState = FWState.DOUPDATE;\r\n                break;\r\n            case
+    FWState.DOUPDATE:\r\n                GameMain_1.default.Instance.DoUpdate();\r\n               
+    break;\r\n        }\r\n    }\r\n    FixedUpdate() {\r\n    }\r\n}\r\nexports.default
+    = FrameworkEnter;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRnJhbWV3b3JrRW50ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJGcmFtZXdvcmtFbnRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCxxRUFBOEQ7QUFDOUQseUNBQWtDO0FBQ2xDLElBQUssT0FNSjtBQU5ELFdBQUssT0FBTztJQUNSLHFDQUFJLENBQUE7SUFDSiwyQ0FBTyxDQUFBO0lBQ1AsMkNBQU8sQ0FBQTtJQUNQLDJDQUFPLENBQUE7SUFDUCw2Q0FBUSxDQUFBO0FBQ1osQ0FBQyxFQU5JLE9BQU8sS0FBUCxPQUFPLFFBTVg7QUFFRDs7R0FFRztBQUNILE1BQXFCLGNBQWUsU0FBUSxxQ0FBcUI7SUFFN0QsS0FBSztJQUVMLENBQUM7SUFFRCxLQUFLO1FBQ0QsSUFBSSxDQUFDLE9BQU8sR0FBRyxPQUFPLENBQUMsT0FBTyxDQUFDO0lBQ25DLENBQUM7SUFFRCxNQUFNO1FBQ0YsUUFBUSxJQUFJLENBQUMsT0FBTyxFQUFFO1lBQ2xCLEtBQUssT0FBTyxDQUFDLE9BQU87Z0JBQ2hCLE9BQU8sQ0FBQyxHQUFHLENBQUMscUJBQXFCLENBQUMsQ0FBQztnQkFDbkMsMkJBQTJCO2dCQUMzQiwwQkFBZ0IsQ0FBQyxJQUFJLEVBQUUsQ0FBQztnQkFDeEIsc0JBQXNCO2dCQUN0QixrQkFBUSxDQUFDLFFBQVEsQ0FBQyxNQUFNLEVBQUUsQ0FBQztnQkFDM0IsT0FBTyxDQUFDLEdBQUcsQ0FBQyw2QkFBNkIsQ0FBQyxDQUFDO2dCQUMzQyxJQUFJLENBQUMsT0FBTyxHQUFHLE9BQU8sQ0FBQyxPQUFPLENBQUM7Z0JBQy9CLE9BQU8sQ0FBQyxHQUFHLENBQUMsOEJBQThCLENBQUMsQ0FBQztnQkFDNUMsTUFBTTtZQUNWLEtBQUssT0FBTyxDQUFDLE9BQU87Z0JBQ2hCLGtCQUFRLENBQUMsUUFBUSxDQUFDLE9BQU8sRUFBRSxDQUFDO2dCQUM1QixJQUFJLENBQUMsT0FBTyxHQUFHLE9BQU8sQ0FBQyxRQUFRLENBQUM7Z0JBQ2hDLE1BQU07WUFDVixLQUFLLE9BQU8sQ0FBQyxRQUFRO2dCQUNqQixrQkFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FBQztnQkFDN0IsTUFBTTtTQUNiO0lBQ0wsQ0FBQztJQUdELFdBQVc7SUFDWCxDQUFDO0NBRUo7QUFwQ0QsaUNBb0NDIn0=","assetPath":"Assets/Scripts/FrameworkEnter.ts","manifest":{"properties":[],"name":"FrameworkEnter","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: a5dbca325170c74fb33fbe25f3438bd0
+  onlyWriteTrigger: 0

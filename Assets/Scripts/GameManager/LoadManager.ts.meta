@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: 119e3cf59f3257649aa42f1cf80fac5d
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\n/**\r\n * Resource loading management
+    class\r\n */\r\nclass LoadManager extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    static get instance() {\r\n        if (LoadManager._instance === null)
+    {\r\n            LoadManager._instance = new LoadManager();\r\n        }\r\n       
+    return LoadManager._instance;\r\n    }\r\n    Awake() {\r\n        LoadManager._instance
+    = this;\r\n    }\r\n    Init() {\r\n    }\r\n    ResLoad_jsonData(fileName) {\r\n       
+    let txt = UnityEngine_1.Resources.Load(fileName);\r\n        console.log(\"ResLoad_jsonData:\"
+    + txt);\r\n        return JSON.parse(txt.text);\r\n    }\r\n    ResLoad_texture2d(fileName)
+    {\r\n        let texture2D = UnityEngine_1.Resources.Load(fileName);\r\n       
+    if (!texture2D) {\r\n            console.error(\"can''t find texture:\", fileName);\r\n       
+    }\r\n        return texture2D;\r\n    }\r\n    ResLoad_sprite(fileName) {\r\n       
+    let texture2D = this.ResLoad_texture2d(fileName);\r\n        return UnityEngine_1.Sprite.Create(texture2D,
+    new UnityEngine_1.Rect(0, 0, texture2D.width, texture2D.height), new UnityEngine_1.Vector2(0.5,
+    0.5));\r\n    }\r\n    ResLoad_PrefabObj(fileName) {\r\n        var pfb = UnityEngine_1.Resources.Load(\"Prefabs/\"
+    + fileName);\r\n        return UnityEngine_1.GameObject.Instantiate(pfb);\r\n   
+    }\r\n    ResLoad_InstancePfb(pfb) {\r\n        return UnityEngine_1.GameObject.Instantiate(pfb);\r\n   
+    }\r\n}\r\nexports.default = LoadManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTG9hZE1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJMb2FkTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUE4RztBQUM5RyxpREFBcUQ7QUFDckQ7O0dBRUc7QUFDSCxNQUFxQixXQUFZLFNBQVEscUNBQXFCO0lBR25ELE1BQU0sS0FBSyxRQUFRO1FBQ3RCLElBQUksV0FBVyxDQUFDLFNBQVMsS0FBSyxJQUFJLEVBQUU7WUFDaEMsV0FBVyxDQUFDLFNBQVMsR0FBRyxJQUFJLFdBQVcsRUFBRSxDQUFDO1NBQzdDO1FBQ0QsT0FBTyxXQUFXLENBQUMsU0FBUyxDQUFDO0lBQ2pDLENBQUM7SUFDRCxLQUFLO1FBQ0QsV0FBVyxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUM7SUFDakMsQ0FBQztJQUVELElBQUk7SUFFSixDQUFDO0lBRUQsZ0JBQWdCLENBQUMsUUFBZ0I7UUFDN0IsSUFBSSxHQUFHLEdBQUcsdUJBQVMsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFjLENBQUM7UUFDaEQsT0FBTyxDQUFDLEdBQUcsQ0FBQyxtQkFBbUIsR0FBRyxHQUFHLENBQUMsQ0FBQztRQUN2QyxPQUFPLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ2hDLENBQUM7SUFFRCxpQkFBaUIsQ0FBQyxRQUFnQjtRQUM5QixJQUFJLFNBQVMsR0FBRyx1QkFBUyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQWMsQ0FBQztRQUN0RCxJQUFJLENBQUMsU0FBUyxFQUFFO1lBQ1osT0FBTyxDQUFDLEtBQUssQ0FBQyxxQkFBcUIsRUFBRSxRQUFRLENBQUMsQ0FBQztTQUNsRDtRQUNELE9BQU8sU0FBUyxDQUFDO0lBQ3JCLENBQUM7SUFFRCxjQUFjLENBQUMsUUFBZ0I7UUFDM0IsSUFBSSxTQUFTLEdBQUcsSUFBSSxDQUFDLGlCQUFpQixDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQ2pELE9BQU8sb0JBQU0sQ0FBQyxNQUFNLENBQUMsU0FBUyxFQUFFLElBQUksa0JBQUksQ0FBQyxDQUFDLEVBQUUsQ0FBQyxFQUFFLFNBQVMsQ0FBQyxLQUFLLEVBQUUsU0FBUyxDQUFDLE1BQU0sQ0FBQyxFQUFFLElBQUkscUJBQU8sQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDLENBQUMsQ0FBQztJQUM5RyxDQUFDO0lBQ0QsaUJBQWlCLENBQUMsUUFBZ0I7UUFDOUIsSUFBSSxHQUFHLEdBQUcsdUJBQVMsQ0FBQyxJQUFJLENBQUMsVUFBVSxHQUFHLFFBQVEsQ0FBQyxDQUFDO1FBQ2hELE9BQU8sd0JBQVUsQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFlLENBQUM7SUFDckQsQ0FBQztJQUNELG1CQUFtQixDQUFDLEdBQWU7UUFDL0IsT0FBTyx3QkFBVSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQWUsQ0FBQztJQUNyRCxDQUFDO0NBR0o7QUE1Q0QsOEJBNENDIn0=","assetPath":"Assets/Scripts/GameManager/LoadManager.ts","manifest":{"properties":[],"name":"LoadManager","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 09091a89b6c5b406d34a43ed7f21bc68
+  onlyWriteTrigger: 0

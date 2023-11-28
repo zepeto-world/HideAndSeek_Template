@@ -1,0 +1,94 @@
+fileFormatVersion: 2
+guid: 64fb6dc10c827ef4c8c22d4221c4188b
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst __UnityEngine__ = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    PlayerManager_1 = require(\"./PlayerManager\");\r\nconst BaseManager_1 = require(\"./BaseManager\");\r\nconst
+    NetManager_1 = require(\"./NetManager\");\r\nconst UIToast_1 = require(\"../UI/UIToast\");\r\nconst
+    UILoading_1 = require(\"../UI/UILoading\");\r\nconst UIHomePanel_1 = require(\"../UI/UIHomePanel\");\r\nconst
+    UIModelRandomPanel_1 = require(\"../UI/UIModelRandomPanel\");\r\n/**\r\n * UI
+    Management Class\r\n * 1. Handling UI display in different game states\r\n *
+    2. Display and closing of prompts and pop-up windows in the game\r\n * 3. Button
+    operation processing in games\r\n */\r\nclass UIManager extends BaseManager_1.default
+    {\r\n    static get Instance() {\r\n        return UIManager._instance;\r\n   
+    }\r\n    get CurStar() { return this.mCurStar; }\r\n    Awake() {\r\n       
+    UIManager._instance = this;\r\n        this.mLastModel = -1;\r\n    }\r\n   
+    Start() {\r\n        this.TOAST = UIToast_1.default.Instance;\r\n        this.mLoadingPanel.SetActive(true);\r\n       
+    this.mHomeCtrl = this.mHomePanel.GetComponent($typeof(UIHomePanel_1.default));\r\n   
+    }\r\n    /**\r\n     * UI display during the waiting phase\r\n     */\r\n   
+    OnGameWait() {\r\n        this.mHomeCtrl.OnGameWait();\r\n    }\r\n    /**\r\n    
+    * UI display during the preparation phase\r\n     */\r\n    OnGameReady() {\r\n       
+    // Game Countdown\r\n        this.mHomeCtrl.OnGameReady();\r\n    }\r\n    /**\r\n    
+    * UI display at the beginning of the game\r\n     */\r\n    OnGameStart(gameInfo,
+    gameRule, player) {\r\n        if (ZEPETO_Script_1.ZepetoScriptBehaviour.op_Inequality(this.mHomeCtrl,
+    null)) {\r\n            this.mHomeCtrl.OnGameStart(gameInfo, gameRule, player);\r\n       
+    }\r\n    }\r\n    /**\r\n     * UI display in the game\r\n     */\r\n    OnGameUpdate(gameInfo,
+    player) {\r\n        this.mHomeCtrl.OnGameUpdate(gameInfo, player);\r\n    }\r\n   
+    /**\r\n     * UI display at Peak Moment\r\n     */\r\n    OnPeakMoment(addHP,
+    isHunter) {\r\n        // this.TOAST.ShowPeakMoment(30);\r\n        if (!isHunter)
+    {\r\n            this.mHomeCtrl.OnPeakMoment(addHP);\r\n        }\r\n       
+    this.mHomeCtrl.SetTimerColor(true);\r\n    }\r\n    /**\r\n     * Send Random
+    Transformation\r\n     */\r\n    SendRandomModel() {\r\n        this.SendEvent(NetManager_1.sEventArg.RandomModel,
+    null);\r\n    }\r\n    OnShowRandomModel(targetId) {\r\n        this.mHomeCtrl.OpenRandomModelPanel(targetId);\r\n   
+    }\r\n    /**\r\n     * Confirm the transformation model\r\n     */\r\n    OnConfirmedModel()
+    {\r\n        this.mHomeCtrl.HideRandomModelPanel();\r\n    }\r\n    /**\r\n    
+    * Game round UI settlement\r\n     * @param roundResult\r\n     */\r\n    OnRoundOver(roundResult)
+    {\r\n        console.log(\"Show RoundOver UI\");\r\n        this.mLastModel =
+    -1;\r\n        this.mHomeCtrl.OnRoundOver();\r\n    }\r\n    /**\r\n     * UI
+    settlement at the end of the game\r\n     * @param roundResult\r\n     */\r\n   
+    OnGameOver() {\r\n        console.log(\"Game Over\");\r\n        this.mHomeCtrl.OnGameOver();\r\n   
+    }\r\n    /**\r\n     * Use stealth\r\n     * @param buffId\r\n     */\r\n   
+    OnUseBuff(buffId) {\r\n        this.SendEvent(NetManager_1.sEventArg.UseBuff,
+    buffId);\r\n    }\r\n    CheckCanRestore() {\r\n        if (this.mLastModel <
+    0 || this.mLastModel > 90)\r\n            return false;\r\n        return true;\r\n   
+    }\r\n    /**\r\n     * Lock direction\r\n     * @param buffId\r\n     */\r\n   
+    OnLockView(isLock) {\r\n        this.TOAST.ShowLockViewStatus(isLock);\r\n       
+    this.OnActionEvent(PlayerManager_1.ActionEvent.OnLockCamera, isLock);\r\n   
+    }\r\n    /**\r\n     * Free View\r\n     * @param isFree\r\n     */\r\n    OnFreeCamra(isFree)
+    {\r\n        this.OnActionEvent(PlayerManager_1.ActionEvent.OnFreeCamera, isFree);\r\n   
+    }\r\n    /**\r\n     * Observation perspective\r\n     * @param sessionId\r\n    
+    */\r\n    OnWatchCamera(sessionId) {\r\n        this.OnActionEvent(PlayerManager_1.ActionEvent.OnWatchCamera,
+    sessionId);\r\n    }\r\n    /**\r\n     * UI display of death\r\n     * @param
+    data\r\n     */\r\n    OnDie(data) {\r\n        this.mHomeCtrl.OnDie(data);\r\n   
+    }\r\n    OnChangeModelCost(modelId, cost) {\r\n        //let canChange = this.CheckCanChangeModel(cost);\r\n       
+    if (true) {\r\n            this.mLastModel = modelId;\r\n            this.SendEvent(NetManager_1.sEventArg.ChangeModel,
+    modelId);\r\n            return true;\r\n        }\r\n        else {\r\n           
+    //this.TOAST.Show(\"Insufficient star points!\", 1);\r\n            return false;\r\n       
+    }\r\n    }\r\n    OnChangeModel(modelId) {\r\n        this.mLastModel = modelId;\r\n       
+    this.SendEvent(NetManager_1.sEventArg.ChangeModel, modelId);\r\n        return
+    true;\r\n    }\r\n    /**\r\n     * Update Health\r\n     * @param curHP\r\n    
+    * @param elasped\r\n     */\r\n    OnUpdateHP(curHP, elasped) {\r\n        let
+    isBeAttacked = this.mHomeCtrl.UpdateUP(curHP);\r\n        if (isBeAttacked) {\r\n           
+    if (curHP != 0) {\r\n                this.TOAST.ShowHiderBeFound();\r\n           
+    }\r\n        }\r\n    }\r\n    /**\r\n     * Update the number of stars\r\n    
+    * @param curStar\r\n     */\r\n    OnUpdateStar(curStar) {\r\n        this.mCurStar
+    = curStar;\r\n        this.mRandomModelPanel.GetComponent($typeof(UIModelRandomPanel_1.default)).UpdateStar(curStar);\r\n   
+    }\r\n    /**\r\n     * Update the number of stealth buffs\r\n     * @param curStar\r\n    
+    */\r\n    OnUpdateBuff(buffNum) {\r\n        this.mHomeCtrl.UpdateBuff(buffNum);\r\n   
+    }\r\n    /* Static Canvas Event */\r\n    /**\r\n     * Close the Loading interface\r\n    
+    * @param userId\r\n     */\r\n    OnFinishLoad(userId) {\r\n        console.log(\"OnFinishLoad!\");\r\n       
+    if (__UnityEngine__.Object.op_Inequality(this.mLoadingPanel, null)) {\r\n           
+    this.mLoadingPanel.GetComponent($typeof(UILoading_1.default)).OnFinishLoad();\r\n           
+    this.mLoadingPanel = null;\r\n        }\r\n        if (ZEPETO_Script_1.ZepetoScriptBehaviour.op_Inequality(this.mHomeCtrl,
+    null)) {\r\n            this.mHomeCtrl.Init();\r\n        }\r\n    }\r\n}\r\nexports.default
+    = UIManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlNYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlNYW5hZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLGlEQUFxRDtBQUNyRCw2Q0FBeUM7QUFDekMsbURBQTZDO0FBQzdDLCtDQUF1QztBQUN2Qyw2Q0FBd0M7QUFDeEMsMkNBQW1DO0FBQ25DLCtDQUF1QztBQUN2QyxtREFBMkM7QUFFM0MsaUVBQTBEO0FBRzFEOzs7OztHQUtHO0FBQ0gsTUFBcUIsU0FBVSxTQUFRLHFCQUFXO0lBSXZDLE1BQU0sS0FBSyxRQUFRO1FBQ3RCLE9BQU8sU0FBUyxDQUFDLFNBQVMsQ0FBQztJQUMvQixDQUFDO0lBVUQsSUFBVyxPQUFPLEtBQUssT0FBTyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQztJQUc5QyxLQUFLO1FBQ0QsU0FBUyxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUM7UUFDM0IsSUFBSSxDQUFDLFVBQVUsR0FBRyxDQUFDLENBQUMsQ0FBQztJQUN6QixDQUFDO0lBRUQsS0FBSztRQUNELElBQUksQ0FBQyxLQUFLLEdBQUcsaUJBQU8sQ0FBQyxRQUFRLENBQUM7UUFDOUIsSUFBSSxDQUFDLGFBQWEsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDbkMsSUFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLFlBQVksU0FBQyxxQkFBVyxFQUFHLENBQUM7SUFDakUsQ0FBQztJQUVEOztPQUVHO0lBQ0ksVUFBVTtRQUNiLElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxFQUFFLENBQUM7SUFDaEMsQ0FBQztJQUVEOztPQUVHO0lBQ0gsV0FBVztRQUNQLGlCQUFpQjtRQUNqQixJQUFJLENBQUMsU0FBUyxDQUFDLFdBQVcsRUFBRSxDQUFDO0lBQ2pDLENBQUM7SUFFRDs7T0FFRztJQUNILFdBQVcsQ0FBQyxRQUFtQixFQUFFLFFBQWtCLEVBQUUsTUFBZTtRQUNoRSxJQW5FQyxxQ0FBcUIsQ0Fn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","assetPath":"Assets/Scripts/GameManager/UIManager.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"mLoadingPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mHomePanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mRandomModelPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"TOAST","type":"D:/Zaizai/Project/new-world/ZZSH_HideAndSeek_Template/Assets/Scripts/UI/UIToast.default","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"mHomeCtrl","type":"D:/Zaizai/Project/new-world/ZZSH_HideAndSeek_Template/Assets/Scripts/UI/UIHomePanel.default","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"elasped","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIManager","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 8a323614fd82a3c9680aa8fc09dc8cb7
+  onlyWriteTrigger: 0

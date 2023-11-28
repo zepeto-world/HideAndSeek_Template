@@ -1,0 +1,120 @@
+fileFormatVersion: 2
+guid: 836cd514c48644b3eb019155b418fb6a
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine = require(\\\"UnityEngine\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst UnityEngine_EventSystems_1
+    = require(\\\"UnityEngine.EventSystems\\\");\\r\\nconst UnityEngine_EventSystems_EventTrigger_1
+    = require(\\\"UnityEngine.EventSystems.EventTrigger\\\");\\r\\nconst UnityEngine_UI_1
+    = require(\\\"UnityEngine.UI\\\");\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    PlayerManager_1 = require(\\\"../GameManager/PlayerManager\\\");\\r\\nclass CustomScreenStick
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
+    super(...arguments);\\r\\n        this.mIsOk = false;\\r\\n        this.mLastJumpTime
+    = 0;\\r\\n    }\\r\\n    // private _frameSendTimer : number = 0;\\r\\n    //
+    private _defaultInterval : number = 0.03; // FPS->16\\r\\n    Start() {\\r\\n       
+    if ((UnityEngine_1.SystemInfo.operatingSystemFamily == UnityEngine_1.OperatingSystemFamily.MacOSX)
+    || (UnityEngine_1.SystemInfo.operatingSystemFamily == UnityEngine_1.OperatingSystemFamily.Windows))
+    {\\r\\n            this._isOnEditor = true;\\r\\n            console.log(\\\"[CustomScreenStick]:
+    isAutoHideInMobile will be set false in MacOS or Windows\\\");\\r\\n        }\\r\\n       
+    else {\\r\\n            this._isOnEditor = false;\\r\\n        }\\r\\n       
+    this._eventTrigger = this.gameObject.GetComponent($typeof(UnityEngine_EventSystems_1.EventTrigger));\\r\\n       
+    this.UIZepetoPlayerControlObject = this.UIZepetoPlayerControlObject;\\r\\n       
+    this._rectTransform = this.gameObject.GetComponent($typeof(UnityEngine_1.RectTransform));\\r\\n       
+    this._parentRectTransform = this.transform.parent.gameObject.GetComponent($typeof(UnityEngine_1.RectTransform));\\r\\n       
+    this._startPosition = this._rectTransform.anchoredPosition;\\r\\n        this._isDragging
+    = false;\\r\\n        this._controllerCanvasGroup = this.transform.parent.GetComponent($typeof(UnityEngine_1.CanvasGroup));\\r\\n       
+    if (this.isAutoHideInMobile) {\\r\\n            this._controllerCanvasGroup.alpha
+    = 0;\\r\\n        }\\r\\n        if (this.isUsingRotatorGO) {\\r\\n           
+    this._rotatorRectTransform = this.rotatorGO.GetComponent($typeof(UnityEngine_1.RectTransform));\\r\\n           
+    this.rotatorGO.SetActive(false);\\r\\n        }\\r\\n        if (this.jumpBtn)
+    {\\r\\n            this.jumpBtn.onClick.AddListener(() => {\\r\\n               
+    this.Jump();\\r\\n            });\\r\\n        }\\r\\n        // Register Point
+    Down\\r\\n        let _pointerDownEntry = new UnityEngine_EventSystems_EventTrigger_1.Entry();\\r\\n       
+    _pointerDownEntry.eventID = UnityEngine_EventSystems_1.EventTriggerType.PointerDown;\\r\\n       
+    _pointerDownEntry.callback.AddListener(() => {\\r\\n            if (this.isUsingRotatorGO)
+    {\\r\\n                this.rotatorGO.SetActive(true);\\r\\n            }\\r\\n           
+    this._isDragging = true;\\r\\n            if (this.isAutoHideInMobile)\\r\\n               
+    this._controllerCanvasGroup.alpha = 1;\\r\\n            //this.UIZepetoPlayerControlObject.StartMoving();\\r\\n           
+    if (PlayerManager_1.default.Instance != null) {\\r\\n                PlayerManager_1.default.Instance.OnDragBegin();\\r\\n           
+    }\\r\\n        });\\r\\n        this._eventTrigger.triggers.Add(_pointerDownEntry);\\r\\n       
+    // Register Drag\\r\\n        let _dragEntry = new UnityEngine_EventSystems_EventTrigger_1.Entry();\\r\\n       
+    _dragEntry.eventID = UnityEngine_EventSystems_1.EventTriggerType.Drag;\\r\\n       
+    _dragEntry.callback.AddListener((eventData) => {\\r\\n            let _vector2Ref
+    = $ref();\\r\\n            UnityEngine_1.RectTransformUtility.ScreenPointToLocalPointInRectangle(this._parentRectTransform,
+    eventData.position, eventData.pressEventCamera, _vector2Ref);\\r\\n           
+    let _vector2Converted = $unref(_vector2Ref);\\r\\n            let _vector2Normalized
+    = UnityEngine_1.Vector2.op_Subtraction(_vector2Converted, UnityEngine_1.Vector2.Scale(this._parentRectTransform.sizeDelta,
+    new UnityEngine_1.Vector2(0.5, 0.5)));\\r\\n            let _vector2Clamped =
+    UnityEngine_1.Vector2.ClampMagnitude(_vector2Normalized, this.stickMaximumDistance);\\r\\n           
+    this._rectTransform.anchoredPosition = _vector2Clamped;\\r\\n            let
+    _vector2Adjusted = UnityEngine_1.Vector2.op_Division(_vector2Clamped, this.stickMaximumDistance);\\r\\n           
+    // console.log(\\\"\U0001F680 ~ file: CustomScreenStick.ts ~ line 57 ~ CustomScreenStick
+    ~ _dragEntry.callback.AddListener ~ _finalVector2\\\", _vector2Adjusted)\\r\\n           
+    let _angle = this.Vector2ToAngle(_vector2Adjusted);\\r\\n            if (this.isUsingRotatorGO)
+    {\\r\\n                this._rotatorRectTransform.rotation = UnityEngine_1.Quaternion.Euler(new
+    UnityEngine_1.Vector3(0, 0, 360 - _angle));\\r\\n            }\\r\\n           
+    this._isDragging = true;\\r\\n            //this.UIZepetoPlayerControlObject.Move(_vector2Adjusted);\\r\\n           
+    if (PlayerManager_1.default.Instance != null) {\\r\\n                PlayerManager_1.default.Instance.OnDragMove(_vector2Adjusted);\\r\\n           
+    }\\r\\n        });\\r\\n        this._eventTrigger.triggers.Add(_dragEntry);\\r\\n       
+    // Register Drag End\\r\\n        let _dragEndEntry = new UnityEngine_EventSystems_EventTrigger_1.Entry();\\r\\n       
+    _dragEndEntry.eventID = UnityEngine_EventSystems_1.EventTriggerType.EndDrag;\\r\\n       
+    _dragEndEntry.callback.AddListener((eventData) => {\\r\\n            this._rectTransform.anchoredPosition
+    = this._startPosition;\\r\\n            if (this.isUsingRotatorGO) {\\r\\n               
+    this.rotatorGO.SetActive(false);\\r\\n            }\\r\\n            this._isDragging
+    = false;\\r\\n            if (this.isAutoHideInMobile)\\r\\n                this._controllerCanvasGroup.alpha
+    = 0;\\r\\n            //this.UIZepetoPlayerControlObject.StopMoving();\\r\\n           
+    if (PlayerManager_1.default.Instance != null) {\\r\\n                PlayerManager_1.default.Instance.OnDragEnd();\\r\\n           
+    }\\r\\n        });\\r\\n        this._eventTrigger.triggers.Add(_dragEndEntry);\\r\\n       
+    this._isInitialized = true;\\r\\n    }\\r\\n    OnDisable() {\\r\\n        //this.UIZepetoPlayerControlObject.StopMoving();\\r\\n       
+    if (PlayerManager_1.default.Instance != null) {\\r\\n            PlayerManager_1.default.Instance.OnDragEnd();\\r\\n       
+    }\\r\\n        this._rectTransform.anchoredPosition = this._startPosition;\\r\\n   
+    }\\r\\n    Update() {\\r\\n        if (this._isInitialized && !this._isOnEditor)
+    {\\r\\n            if (UnityEngine_1.Input.touchCount == 0) {\\r\\n               
+    //this.UIZepetoPlayerControlObject.StopMoving();\\r\\n                if (PlayerManager_1.default.Instance
+    != null) {\\r\\n                    PlayerManager_1.default.Instance.OnDragEnd();\\r\\n                   
+    // console.error(\\\"OnDragEnd\\\");\\r\\n                }\\r\\n               
+    this._rectTransform.anchoredPosition = this._startPosition;\\r\\n               
+    if (this.isUsingRotatorGO) {\\r\\n                    this.rotatorGO.SetActive(false);\\r\\n               
+    }\\r\\n                this._isDragging = false;\\r\\n                if (this.isAutoHideInMobile)\\r\\n                   
+    this._controllerCanvasGroup.alpha = 0;\\r\\n            }\\r\\n        }\\r\\n       
+    if (UnityEngine.Application.isEditor ||\\r\\n            (UnityEngine.Application.platform
+    != UnityEngine.RuntimePlatform.Android && UnityEngine.Application.platform !=
+    UnityEngine.RuntimePlatform.IPhonePlayer)) {\\r\\n            let h = UnityEngine_1.Input.GetAxis(\\\"Horizontal\\\");\\r\\n           
+    let v = UnityEngine_1.Input.GetAxis(\\\"Vertical\\\");\\r\\n            if (h
+    != 0 || v != 0) {\\r\\n                PlayerManager_1.default.Instance.OnDragMove(new
+    UnityEngine_1.Vector2(h, v));\\r\\n                this.mIsOk = true;\\r\\n           
+    }\\r\\n            else {\\r\\n                if (this.mIsOk) {\\r\\n                   
+    PlayerManager_1.default.Instance.OnDragEnd();\\r\\n                    this.mIsOk
+    = false;\\r\\n                }\\r\\n            }\\r\\n            if (UnityEngine_1.Input.GetKeyDown(UnityEngine_1.KeyCode.Space))
+    {\\r\\n                this.Jump();\\r\\n            }\\r\\n        }\\r\\n   
+    }\\r\\n    Vector2ToAngle(input) {\\r\\n        if (input.x < 0) {\\r\\n           
+    return 360 - (UnityEngine_1.Mathf.Atan2(input.x, input.y) * UnityEngine_1.Mathf.Rad2Deg
+    * -1);\\r\\n        }\\r\\n        else {\\r\\n            return (UnityEngine_1.Mathf.Atan2(input.x,
+    input.y) * UnityEngine_1.Mathf.Rad2Deg);\\r\\n        }\\r\\n    }\\r\\n    Jump()
+    {\\r\\n        //this.UIZepetoPlayerControlObject.Jump();\\r\\n        //PlayerManager.Instance.SyncLocalPlayerState(CharacterState.Jump);\\r\\n       
+    if (UnityEngine_1.Time.time - this.mLastJumpTime > 1) {\\r\\n            PlayerManager_1.default.Instance.Jump();\\r\\n           
+    this.mLastJumpTime = UnityEngine_1.Time.time;\\r\\n        }\\r\\n    }\\r\\n}\\r\\nexports.default
+    = CustomScreenStick;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ3VzdG9tU2NyZWVuU3RpY2suanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJDdXN0b21TY3JlZW5TdGljay50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDJDQUEyQztBQUMzQyw2Q0FlcUI7QUFDckIsdUVBQTJGO0FBQzNGLGlHQUE4RDtBQUM5RCxtREFBd0M7QUFFeEMsaURBQXFEO0FBQ3JELGdFQUF3RDtBQUd4RCxNQUFxQixpQkFBa0IsU0FBUSxxQ0FBcUI7SUFBcEU7O1FBaU1ZLFVBQUssR0FBWSxLQUFLLENBQUM7UUFVdkIsa0JBQWEsR0FBVyxDQUFDLENBQUM7SUFZdEMsQ0FBQztJQXRMRyx3Q0FBd0M7SUFDeEMsdURBQXVEO0lBRXZELEtBQUs7UUFDRCxJQUFJLENBQUMsd0JBQVUsQ0FBQyxxQkFBcUIsSUFBSSxtQ0FBcUIsQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLHdCQUFVLENBQUMscUJBQXFCLElBQUksbUNBQXFCLENBQUMsT0FBTyxDQUFDLEVBQUU7WUFDM0ksSUFBSSxDQUFDLFdBQVcsR0FBRyxJQUFJLENBQUM7WUFDeEIsT0FBTyxDQUFDLEdBQUcsQ0FBQywrRUFBK0UsQ0FBQyxDQUFDO1NBQ2hHO2FBQU07WUFDSCxJQUFJLENBQUMsV0FBVyxHQUFHLEtBQUssQ0FBQztTQUM1QjtRQUVELElBQUksQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLFNBQUMsdUNBQVksRUFBRyxDQUFDO1FBQ2xFLElBQUksQ0FBQywyQkFBMkIsR0FBRyxJQUFJLENBQUMsMkJBQTJCLENBQUM7UUFDcEUsSUFBSSxDQUFDLGNBQWMsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLFlBQVksU0FBQywyQkFBYSxFQUFHLENBQUM7UUFDcEUsSUFBSSxDQUFDLG9CQUFvQixHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxZQUFZLFNBQUMsMkJBQWEsRUFBRyxDQUFDO1FBQzNGLElBQUksQ0FB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\",\"assetPath\":\"Assets/Scripts/GameController/CustomScreenStick.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"ZEPETO.Character.Controller\",\"name\":\"UIZepetoPlayerControlObject\",\"type\":\"ZEPETO.Character.Controller.UIZepetoPlayerControl\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"Header\",\"args\":[\"\\\"----
+    Basic Settings ----\\\"\"]}]},{\"assembly\":\"mscorlib\",\"name\":\"stickMaximumDistance\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"isUsingRotatorGO\",\"type\":\"System.Boolean\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"Header\",\"args\":[\"\\\"----
+    Rotator Related ----\\\"\"]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"rotatorGO\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"isAutoHideInMobile\",\"type\":\"System.Boolean\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"Header\",\"args\":[\"\\\"----
+    Other Settings ----\\\"\"]}]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"jumpBtn\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"Header\",\"args\":[\"\\\"----
+    Jump ----\\\"\"]}]}],\"name\":\"CustomScreenStick\",\"description\":\"\",\"hasAnimatorMove\":false},\"isCompiled\":true}"
+  typescriptHash: fa1b0ef6a385610201552e5f05331f48
+  onlyWriteTrigger: 0

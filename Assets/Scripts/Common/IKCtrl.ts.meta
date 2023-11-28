@@ -1,0 +1,38 @@
+fileFormatVersion: 2
+guid: 0f17146bf4f66d64199d8c049e7a6f74
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\n/**\r\n * IK control when turning
+    on a flashlight\r\n */\r\nclass IKCtrl extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.ikActive
+    = false;\r\n        this.ikObj = null;\r\n        this.ikGoal = UnityEngine_1.AvatarIKGoal.RightHand;\r\n   
+    }\r\n    // public ikanimator: Animator;\r\n    Start() {\r\n        this.animator
+    = this.transform.GetComponent($typeof(UnityEngine_1.Animator));\r\n    }\r\n   
+    OnAnimatorIK() {\r\n        if (this.animator) {\r\n            if (this.ikActive)
+    {\r\n                this.animator.SetIKPositionWeight(this.ikGoal, 1);\r\n               
+    this.animator.SetIKRotationWeight(this.ikGoal, 1);\r\n                if (this.ikObj
+    != null) {\r\n                    this.animator.SetIKPosition(this.ikGoal, this.ikObj.position);\r\n                   
+    this.animator.SetIKRotation(this.ikGoal, this.ikObj.rotation);\r\n               
+    }\r\n            }\r\n            else {\r\n                this.animator.SetIKPositionWeight(this.ikGoal,
+    0);\r\n                this.animator.SetIKRotationWeight(this.ikGoal, 0);\r\n           
+    }\r\n        }\r\n    }\r\n}\r\nexports.default = IKCtrl;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSUtDdHJsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiSUtDdHJsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUE0RztBQUU1Rzs7R0FFRztBQUNILE1BQXFCLE1BQU8sU0FBUSxxQ0FBcUI7SUFBekQ7O1FBRVcsYUFBUSxHQUFTLEtBQUssQ0FBQztRQUN2QixVQUFLLEdBQWMsSUFBSSxDQUFDO1FBQ3hCLFdBQU0sR0FBVywwQkFBWSxDQUFDLFNBQVMsQ0FBQztJQXlCbkQsQ0FBQztJQXhCRywrQkFBK0I7SUFFL0IsS0FBSztRQUNELElBQUksQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxZQUFZLFNBQUMsc0JBQVEsRUFBRyxDQUFDO0lBQzVELENBQUM7SUFFRCxZQUFZO1FBQ1IsSUFBSSxJQUFJLENBQUMsUUFBUSxFQUFFO1lBQ2YsSUFBSSxJQUFJLENBQUMsUUFBUSxFQUFFO2dCQUNmLElBQUksQ0FBQyxRQUFRLENBQUMsbUJBQW1CLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLENBQUMsQ0FBQztnQkFDbEQsSUFBSSxDQUFDLFFBQVEsQ0FBQyxtQkFBbUIsQ0FBQyxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsQ0FBQyxDQUFDO2dCQUVsRCxJQUFJLElBQUksQ0FBQyxLQUFLLElBQUksSUFBSSxFQUFFO29CQUNwQixJQUFJLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsTUFBTSxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQUM7b0JBQzlELElBQUksQ0FBQyxRQUFRLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxNQUFNLEVBQUUsSUFBSSxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsQ0FBQztpQkFDakU7YUFDSjtpQkFDSTtnQkFDRCxJQUFJLENBQUMsUUFBUSxDQUFDLG1CQUFtQixDQUFDLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxDQUFDLENBQUM7Z0JBQ2xELElBQUksQ0FBQyxRQUFRLENBQUMsbUJBQW1CLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLENBQUMsQ0FBQzthQUNyRDtTQUNKO0lBQ0wsQ0FBQztDQUVKO0FBN0JELHlCQTZCQyJ9","assetPath":"Assets/Scripts/Common/IKCtrl.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"ikActive","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"ikObj","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"ikGoal","type":"System.Single","isArray":false,"initValue":["RightHand"],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"IKCtrl","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: b4cea343feedfd18039e673cf6137ea6
+  onlyWriteTrigger: 0

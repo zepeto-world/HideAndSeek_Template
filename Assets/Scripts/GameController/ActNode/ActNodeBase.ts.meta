@@ -1,0 +1,27 @@
+fileFormatVersion: 2
+guid: 10360deea30f01444b13ae2865143ab1
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    ActNodeBase extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Check() {\r\n       
+    return false;\r\n    }\r\n    *CoRun() {\r\n        console.log(\"ActnodeBase\");\r\n   
+    }\r\n}\r\nexports.default = ActNodeBase;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQWN0Tm9kZUJhc2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJBY3ROb2RlQmFzZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCxNQUFxQixXQUFZLFNBQVEscUNBQXFCO0lBQzFELEtBQUs7UUFDRCxPQUFPLEtBQUssQ0FBQztJQUNqQixDQUFDO0lBQ0QsQ0FBQyxLQUFLO1FBQ0YsT0FBTyxDQUFDLEdBQUcsQ0FBQyxhQUFhLENBQUMsQ0FBQztJQUMvQixDQUFDO0NBRUo7QUFSRCw4QkFRQyJ9","assetPath":"Assets/Scripts/GameController/ActNode/ActNodeBase.ts","manifest":{"properties":[],"name":"ActNodeBase","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: f9b1c7d1d1497169e860e444f8064637
+  onlyWriteTrigger: 0

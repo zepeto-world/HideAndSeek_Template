@@ -1,0 +1,44 @@
+fileFormatVersion: 2
+guid: 46c3b83430566984bbcac6f160abc055
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    UIHPBar extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    InitHPBar(maxValue,
+    peakAddValue) {\r\n        this._maxValue = maxValue;\r\n        this._peakAddValue
+    = peakAddValue;\r\n        this._peakMaxValue = maxValue + peakAddValue;\r\n   
+    }\r\n    SetValue(currentValue) {\r\n        if (isNaN(currentValue) || currentValue
+    < 0) {\r\n            console.error(\"current HPValue is error:\", currentValue);\r\n           
+    currentValue = 0;\r\n        }\r\n        this._currentValue = currentValue;\r\n       
+    let img;\r\n        let maxValue;\r\n        if (this._currentValue <= this._maxValue)
+    {\r\n            img = this.redImage;\r\n            maxValue = this._maxValue;\r\n           
+    if (this.peakImage.gameObject.activeSelf) {\r\n                this.peakImage.gameObject.SetActive(false);\r\n           
+    }\r\n            if (!this.redImage.gameObject.activeSelf) {\r\n               
+    this.redImage.gameObject.SetActive(true);\r\n            }\r\n        }\r\n       
+    else if (this._currentValue > this._maxValue) {\r\n            img = this.peakImage;\r\n           
+    maxValue = this._peakMaxValue;\r\n            if (!this.peakImage.gameObject.activeSelf)
+    {\r\n                this.peakImage.gameObject.SetActive(true);\r\n           
+    }\r\n            if (this.redImage.gameObject.activeSelf) {\r\n               
+    this.redImage.gameObject.SetActive(false);\r\n            }\r\n        }\r\n       
+    // console.error(\"maxValue:\", maxValue, \"currentValue:\", currentValue);\r\n       
+    if (maxValue) {\r\n            img.fillAmount = currentValue / maxValue;\r\n       
+    }\r\n    }\r\n}\r\nexports.default = UIHPBar;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlIUEJhci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlVJSFBCYXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBcUU7QUFDckUsbURBQXVDO0FBQ3ZDLGlEQUFxRDtBQUVyRCxNQUFxQixPQUFRLFNBQVEscUNBQXFCO0lBUS9DLFNBQVMsQ0FBQyxRQUFnQixFQUFFLFlBQW9CO1FBQ25ELElBQUksQ0FBQyxTQUFTLEdBQUcsUUFBUSxDQUFDO1FBQzFCLElBQUksQ0FBQyxhQUFhLEdBQUcsWUFBWSxDQUFDO1FBQ2xDLElBQUksQ0FBQyxhQUFhLEdBQUcsUUFBUSxHQUFHLFlBQVksQ0FBQztJQUNqRCxDQUFDO0lBRU0sUUFBUSxDQUFDLFlBQW9CO1FBQ2hDLElBQUksS0FBSyxDQUFDLFlBQVksQ0FBQyxJQUFJLFlBQVksR0FBRyxDQUFDLEVBQUU7WUFDekMsT0FBTyxDQUFDLEtBQUssQ0FBQywyQkFBMkIsRUFBRSxZQUFZLENBQUMsQ0FBQztZQUN6RCxZQUFZLEdBQUcsQ0FBQyxDQUFDO1NBQ3BCO1FBRUQsSUFBSSxDQUFDLGFBQWEsR0FBRyxZQUFZLENBQUM7UUFDbEMsSUFBSSxHQUFVLENBQUM7UUFDZixJQUFJLFFBQVEsQ0FBQztRQUNiLElBQUksSUFBSSxDQUFDLGFBQWEsSUFBSSxJQUFJLENBQUMsU0FBUyxFQUFFO1lBQ3RDLEdBQUcsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDO1lBQ3BCLFFBQVEsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDO1lBQzFCLElBQUksSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsVUFBVSxFQUFFO2dCQUN0QyxJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7YUFDOUM7WUFDRCxJQUFJLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsVUFBVSxFQUFFO2dCQUN0QyxJQUFJLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7YUFDNUM7U0FDSjthQUNJLElBQUksSUFBSSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUMsU0FBUyxFQUFFO1lBQzFDLEdBQUcsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDO1lBQ3JCLFFBQVEsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDO1lBQzlCLElBQUksQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsQ0FBQyxVQUFVLEVBQUU7Z0JBQ3ZDLElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQzthQUM3QztZQUNELElBQUksSUFBSSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsVUFBVSxFQUFFO2dCQUNyQyxJQUFJLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7YUFDN0M7U0FDSjtRQUNELHVFQUF1RTtRQUN2RSxJQUFJLFFBQVEsRUFBRTtZQUNWLEdBQUcsQ0FBQyxVQUFVLEdBQUcsWUFBWSxHQUFHLFFBQVEsQ0FBQztTQUM1QztJQUNMLENBQUM7Q0FFSjtBQWpERCwwQkFpREMifQ==","assetPath":"Assets/Scripts/UI/UIHPBar.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"redImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"peakImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIHPBar","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 82071d865cc0d05270d5d4a4bbad249a
+  onlyWriteTrigger: 0

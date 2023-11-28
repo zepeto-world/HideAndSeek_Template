@@ -1,0 +1,48 @@
+fileFormatVersion: 2
+guid: c91d0a1b6551d40afbacd67f0c7ca5d1
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst Localization_1 = require(\"./Localization\");\r\n//
+    TODO: Change the options below\r\nconst _numberOfLanguage = 17;\r\nclass LanguageChanger
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n       
+    super(...arguments);\r\n        this._isInitialized = false;\r\n        this._currentLanguageKeyIndex
+    = 0;\r\n    }\r\n    Next() {\r\n        this._currentLanguageKeyIndex++;\r\n       
+    if (this._currentLanguageKeyIndex >= _numberOfLanguage) {\r\n            this._currentLanguageKeyIndex
+    = 0;\r\n        }\r\n        if (!this._localization) {\r\n            this._localization
+    = Localization_1.default.Instance;\r\n        }\r\n        this._localization.ChangeLanguageOption(this._currentLanguageKeyIndex);\r\n   
+    }\r\n    Prev() {\r\n        this._currentLanguageKeyIndex--;\r\n        if (this._currentLanguageKeyIndex
+    < 0) {\r\n            this._currentLanguageKeyIndex = 15;\r\n        }\r\n       
+    if (!this._localization) {\r\n            this._localization = Localization_1.default.Instance;\r\n       
+    }\r\n        this._localization.ChangeLanguageOption(this._currentLanguageKeyIndex);\r\n   
+    }\r\n    GetCurrentLanguageKeyIndex() {\r\n        let _key = this._localization.CurrentLanguageKey;\r\n       
+    let _targetIndex = 0;\r\n        for (let i = 0; i < _numberOfLanguage; i++)
+    {\r\n            if (Localization_1.LanguageOption[i].toString() == _key) {\r\n               
+    _targetIndex = i;\r\n            }\r\n        }\r\n        this._currentLanguageKeyIndex
+    = _targetIndex;\r\n    }\r\n    UpdateCurrnetLangKeyText() {\r\n        this.currentLangKeyText.text
+    = this._localization.CurrentLanguageKey;\r\n    }\r\n    Start() {\r\n       
+    this._localization = Localization_1.default.Instance;\r\n        this._isInitialized
+    = true;\r\n        this.UpdateCurrnetLangKeyText();\r\n        this.GetCurrentLanguageKeyIndex();\r\n       
+    this._localization.onLanguageOptionChanged.AddListener(() => {\r\n           
+    this.UpdateCurrnetLangKeyText();\r\n            this.GetCurrentLanguageKeyIndex();\r\n       
+    });\r\n        this.nextButton.onClick.AddListener(this.Next);\r\n        this.nextButton.onClick.AddListener(this.Prev);\r\n   
+    }\r\n}\r\nexports.default = LanguageChanger;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTGFuZ3VhZ2VDaGFuZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiTGFuZ3VhZ2VDaGFuZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbURBQThDO0FBQzlDLGlEQUFxRDtBQUNyRCxpREFBNkQ7QUFFN0QsaUNBQWlDO0FBQ2pDLE1BQU0saUJBQWlCLEdBQUcsRUFBRSxDQUFDO0FBRTdCLE1BQXFCLGVBQWdCLFNBQVEscUNBQXFCO0lBQWxFOztRQU9ZLG1CQUFjLEdBQVksS0FBSyxDQUFDO1FBRWhDLDZCQUF3QixHQUFHLENBQUMsQ0FBQztJQXVEekMsQ0FBQztJQXJEVSxJQUFJO1FBQ1AsSUFBSSxDQUFDLHdCQUF3QixFQUFFLENBQUM7UUFDaEMsSUFBSSxJQUFJLENBQUMsd0JBQXdCLElBQUksaUJBQWlCLEVBQUU7WUFDcEQsSUFBSSxDQUFDLHdCQUF3QixHQUFHLENBQUMsQ0FBQztTQUNyQztRQUNELElBQUksQ0FBQyxJQUFJLENBQUMsYUFBYSxFQUFFO1lBQ3JCLElBQUksQ0FBQyxhQUFhLEdBQUcsc0JBQVksQ0FBQyxRQUFRLENBQUM7U0FDOUM7UUFDRCxJQUFJLENBQUMsYUFBYSxDQUFDLG9CQUFvQixDQUFDLElBQUksQ0FBQyx3QkFBd0IsQ0FBQyxDQUFDO0lBQzNFLENBQUM7SUFFTSxJQUFJO1FBQ1AsSUFBSSxDQUFDLHdCQUF3QixFQUFFLENBQUM7UUFDaEMsSUFBSSxJQUFJLENBQUMsd0JBQXdCLEdBQUcsQ0FBQyxFQUFFO1lBQ25DLElBQUksQ0FBQyx3QkFBd0IsR0FBRyxFQUFFLENBQUM7U0FDdEM7UUFDRCxJQUFJLENBQUMsSUFBSSxDQUFDLGFBQWEsRUFBRTtZQUNyQixJQUFJLENBQUMsYUFBYSxHQUFHLHNCQUFZLENBQUMsUUFBUSxDQUFDO1NBQzlDO1FBQ0QsSUFBSSxDQUFDLGFBQWEsQ0FBQyxvQkFBb0IsQ0FBQyxJQUFJLENBQUMsd0JBQXdCLENBQUMsQ0FBQztJQUMzRSxDQUFDO0lBRU8sMEJBQTBCO1FBQzlCLElBQUksSUFBSSxHQUFHLElBQUksQ0FBQyxhQUFhLENBQUMsa0JBQWtCLENBQUM7UUFFakQsSUFBSSxZQUFZLEdBQUcsQ0FBQyxDQUFDO1FBQ3JCLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxpQkFBaUIsRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUN4QyxJQUFJLDZCQUFjLENBQUMsQ0FBQyxDQUFDLENBQUMsUUFBUSxFQUFFLElBQUksSUFBSSxFQUFFO2dCQUN0QyxZQUFZLEdBQUcsQ0FBQyxDQUFDO2FBQ3BCO1NBQ0o7UUFDRCxJQUFJLENBQUMsd0JBQXdCLEdBQUcsWUFBWSxDQUFDO0lBQ2pELENBQUM7SUFFTyx3QkFBd0I7UUFDNUIsSUFBSSxDQUFDLGtCQUFrQixDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLGtCQUFrQixDQUFDO0lBQ3pFLENBQUM7SUFFRCxLQUFLO1FBQ0QsSUFBSSxDQUFDLGFBQWEsR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQztRQUMzQyxJQUFJLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQztRQUMzQixJQUFJLENBQUMsd0JBQXdCLEVBQUUsQ0FBQztRQUNoQyxJQUFJLENBQUMsMEJBQTBCLEVBQUUsQ0FBQztRQUVsQyxJQUFJLENBQUMsYUFBYSxDQUFDLHVCQUF1QixDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDeEQsSUFBSSxDQUFDLHdCQUF3QixFQUFFLENBQUM7WUFDaEMsSUFBSSxDQUFDLDBCQUEwQixFQUFFLENBQUM7UUFDdEMsQ0FBQyxDQUFDLENBQUE7UUFFRixJQUFJLENBQUMsVUFBVSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQy9DLElBQUksQ0FBQyxVQUFVLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDbkQsQ0FBQztDQUVKO0FBaEVELGtDQWdFQyJ9","assetPath":"Assets/Scripts/Common/Localization/Scripts/LanguageChanger.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"nextButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"prevButton","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"currentLangKeyText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"LanguageChanger","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: f7f6bbf91561bf50344d34036fc1980d
+  onlyWriteTrigger: 0

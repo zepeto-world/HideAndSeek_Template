@@ -1,0 +1,52 @@
+fileFormatVersion: 2
+guid: 782e98fbaa1a47b48b697589f5e04ad1
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\n/**\r\n * Sound effect controller\r\n
+    */\r\nclass AudioController extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
+    static get Instance() {\r\n        return AudioController._instance;\r\n    }\r\n   
+    Awake() {\r\n        AudioController._instance = this;\r\n    }\r\n    PlayBGM(clip)
+    {\r\n        this.mBGMAudioSource.clip = clip;\r\n        this.mBGMAudioSource.Play();\r\n   
+    }\r\n    PlayReadyBGM() {\r\n        this.mBGMAudioSource.clip = this.mReadyBGM;\r\n       
+    this.mBGMAudioSource.Play();\r\n        this.mBGMAudioSource.volume = 1;\r\n   
+    }\r\n    PlayStartGameBGM() {\r\n        this.mBGMAudioSource.clip = this.mStarGameBGM;\r\n       
+    this.mBGMAudioSource.Play();\r\n        this.mBGMAudioSource.volume = 1;\r\n   
+    }\r\n    PlayPeakBGM() {\r\n        this.mBGMAudioSource.clip = this.mPeakBGM;\r\n       
+    this.mBGMAudioSource.volume = 0.5;\r\n        this.mBGMAudioSource.Play();\r\n   
+    }\r\n    // It is possible to call multiple times within 1 second, so will not
+    handle it for now\r\n    // private _isPlayingTimeOut: boolean = false;\r\n   
+    PlayTimeout() {\r\n        //todo\r\n        // if (this._isPlayingTimeOut) {\r\n       
+    //     return;\r\n        // }\r\n        // this.PlayOneShot(this.mTimeout);\r\n       
+    // this._isPlayingTimeOut = true;\r\n        // this.StartCoroutine(this.RunSFXCallBack(1,
+    () => {\r\n        //     this._isPlayingTimeOut = false;\r\n        // }));\r\n   
+    }\r\n    // *RunSFXCallBack(waitTime: number, cb: Function) {\r\n    //     yield
+    new WaitForSeconds(waitTime);\r\n    //     cb();\r\n    // }\r\n    PlayRoundOver()
+    {\r\n        this.PlayOneShot(this.mRoundOver);\r\n    }\r\n    PlayGameOver()
+    {\r\n        this.PlayOneShot(this.mGameOver);\r\n    }\r\n    PlayOpenLight()
+    {\r\n        this.PlayOneShot(this.mOpenLight);\r\n    }\r\n    PlayJump() {\r\n       
+    this.PlayOneShot(this.mJump);\r\n    }\r\n    PlayOneShot(clip) {\r\n       
+    this.mEffectAudioSource.PlayOneShot(clip);\r\n    }\r\n    PlayAtPoint(clip,
+    point) {\r\n        UnityEngine_1.AudioSource.PlayClipAtPoint(clip, point);\r\n   
+    }\r\n    PlayGetReward() {\r\n        this.PlayOneShot(this.mGetReward);\r\n   
+    }\r\n}\r\nexports.default = AudioController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQXVkaW9Db250cm9sbGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQXVkaW9Db250cm9sbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUE2RTtBQUU3RTs7R0FFRztBQUVILE1BQXFCLGVBQWdCLFNBQVEscUNBQXFCO0lBT3ZELE1BQU0sS0FBSyxRQUFRO1FBQ3RCLE9BQU8sZUFBZSxDQUFDLFNBQVMsQ0FBQztJQUNyQyxDQUFDO0lBY0QsS0FBSztRQUNELGVBQWUsQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO0lBQ3JDLENBQUM7SUFFTSxPQUFPLENBQUMsSUFBZTtRQUMxQixJQUFJLENBQUMsZUFBZSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUM7UUFDakMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUNoQyxDQUFDO0lBRU0sWUFBWTtRQUNmLElBQUksQ0FBQyxlQUFlLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUM7UUFDM0MsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUM1QixJQUFJLENBQUMsZUFBZSxDQUFDLE1BQU0sR0FBRyxDQUFDLENBQUM7SUFDcEMsQ0FBQztJQUVNLGdCQUFnQjtRQUNuQixJQUFJLENBQUMsZUFBZSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDO1FBQzlDLElBQUksQ0FBQyxlQUFlLENBQUMsSUFBSSxFQUFFLENBQUM7UUFDNUIsSUFBSSxDQUFDLGVBQWUsQ0FBQyxNQUFNLEdBQUcsQ0FBQyxDQUFDO0lBQ3BDLENBQUM7SUFFTSxXQUFXO1FBQ2QsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQztRQUMxQyxJQUFJLENBQUMsZUFBZSxDQUFDLE1BQU0sR0FBRyxHQUFHLENBQUM7UUFDbEMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUNoQyxDQUFDO0lBRUQsdUZBQXVGO0lBQ3ZGLDhDQUE4QztJQUN2QyxXQUFXO1FBQ2QsTUFBTTtRQUNOLGdDQUFnQztRQUNoQyxjQUFjO1FBQ2QsSUFBSTtRQUNKLG1DQUFtQztRQUNuQyxpQ0FBaUM7UUFDakMscURBQXFEO1FBQ3JELHNDQUFzQztRQUN0QyxPQUFPO0lBQ1gsQ0FBQztJQUVELG9EQUFvRDtJQUNwRCwwQ0FBMEM7SUFDMUMsWUFBWTtJQUNaLElBQUk7SUFFRyxhQUFhO1FBQ2hCLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0lBQ3RDLENBQUM7SUFFTSxZQUFZO1FBQ2YsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUM7SUFDckMsQ0FBQztJQUVNLGFBQWE7UUFDaEIsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7SUFDdEMsQ0FBQztJQUVNLFFBQVE7UUFDWCxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUNqQyxDQUFDO0lBRU0sV0FBVyxDQUFDLElBQWU7UUFDOUIsSUFBSSxDQUFDLGtCQUFrQixDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUM5QyxDQUFDO0lBRU0sV0FBVyxDQUFDLElBQWUsRUFBRSxLQUFjO1FBQzlDLHlCQUFXLENBQUMsZUFBZSxDQUFDLElBQUksRUFBRSxLQUFLLENBQUMsQ0FBQztJQUM3QyxDQUFDO0lBRU0sYUFBYTtRQUNoQixJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUN0QyxDQUFDO0NBRUo7QUFqR0Qsa0NBaUdDIn0=","assetPath":"Assets/Scripts/GameController/AudioController.ts","manifest":{"properties":[{"assembly":"UnityEngine.AudioModule","name":"mEffectAudioSource","type":"UnityEngine.AudioSource","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.AudioModule","name":"mBGMAudioSource","type":"UnityEngine.AudioSource","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.AudioModule","name":"mReadyBGM","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Sound
+    Effects\""]}]},{"assembly":"UnityEngine.AudioModule","name":"mStarGameBGM","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.AudioModule","name":"mPeakBGM","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.AudioModule","name":"mTimeout","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.AudioModule","name":"mRoundOver","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.AudioModule","name":"mGameOver","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.AudioModule","name":"mOpenLight","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.AudioModule","name":"mGetReward","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.AudioModule","name":"mJump","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"AudioController","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: ac154121635b36aee70b9990f470e5bb
+  onlyWriteTrigger: 0

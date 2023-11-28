@@ -1,0 +1,169 @@
+fileFormatVersion: 2
+guid: b7ab8cba174c58a4187cab2a18012213
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst
+    Localization_1 = require(\\\"../Common/Localization/Scripts/Localization\\\");\\r\\nconst
+    UIRoundResultPanel_1 = require(\\\"../UI/UIRoundResultPanel\\\");\\r\\nconst
+    UIGameOverPanel_1 = require(\\\"../UI/UIGameOverPanel\\\");\\r\\nconst AudioController_1
+    = require(\\\"../GameController/AudioController\\\");\\r\\nclass ToastNode {\\r\\n   
+    constructor() {\\r\\n        this.IsTimeout = false;\\r\\n        this.LeftTime
+    = 0;\\r\\n        this.mTimeChange = null;\\r\\n        // Duration\\r\\n       
+    this.mDuration = 0;\\r\\n        this.mPassedTime = 0;\\r\\n    }\\r\\n    Init(_duration,
+    _elapsed, _timeChange) {\\r\\n        this.mDuration = _duration;\\r\\n       
+    this.mElapsed = _elapsed;\\r\\n        this.LeftTime = _duration;\\r\\n       
+    this.mTimeChange = _timeChange;\\r\\n    }\\r\\n    Update(deltaTime) {\\r\\n       
+    this.mPassedTime += deltaTime;\\r\\n        if (this.mPassedTime >= 1) {\\r\\n           
+    this.mPassedTime -= 1;\\r\\n            this.mDuration--;\\r\\n            if
+    (this.mDuration <= 0) {\\r\\n                this.IsTimeout = true;\\r\\n           
+    }\\r\\n            if (this.mTimeChange != null) {\\r\\n                this.mTimeChange();\\r\\n           
+    }\\r\\n        }\\r\\n    }\\r\\n    UpdateElapsed(_elapsed) {\\r\\n        this.mPassedTime
+    = _elapsed - this.mElapsed;\\r\\n        this.LeftTime = this.mDuration - this.mPassedTime;\\r\\n       
+    if (this.LeftTime <= 0) {\\r\\n            this.IsTimeout = true;\\r\\n       
+    }\\r\\n        if (this.mTimeChange != null) {\\r\\n            this.mTimeChange();\\r\\n       
+    }\\r\\n    }\\r\\n}\\r\\n/**\\r\\n * Toast tips in the game\\r\\n */\\r\\nclass
+    UIToast extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.GameStatusToast = \\\"GameStatusToast\\\";\\r\\n       
+    this.CommonToastDuration = 3;\\r\\n        this.mToastMap = new Map();\\r\\n       
+    this.mResultDealyConst = 2;\\r\\n        this.mRoundOverDuration = 5;\\r\\n       
+    this.mGameOverDuration = 10;\\r\\n        //-------------------------notice\\r\\n   
+    }\\r\\n    static get Instance() {\\r\\n        return UIToast._instance;\\r\\n   
+    }\\r\\n    Awake() {\\r\\n        UIToast._instance = this;\\r\\n    }\\r\\n   
+    UpdateElapsed(_elapsed) {\\r\\n        this.mElasped = _elapsed;\\r\\n       
+    if (this.mToastMap.size > 0) {\\r\\n            this.mToastMap.forEach((node,
+    name) => {\\r\\n                node.UpdateElapsed(_elapsed);\\r\\n               
+    if (node.IsTimeout) {\\r\\n                    this.mToastMap.delete(name);\\r\\n               
+    }\\r\\n            });\\r\\n        }\\r\\n    }\\r\\n    HideGameStatus() {\\r\\n       
+    this.mGameStatusToast.SetActive(false);\\r\\n    }\\r\\n    ShowGameStatus(title,
+    msg) {\\r\\n        this.mGameStatusToast.SetActive(true);\\r\\n        this.mGameStatusTitle.text
+    = title;\\r\\n        if (msg == null) {\\r\\n            this.mGameStatusContent.gameObject.SetActive(false);\\r\\n       
+    }\\r\\n        else {\\r\\n            this.mGameStatusContent.gameObject.SetActive(true);\\r\\n           
+    this.mGameStatusContent.text = msg;\\r\\n        }\\r\\n    }\\r\\n    /**\\r\\n    
+    * Game status prompt Toast(There is a countdown)\\r\\n     * @param duration\\r\\n    
+    * @param title\\r\\n     * @param content\\r\\n     */\\r\\n    ShowGameStatusToastWithCountDown(duration,
+    title, content) {\\r\\n        if (this.mToastMap.has(this.GameStatusToast))
+    {\\r\\n            this.mToastMap.delete(this.GameStatusToast);\\r\\n       
+    }\\r\\n        this.ShowGameStatus(title, content ? content : null);\\r\\n       
+    var countDown = this.mGameStatusCountDown;\\r\\n        countDown.SetActive(true);\\r\\n       
+    var countDownText = countDown.GetComponentInChildren($typeof(UnityEngine_UI_1.Text));\\r\\n       
+    countDownText.text = duration.toString();\\r\\n        let node = new ToastNode();\\r\\n       
+    node.Init(duration, this.mElasped, () => {\\r\\n            //mathf.floor( time
+    / 10)\\r\\n            countDownText.text = node.LeftTime.toString();\\r\\n           
+    if (node.LeftTime <= 10) {\\r\\n                AudioController_1.default.Instance.PlayTimeout();\\r\\n           
+    }\\r\\n            if (node.IsTimeout) {\\r\\n                countDown.SetActive(false);\\r\\n               
+    this.HideGameStatus();\\r\\n            }\\r\\n        });\\r\\n        this.mToastMap.set(this.GameStatusToast,
+    node);\\r\\n    }\\r\\n    /**\\r\\n     * Public prompt pop-up\\r\\n     * @param
+    title\\r\\n     * @param content\\r\\n     * @returns\\r\\n     */\\r\\n    ShowCommonToast(title,
+    content) {\\r\\n        if (this.mToastMap.has(title)) {\\r\\n            return;\\r\\n       
+    }\\r\\n        let comToastObj = UnityEngine_1.GameObject.Instantiate(this.mCommonToast,
+    this.transform);\\r\\n        let titleText = comToastObj.transform.GetChild(0).GetComponent($typeof(UnityEngine_UI_1.Text));\\r\\n       
+    titleText.text = title;\\r\\n        let contentText = comToastObj.transform.GetChild(1).GetComponent($typeof(UnityEngine_UI_1.Text));\\r\\n       
+    if (content && content != \\\"\\\") {\\r\\n            contentText.text = content;\\r\\n           
+    contentText.gameObject.SetActive(true);\\r\\n        }\\r\\n        else {\\r\\n           
+    contentText.gameObject.SetActive(false);\\r\\n        }\\r\\n        let animationClip
+    = comToastObj.GetComponent($typeof(UnityEngine_1.Animation)).clip;\\r\\n       
+    let node = new ToastNode();\\r\\n        node.Init(animationClip.length, this.mElasped,
+    () => {\\r\\n            if (node.IsTimeout) {\\r\\n                if (this.mToastMap.has(title))
+    {\\r\\n                    this.mToastMap.delete(title);\\r\\n               
+    }\\r\\n                UnityEngine_1.GameObject.DestroyImmediate(comToastObj);\\r\\n           
+    }\\r\\n        });\\r\\n        this.mToastMap.set(title, node);\\r\\n    }\\r\\n   
+    // notice------------------------ start\\r\\n    /**\\r\\n     * Game waiting
+    prompt\\r\\n     */\\r\\n    ShowGameWait() {\\r\\n        var title = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_wait_tip\\\");\\r\\n       
+    var content = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_wait_content\\\");\\r\\n       
+    this.ShowGameStatus(title, content);\\r\\n    }\\r\\n    /**\\r\\n     * Game
+    start prompt\\r\\n     * @param isHunter\\r\\n     * @param duration\\r\\n    
+    */\\r\\n    ShowGameStart(isHunter, duration) {\\r\\n        var title = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_hider_tip\\\");\\r\\n       
+    if (isHunter) {\\r\\n            title = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_hunter_tip\\\");\\r\\n       
+    }\\r\\n        // console.error(\\\"Game start countdown\uFF1A\\\", Date.now());\\r\\n       
+    this.ShowGameStatusToastWithCountDown(duration, title);\\r\\n    }\\r\\n    /**\\r\\n    
+    * Peak Hour Reminder\\r\\n     * @param duration\\r\\n     * @param elapsed\\r\\n    
+    */\\r\\n    ShowPeakMoment(duration, elapsed) {\\r\\n        var title = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_peak_tip\\\");\\r\\n       
+    var content = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_peak_content\\\");\\r\\n       
+    this.ShowGameStatus(title, content);\\r\\n    }\\r\\n    /**\\r\\n     * The
+    countdown is about to begin\\r\\n     * @param duration\\r\\n     */\\r\\n   
+    ShowReadyCountDown(duration) {\\r\\n        var title = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_ready_start\\\");\\r\\n       
+    this.ShowGameStatusToastWithCountDown(duration, title);\\r\\n    }\\r\\n    /**\\r\\n    
+    * Small turn settlement\\r\\n     * @param roundResult\\r\\n     * @param round\\r\\n    
+    * @param gameRule\\r\\n     * @param myScore\\r\\n     */\\r\\n    ShowRoundResult(roundResult,
+    round, gameRule, myScore) {\\r\\n        if (round < gameRule.roundNumber) {\\r\\n           
+    // At the end of the last round, only the game settlement panel will be displayed      
+    \\r\\n            let tip = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_round_over\\\");\\r\\n           
+    this.ShowGameStatus(tip, null);\\r\\n            let node = new ToastNode();\\r\\n           
+    node.Init(this.mResultDealyConst, this.mElasped, () => {\\r\\n               
+    if (node.IsTimeout) {\\r\\n                    this.mToastMap.delete(\\\"RoundResultDelay\\\");\\r\\n                   
+    this.ShowRoundPanel(roundResult, this.mRoundOverDuration, myScore);\\r\\n               
+    }\\r\\n            });\\r\\n            this.mToastMap.set(\\\"RoundResultDelay\\\",
+    node);\\r\\n        }\\r\\n    }\\r\\n    ShowRoundPanel(roundResult, duration,
+    myScore) {\\r\\n        this.HideGameStatus();\\r\\n        console.log(\\\"[RoundOver]Display
+    Round Settlement\\\");\\r\\n        var item = UnityEngine_1.GameObject.Instantiate(this.mRoundResult,
+    this.transform);\\r\\n        let roundResultPanel = item.GetComponent($typeof(UIRoundResultPanel_1.default));\\r\\n       
+    roundResultPanel.mCoundDownTimer.text = duration.toString();\\r\\n        roundResultPanel.Show(roundResult,
+    myScore);\\r\\n        let node = new ToastNode();\\r\\n        node.Init(duration,
+    this.mElasped, () => {\\r\\n            roundResultPanel.mCoundDownTimer.text
+    = node.LeftTime.toString(); //mathf.floor( time / 10)\\r\\n            if (node.IsTimeout)
+    {\\r\\n                console.log(\\\"[RoundOver]Close Round Settlement\\\");\\r\\n               
+    this.mToastMap.delete(\\\"RoundResult\\\");\\r\\n                UnityEngine_1.GameObject.DestroyImmediate(item);\\r\\n           
+    }\\r\\n        });\\r\\n        this.mToastMap.set(\\\"RoundResult\\\", node);\\r\\n   
+    }\\r\\n    /**\\r\\n     * Game settlement\\r\\n     * @param result\\r\\n    
+    */\\r\\n    ShowGameOver(result) {\\r\\n        let tip = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_game_over\\\");\\r\\n       
+    this.ShowGameStatus(tip, null);\\r\\n        let node = new ToastNode();\\r\\n       
+    node.Init(this.mResultDealyConst, this.mElasped, () => {\\r\\n            if
+    (node.IsTimeout) {\\r\\n                if (this.mToastMap.has(\\\"GameOverDelay\\\"))
+    {\\r\\n                    this.mToastMap.delete(\\\"GameOverDelay\\\");\\r\\n               
+    }\\r\\n                this.ShowGameOverPanel(result, this.mGameOverDuration);\\r\\n           
+    }\\r\\n        });\\r\\n        this.mToastMap.set(\\\"GameOverDelay\\\", node);\\r\\n   
+    }\\r\\n    ShowGameOverPanel(result, duration) {\\r\\n        this.HideGameStatus();\\r\\n       
+    var item = UnityEngine_1.GameObject.Instantiate(this.mGameOverPanel, this.transform);\\r\\n       
+    item.SetActive(true);\\r\\n        let gameOverPanel = item.GetComponent($typeof(UIGameOverPanel_1.default));\\r\\n       
+    gameOverPanel.mCoundDownTimer.text = duration.toString();\\r\\n        gameOverPanel.Show(result);\\r\\n       
+    item.transform.localScale = UnityEngine_1.Vector3.one;\\r\\n        let node
+    = new ToastNode();\\r\\n        console.log(\\\"[GameOver]Display game settlement\\\");\\r\\n       
+    node.Init(duration, this.mElasped, () => {\\r\\n            gameOverPanel.mCoundDownTimer.text
+    = node.LeftTime.toString(); //mathf.floor( time / 10)\\r\\n            if (node.IsTimeout)
+    {\\r\\n                if (this.mToastMap.has(\\\"GameOverResult\\\")) {\\r\\n                   
+    this.mToastMap.delete(\\\"GameOverResult\\\");\\r\\n                }\\r\\n               
+    console.log(\\\"[GameOver]\u5173\u95ED\u6E38\u620F\u7ED3\u7B97\\\");\\r\\n               
+    UnityEngine_1.GameObject.DestroyImmediate(item);\\r\\n            }\\r\\n       
+    });\\r\\n        this.mToastMap.set(\\\"GameOverResult\\\", node);\\r\\n    }\\r\\n   
+    /**\\r\\n     * Hidden person hit prompt\\r\\n     */\\r\\n    ShowHiderBeFound()
+    {\\r\\n        var title = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_hider_beFound\\\");\\r\\n       
+    this.ShowCommonToast(title);\\r\\n    }\\r\\n    /**\\r\\n     * Hidden person
+    scanned to prompt\\r\\n     */\\r\\n    ShowHiderBeScan() {\\r\\n        var
+    title = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_hider_beScan\\\");\\r\\n       
+    this.ShowCommonToast(title);\\r\\n    }\\r\\n    /**\\r\\n     * Finder scanning
+    to prompt\\r\\n     */\\r\\n    ShowHunterScan() {\\r\\n        var title = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_hunter_Scan\\\");\\r\\n       
+    this.ShowCommonToast(title);\\r\\n    }\\r\\n    /**\\r\\n     * Hidden person
+    death reminder\\r\\n     */\\r\\n    ShowHiderDead() {\\r\\n        var title
+    = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_hider_dead\\\");\\r\\n       
+    this.ShowCommonToast(title);\\r\\n    }\\r\\n    /**\\r\\n     * Seeker Kill
+    Reminder\\r\\n     */\\r\\n    ShowHunterKill() {\\r\\n        var title = Localization_1.default.Instance.GetLocalizedText(\\\"Toast_hunter_kill\\\");\\r\\n       
+    this.ShowCommonToast(title);\\r\\n    }\\r\\n    /**\\r\\n     * Status lock/Unlock
+    prompt\\r\\n     * @param isLock\\r\\n     */\\r\\n    ShowLockViewStatus(isLock)
+    {\\r\\n        var title = Localization_1.default.Instance.GetLocalizedText(isLock
+    ? \\\"Toast_status_lock\\\" : \\\"Toast_status_unlock\\\");\\r\\n        this.ShowCommonToast(title);\\r\\n   
+    }\\r\\n    //Prompt for successful sharing\\r\\n    ShowFeedSuccess() {\\r\\n       
+    var title = Localization_1.default.Instance.GetLocalizedText(\\\"Feed_success\\\");\\r\\n       
+    this.ShowCommonToast(title);\\r\\n    }\\r\\n    //Sharing failure prompt\\r\\n   
+    ShowFeedFail() {\\r\\n        var title = Localization_1.default.Instance.GetLocalizedText(\\\"Feed_fail\\\");\\r\\n       
+    this.ShowCommonToast(title);\\r\\n    }\\r\\n}\\r\\nexports.default = UIToast;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlUb2FzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlVJVG9hc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQyxpREFBc0Q7QUFDdkQsNkNBQTZEO0FBQzdELG1EQUFzQztBQUV0Qyw4RUFBdUU7QUFDdkUsaUVBQXlEO0FBQ3pELDJEQUFtRDtBQUNuRCx1RUFBZ0U7QUFHaEUsTUFBTSxTQUFTO0lBQWY7UUFDVyxjQUFTLEdBQVksS0FBSyxDQUFDO1FBQzNCLGFBQVEsR0FBVyxDQUFDLENBQUM7UUFDcEIsZ0JBQVcsR0FBVyxJQUFJLENBQUM7UUFFbkMsV0FBVztRQUNILGNBQVMsR0FBVyxDQUFDLENBQUM7UUFFdEIsZ0JBQVcsR0FBVyxDQUFDLENBQUM7SUFrQ3BDLENBQUM7SUFoQ1UsSUFBSSxDQUFDLFNBQWlCLEVBQUUsUUFBZ0IsRUFBRSxXQUFtQjtRQUNoRSxJQUFJLENBQUMsU0FBUyxHQUFHLFNBQVMsQ0FBQztRQUMzQixJQUFJLENBQUMsUUFBUSxHQUFHLFFBQVEsQ0FBQztRQUN6QixJQUFJLENBQUMsUUFBUSxHQUFHLFNBQVMsQ0FBQztRQUMxQixJQUFJLENBQUMsV0FBVyxHQUFHLFdBQVcsQ0FBQztJQUNuQyxDQUFDO0lBRU0sTUFBTSxDQUFDLFNBQWlCO1FBQzNCLElBQUksQ0FBQyxXQUFXLElBQUksU0FBUyxDQUFDO1FBQzlCLElBQUksSUFBSSxDQUFDLFdBQVcsSUFBSSxDQUFDLEVBQUU7WUFDdkIsSUFBSSxDQUFDLFdBQVcsSUFBSSxDQUFDLENBQUM7WUFDdEIsSUFBSSxDQUFDLFNBQVMsRUFBRSxDQUFDO1lBRWpCLElBQUksSUFBSSxDQUFDLFNBQVMsSUFBSSxDQUFDLEVBQUU7Z0JBQ3JCLElBQUksQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO2FBQ3pCO1lBQ0QsSUFBSSxJQUFJLENBQUMsV0FBVyxJQUFJLElBQUksRUFBRTtnQkFDMUIsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDO2FBQ3RCO1NBQ0o7SUFDTCxD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\",\"assetPath\":\"Assets/Scripts/UI/UIToast.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mGameStatusToast\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mGameStatusTitle\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mGameStatusContent\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mGameStatusCountDown\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mCommonToast\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mRoundResult\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mGameOverPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mLeaderboardPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mLeaderboardRewardPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mRewardPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"ToastNode\",\"description\":\"\",\"hasAnimatorMove\":false},\"isCompiled\":true}"
+  typescriptHash: ab6ff10333d8b7485aa6064192a1e094
+  onlyWriteTrigger: 0

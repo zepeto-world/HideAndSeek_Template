@@ -1,0 +1,38 @@
+fileFormatVersion: 2
+guid: 2b00fa8ffa768954db7408d9220599d8
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    GameMain_1 = require(\"../../GameMain\");\r\nconst UIToast_1 = require(\"../../UI/UIToast\");\r\nconst
+    AudioController_1 = require(\"../AudioController\");\r\nconst ActNodeBase_1 =
+    require(\"./ActNodeBase\");\r\n/**\r\n * Behavior processing: processing game
+    round settlement status\r\n */\r\nclass ActNodeGameRoundOver extends ActNodeBase_1.default
+    {\r\n    Check() {\r\n        // if (GameMain.Instance.GetGameState() == GameState.GameWait)
+    {\r\n        //     this.StopCoroutine(this.CoRun());\r\n        //     return
+    true;\r\n        // }\r\n        return false;\r\n    }\r\n    *CoRun() {\r\n       
+    AudioController_1.default.Instance.PlayReadyBGM();\r\n        GameMain_1.default.Instance.mRoundResult
+    = JSON.parse(GameMain_1.default.Instance.mGameInfo.RoundResult);\r\n        GameMain_1.default.Instance.mUIManager.OnRoundOver(GameMain_1.default.Instance.mRoundResult);\r\n       
+    let myRoundScore = GameMain_1.default.Instance.mPlayerManager.GetMyRoundScore();\r\n       
+    UIToast_1.default.Instance.ShowRoundResult(GameMain_1.default.Instance.mRoundResult,
+    GameMain_1.default.Instance.mGameInfo.GameRound, GameMain_1.default.Instance.mGameRule,
+    myRoundScore);\r\n        GameMain_1.default.Instance.mPlayerManager.OnRoundOver();\r\n   
+    }\r\n}\r\nexports.default = ActNodeGameRoundOver;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQWN0Tm9kZUdhbWVSb3VuZE92ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJBY3ROb2RlR2FtZVJvdW5kT3Zlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCw2Q0FBc0M7QUFDdEMsOENBQXVDO0FBQ3ZDLHdEQUFpRDtBQUNqRCwrQ0FBd0M7QUFFeEM7O0dBRUc7QUFDSCxNQUFxQixvQkFBcUIsU0FBUSxxQkFBVztJQUN6RCxLQUFLO1FBQ0QsZ0VBQWdFO1FBQ2hFLHdDQUF3QztRQUN4QyxtQkFBbUI7UUFDbkIsSUFBSTtRQUNKLE9BQU8sS0FBSyxDQUFDO0lBQ2pCLENBQUM7SUFDRCxDQUFDLEtBQUs7UUFDRix5QkFBZSxDQUFDLFFBQVEsQ0FBQyxZQUFZLEVBQUUsQ0FBQztRQUN4QyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxZQUFZLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsV0FBVyxDQUFDLENBQUM7UUFDckYsa0JBQVEsQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxZQUFZLENBQUMsQ0FBQztRQUN6RSxJQUFJLFlBQVksR0FBRyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxjQUFjLENBQUMsZUFBZSxFQUFFLENBQUM7UUFDdEUsaUJBQU8sQ0FBQyxRQUFRLENBQUMsZUFBZSxDQUFDLGtCQUFRLENBQUMsUUFBUSxDQUFDLFlBQVksRUFBRSxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsU0FBUyxFQUFFLGtCQUFRLENBQUMsUUFBUSxDQUFDLFNBQVMsRUFBRSxZQUFZLENBQUMsQ0FBQztRQUNuSixrQkFBUSxDQUFDLFFBQVEsQ0FBQyxjQUFjLENBQUMsV0FBVyxFQUFFLENBQUM7SUFDbkQsQ0FBQztDQUVKO0FBakJELHVDQWlCQyJ9","assetPath":"Assets/Scripts/GameController/ActNode/ActNodeGameRoundOver.ts","manifest":{"properties":[],"name":"ActNodeGameRoundOver","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 33b766bbe88adc4b30dfdb2c13691126
+  onlyWriteTrigger: 0

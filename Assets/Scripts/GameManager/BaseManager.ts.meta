@@ -1,0 +1,38 @@
+fileFormatVersion: 2
+guid: b85fdf59b1b012d40857d08e0e8fbd45
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    GameMain_1 = require(\"../GameMain\");\r\nconst AudioController_1 = require(\"../GameController/AudioController\");\r\nclass
+    BaseManager extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    get mGameState()
+    { return GameMain_1.default.Instance.mGameState; }\r\n    get mGameRule() { return
+    GameMain_1.default.Instance.mGameRule; }\r\n    OnActionEvent(eventName, message)
+    {\r\n        GameMain_1.default.Instance.OnActionEvent(eventName, message);\r\n   
+    }\r\n    SendEvent(eventName, message) {\r\n        GameMain_1.default.Instance.SendEvent(eventName,
+    message);\r\n    }\r\n    GetPlayerInfoVO(level) {\r\n        return GameMain_1.default.Instance.GetPlayerInfoVO(level);\r\n   
+    }\r\n    GetModelInfoVO(name) {\r\n        return GameMain_1.default.Instance.GetModelInfoVO(name);\r\n   
+    }\r\n    Toast(msg, duration) {\r\n        return GameMain_1.default.Instance.Toast(msg,
+    duration);\r\n    }\r\n    CheckCanChangeModel(cost) {\r\n        return GameMain_1.default.Instance.CheckCanChangeModel(cost);\r\n   
+    }\r\n    // AudioController\r\n    PlayBGM(clip) {\r\n        AudioController_1.default.Instance.PlayBGM(clip);\r\n   
+    }\r\n    PlayOneShot(clip) {\r\n        AudioController_1.default.Instance.PlayOneShot(clip);\r\n   
+    }\r\n    PlayAtPoint(clip, point) {\r\n        AudioController_1.default.Instance.PlayAtPoint(clip,
+    point);\r\n    }\r\n}\r\nexports.default = BaseManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQmFzZU1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJCYXNlTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCwwQ0FBZ0Q7QUFHaEQsdUVBQStEO0FBRS9ELE1BQXFCLFdBQVksU0FBUSxxQ0FBcUI7SUFFMUQsSUFBVyxVQUFVLEtBQWdCLE9BQU8sa0JBQVEsQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQztJQUUzRSxJQUFXLFNBQVMsS0FBZSxPQUFPLGtCQUFRLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUM7SUFFakUsYUFBYSxDQUFDLFNBQWlCLEVBQUUsT0FBWTtRQUNoRCxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsU0FBUyxFQUFFLE9BQU8sQ0FBQyxDQUFDO0lBQ3hELENBQUM7SUFFTSxTQUFTLENBQUMsU0FBb0IsRUFBRSxPQUFZO1FBQy9DLGtCQUFRLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxTQUFTLEVBQUUsT0FBTyxDQUFDLENBQUM7SUFDcEQsQ0FBQztJQUVNLGVBQWUsQ0FBQyxLQUFhO1FBQ2hDLE9BQU8sa0JBQVEsQ0FBQyxRQUFRLENBQUMsZUFBZSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ3BELENBQUM7SUFFTSxjQUFjLENBQUMsSUFBWTtRQUM5QixPQUFPLGtCQUFRLENBQUMsUUFBUSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNsRCxDQUFDO0lBRU0sS0FBSyxDQUFDLEdBQVcsRUFBRSxRQUFnQjtRQUN0QyxPQUFPLGtCQUFRLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxHQUFHLEVBQUUsUUFBUSxDQUFDLENBQUM7SUFDbEQsQ0FBQztJQUVNLG1CQUFtQixDQUFDLElBQVk7UUFDbkMsT0FBTyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxtQkFBbUIsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUN2RCxDQUFDO0lBRUQsa0JBQWtCO0lBQ1gsT0FBTyxDQUFDLElBQWU7UUFDMUIseUJBQWUsQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQzNDLENBQUM7SUFFTSxXQUFXLENBQUMsSUFBZTtRQUM5Qix5QkFBZSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDL0MsQ0FBQztJQUVNLFdBQVcsQ0FBQyxJQUFlLEVBQUUsS0FBYztRQUM5Qyx5QkFBZSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsSUFBSSxFQUFFLEtBQUssQ0FBQyxDQUFDO0lBRXRELENBQUM7Q0FDSjtBQTNDRCw4QkEyQ0MifQ==","assetPath":"Assets/Scripts/GameManager/BaseManager.ts","manifest":{"properties":[],"name":"BaseManager","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 57672c66a437d7ab96d93c50148f37b3
+  onlyWriteTrigger: 0

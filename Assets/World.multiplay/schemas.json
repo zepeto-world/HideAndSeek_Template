@@ -1,0 +1,11 @@
+{
+"State" : {"playerChange" : "sPlayerChange","gameInfo" : "sGameInfo","players" : {"map" : "sPlayer"},"dynamicMaps" : "sDynamicMap","playerHeart" : {"map" : "sGameHeart"}},
+"sPlayer" : {"id" : "uint8","state" : "uint8","targetModel" : "int8","model" : "int8","moveState" : "int8","position" : "sVector3","angleY" : "int16","star" : "int16","HP" : "int16","isHunter" : "boolean","buff" : "int8","buffNum" : "int8"},
+"sVector3" : {"x" : "int16","y" : "int16","z" : "int16"},
+"sPlayerInfo" : {"sessionId" : "string","userId" : "string","nickName" : "string","isReady" : "boolean","hunterNum" : "int8","liveTime" : "int8","hunterSum" : "int16","liveSum" : "int16","score" : "int16","playTimeSum" : "int32","hiderWinSum" : "uint16","hunterWinSum" : "uint16","roundScore" : "int16"},
+"sGameInfo" : {"Elapsed" : "uint32","GameState" : "int8","GameLeftTime" : "int16","GameMatchTime" : "uint8","GameRound" : "int8","HunterNum" : "uint8","HiderNum" : "uint8","PeekHP" : "uint8","RoundResult" : "string"},
+"sRoundResult" : {"isHunterWin" : "boolean","hunterId" : "string","hiderId" : "string","hunterNum" : "int8","liveTime" : "int32","bestScore" : "int32"},
+"sPlayerChange" : {"playerNumber" : "int32"},
+"sDynamicMap" : {"models" : "string"},
+"sGameHeart" : {"heartCount" : "int8"}
+}

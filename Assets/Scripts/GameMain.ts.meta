@@ -1,0 +1,158 @@
+fileFormatVersion: 2
+guid: d390a10d7f4ecf044b96c7a7e3e4ff71
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.GameRule = void 0;\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UIManager_1 = require(\"./GameManager/UIManager\");\r\nconst MapManager_1 = require(\"./GameManager/MapManager\");\r\nconst
+    NetManager_1 = require(\"./GameManager/NetManager\");\r\nconst PlayerManager_1
+    = require(\"./GameManager/PlayerManager\");\r\nconst ConfigManager_1 = require(\"./GameManager/ConfigManager\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst AudioController_1 = require(\"./GameController/AudioController\");\r\nconst
+    ZEPETO_Multiplay_1 = require(\"ZEPETO.Multiplay\");\r\nconst UIToast_1 = require(\"./UI/UIToast\");\r\nconst
+    FrameworkManager_1 = require(\"./GameManager/FrameworkManager\");\r\nconst UnityEngine_SceneManagement_1
+    = require(\"UnityEngine.SceneManagement\");\r\nconst ActNodeManager_1 = require(\"./GameController/ActNode/ActNodeManager\");\r\n/**\r\n
+    * Game Mainstream Process\r\n * 1. Game state behavior machine switching\r\n
+    * 2. Handling Client and Server Connection Intervals\r\n * 3. Game Local Event
+    Handling\r\n */\r\nclass GameMain extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.heartTimer
+    = 0;\r\n    }\r\n    static get Instance() {\r\n        if (!GameMain._instance)
+    {\r\n            const targetObj = UnityEngine_1.GameObject.Find(\"GameMain\");\r\n           
+    if (targetObj)\r\n                GameMain._instance = targetObj.GetComponent($typeof(GameMain));\r\n       
+    }\r\n        return GameMain._instance;\r\n    }\r\n    Awake() {\r\n       
+    GameMain._instance = this;\r\n    }\r\n    DoInit() {\r\n        // Dynamically
+    adding game related management classes\r\n        console.log(\"Gamemain start\");\r\n       
+    let AudioController = FrameworkManager_1.default.loadManager.ResLoad_PrefabObj(\"0AudioController\");\r\n       
+    AudioController.name = \"AudioController\";\r\n        let netManager = FrameworkManager_1.default.loadManager.ResLoad_PrefabObj(\"0NetManager\");\r\n       
+    netManager.name = \"NetManager\";\r\n        let playManager = FrameworkManager_1.default.loadManager.ResLoad_PrefabObj(\"1PlayerManager\");\r\n       
+    playManager.name = \"PlayerManager\";\r\n        let mapManager = FrameworkManager_1.default.loadManager.ResLoad_PrefabObj(\"2MapManager\");\r\n       
+    mapManager.name = \"MapManager\";\r\n        let uiManager = FrameworkManager_1.default.loadManager.ResLoad_PrefabObj(\"3UIManager\");\r\n       
+    uiManager.name = \"UIManager\";\r\n        this.SpawnPlayersPoints = FrameworkManager_1.default.loadManager.ResLoad_PrefabObj(\"SpawnPlayersPoints\");\r\n       
+    this.SpawnPlayersPoints.name = \"SpawnPlayersPoints\";\r\n        console.log(\"Gamemain
+    end\");\r\n        // Dynamically loading scenes\r\n        this.AsyncSceneProgress
+    = UnityEngine_SceneManagement_1.SceneManager.LoadSceneAsync(\"GameScene\", UnityEngine_SceneManagement_1.LoadSceneMode.Additive);\r\n       
+    // Behavior machine management initialization\r\n        this.actNodeManager
+    = new ActNodeManager_1.default();\r\n        this.actNodeManager.InitActNodeMap();\r\n   
+    }\r\n    DoStart() {\r\n        this.mNetManager = NetManager_1.default.Instance;\r\n       
+    this.mPlayerManager = PlayerManager_1.default.Instance;\r\n        this.mUIManager
+    = UIManager_1.default.Instance;\r\n        this.mConfigManager = ConfigManager_1.default.Instance;\r\n       
+    this.mMapManager = MapManager_1.default.Instance;\r\n        this.mGameState
+    = NetManager_1.GameState.None;\r\n    }\r\n    DoUpdate() {\r\n        this.heartTimer
+    += UnityEngine_1.Time.deltaTime;\r\n        if (this.heartTimer > ConfigManager_1.default.GAME_HEART_RATE)
+    {\r\n            this.heartTimer -= ConfigManager_1.default.GAME_HEART_RATE;\r\n           
+    this.OnGameHeartUpdate();\r\n        }\r\n    }\r\n    InitRoomSessionId(sessionId)
+    {\r\n        this.mPlayerManager.SetSessionId(sessionId);\r\n    }\r\n    /**\r\n    
+    * Calculate Client and Server Connection Interval\r\n     */\r\n    OnGameHeartUpdate()
+    {\r\n        this.SendEvent(NetManager_1.sEventArg.GameUpdate, null);\r\n   
+    }\r\n    OnStateUpdate(playerMap) {\r\n        playerMap.ForEach((userId, player)
+    => {\r\n            console.log(\"[OnStateUpdate] \" + userId + \" -- \" + player.id);\r\n       
+    });\r\n    }\r\n    /**\r\n     * Handles game local events triggered by the
+    specified eventName and message.\r\n     * @param eventName\r\n     * @param
+    message\r\n     */\r\n    OnActionEvent(eventName, message) {\r\n        switch
+    (eventName) {\r\n            case PlayerManager_1.ActionEvent.OnFinishLoad:\r\n               
+    let userId = message;\r\n                AudioController_1.default.Instance.PlayReadyBGM();\r\n               
+    this.mUIManager.OnFinishLoad(userId);\r\n                this.mMapManager.OnFinishLoad(userId);\r\n               
+    break;\r\n            case PlayerManager_1.ActionEvent.OnUpdateHP:\r\n               
+    if (this.mGameState >= NetManager_1.GameState.GameStart) {\r\n                   
+    this.mUIManager.OnUpdateHP(message, this.mGameInfo.Elapsed);\r\n               
+    }\r\n                break;\r\n            case PlayerManager_1.ActionEvent.OnUpdateStar:\r\n               
+    this.mUIManager.OnUpdateStar(message);\r\n                break;\r\n           
+    case PlayerManager_1.ActionEvent.OnUpdateBuff:\r\n                this.mUIManager.OnUpdateBuff(message);\r\n               
+    break;\r\n            case PlayerManager_1.ActionEvent.OnLockCamera:\r\n               
+    let isLock = message;\r\n                this.mPlayerManager.LockCamera(isLock);\r\n               
+    break;\r\n            case PlayerManager_1.ActionEvent.OnFreeCamera:\r\n               
+    let isFree = message;\r\n                this.mPlayerManager.FreeCamera(isFree);\r\n               
+    break;\r\n            case PlayerManager_1.ActionEvent.OnWatchCamera:\r\n               
+    this.mPlayerManager.WatchCamera(true, message);\r\n                break;\r\n           
+    case PlayerManager_1.ActionEvent.OnDie:\r\n                this.mUIManager.OnDie(message);\r\n               
+    break;\r\n        }\r\n    }\r\n    /**\r\n     * Event processing\r\n     *
+    @param eventName\r\n     * @param message\r\n     */\r\n    HandleEvent(eventName,
+    message) {\r\n        switch (eventName) {\r\n            case NetManager_1.sEventArg.DynamicMapChange:\r\n               
+    this.mMapManager.OnDynamicMapChange(message);\r\n                break;\r\n           
+    case NetManager_1.sEventArg.GameRule:\r\n                this.mGameRule = JSON.parse(message);\r\n               
+    break;\r\n            case NetManager_1.sEventArg.PlayerChange:\r\n               
+    this.mPlayerManager.OnPlayerChange(message);\r\n                break;\r\n           
+    case NetManager_1.sEventArg.PlayerMove:\r\n                this.mPlayerManager.OnReceiveMoveData(message);\r\n               
+    break;\r\n            case NetManager_1.sEventArg.PlayerJump:\r\n               
+    break;\r\n            case NetManager_1.sEventArg.PlayerInfoSync:\r\n               
+    this.mPlayerManager.UpdatePlayerInfo(message);\r\n                break;\r\n           
+    case NetManager_1.sEventArg.PlayerDie:\r\n                this.mPlayerManager.OnPlayerDie(message);\r\n               
+    break;\r\n            case NetManager_1.sEventArg.RandomModel:\r\n               
+    this.mUIManager.OnShowRandomModel(message);\r\n                break;\r\n           
+    case NetManager_1.sEventArg.GameUpdate:\r\n                this.mGameInfo = message;\r\n               
+    UIToast_1.default.Instance.UpdateElapsed(this.mGameInfo.Elapsed);\r\n               
+    this.GameStateChange();\r\n                break;\r\n            case NetManager_1.sEventArg.SwitchLight:\r\n               
+    this.mPlayerManager.SyncLightAction(message);\r\n                break;\r\n           
+    case NetManager_1.sEventArg.SwitchSuperLight:\r\n                this.mPlayerManager.SyncSuperLightAction(message);\r\n               
+    break;\r\n            case NetManager_1.sEventArg.BeScan:\r\n               
+    this.mPlayerManager.OnPlayerScan(message);\r\n                break;\r\n           
+    case NetManager_1.sEventArg.InitPlayerPos:\r\n                this.mPlayerManager.SetPlayerInitPos(message);\r\n               
+    break;\r\n        }\r\n    }\r\n    GetGameState() {\r\n        return this.mGameInfo.GameState;\r\n   
+    }\r\n    /**\r\n     * Handles game state changes, triggering behavior in the
+    state machine.\r\n     */\r\n    GameStateChange() {\r\n        this.mPlayer
+    = this.mPlayerManager.GetLocalPlayer();\r\n        this.mUIManager.OnGameUpdate(this.mGameInfo,
+    this.mPlayer);\r\n        this.mPlayerManager.UpdateCheck(this.mGameInfo.GameState);\r\n       
+    if (this.mGameState != this.mGameInfo.GameState) {\r\n            console.log(\"GameStateChange\",
+    this.mGameInfo.GameState);\r\n            this.mGameState = this.mGameInfo.GameState;\r\n           
+    this.mMapManager.UpdateCheck();\r\n            let actnode = this.actNodeManager.ActiveNode_GameStateMap.get(this.mGameInfo.GameState);\r\n           
+    if (actnode) {\r\n                this.StartCoroutine(actnode.CoRun());\r\n           
+    }\r\n        }\r\n    }\r\n    SendEvent(eventName, message) {\r\n        if
+    (this.mGameState == NetManager_1.GameState.GameOver)\r\n            return;\r\n       
+    const roomData = new ZEPETO_Multiplay_1.RoomData();\r\n        switch (eventName)
+    {\r\n            case NetManager_1.sEventArg.BeAttacked:\r\n                this.mNetManager.SendEvent(eventName,
+    message);\r\n                break;\r\n            case NetManager_1.sEventArg.SwitchLight:\r\n           
+    case NetManager_1.sEventArg.SwitchSuperLight:\r\n                roomData.Add(\"state\",
+    message);\r\n                roomData.Add(\"sid\", this.mPlayerManager.mSessionId);\r\n               
+    this.mNetManager.SendEvent(eventName, roomData);\r\n                break;\r\n           
+    case NetManager_1.sEventArg.ChangeModel:\r\n                roomData.Add(\"model\",
+    Number(message));\r\n                this.mNetManager.SendEvent(eventName, roomData);\r\n               
+    break;\r\n            case NetManager_1.sEventArg.UseBuff:\r\n               
+    roomData.Add(\"buff\", message);\r\n                this.mNetManager.SendEvent(eventName,
+    roomData);\r\n                break;\r\n            case NetManager_1.sEventArg.PlayerJump:\r\n               
+    roomData.Add(\"sessionId\", message);\r\n                this.mNetManager.SendEvent(eventName,
+    roomData);\r\n                break;\r\n            default:\r\n               
+    this.mNetManager.SendEvent(eventName, message);\r\n        }\r\n    }\r\n   
+    /**\r\n     * Handles game end processing.\r\n     * @param playerInfoMap\r\n    
+    */\r\n    OnGameOver(playerInfoMap) {\r\n        // After the game ends, save
+    the game points. Those who exit midway will not receive points.\r\n        playerInfoMap.forEach((info,
+    id) => {\r\n            if (info.sessionId == this.mPlayerManager.mSessionId)
+    {\r\n                console.log(`Update leaderboard data, found this round :
+    ${info.hunterSum} people, alive ${info.liveSum} seconds`);\r\n            }\r\n       
+    });\r\n        this.mUIManager.OnGameOver();\r\n        this.mPlayerManager.OnGameOver();\r\n       
+    UIToast_1.default.Instance.ShowGameOver(playerInfoMap);\r\n    }\r\n    // AudioController\r\n   
+    /**\r\n     * Play background music (BGM)\r\n     * @param clip\r\n     */\r\n   
+    PlayBGM(clip) {\r\n        AudioController_1.default.Instance.PlayBGM(clip);\r\n   
+    }\r\n    /**\r\n     * Play a sound effect once\r\n     * @param clip\r\n    
+    */\r\n    PlayOneShot(clip) {\r\n        AudioController_1.default.Instance.PlayOneShot(clip);\r\n   
+    }\r\n    /**\r\n     * Play a sound effect once at a specific point.\r\n    
+    * @param clip\r\n     */\r\n    PlayAtPoint(clip, point) {\r\n        AudioController_1.default.Instance.PlayAtPoint(clip,
+    point);\r\n    }\r\n    /**\r\n     * Get player information.\r\n     * @param
+    player\r\n     * @returns\r\n     */\r\n    GetPlayerInfoVO(player) {\r\n       
+    return this.mConfigManager.GetPlayerInfoVO(player);\r\n    }\r\n    /**\r\n    
+    * Manage popups and prompts in games.\r\n     * @param msg\r\n     * @param duration\r\n    
+    */\r\n    Toast(msg, duration) {\r\n        this.mUIManager.Toast(msg, duration);\r\n   
+    }\r\n    /**\r\n     * Get configuration information for the transformation model.\r\n    
+    * @param name\r\n     * @returns\r\n     */\r\n    GetModelInfoVO(name) {\r\n       
+    return this.mConfigManager.GetModelInfoVO(name);\r\n    }\r\n    /**\r\n    
+    * Check if there are enough stars to perform a model transformation.\r\n    
+    * @param cost\r\n     * @returns\r\n     */\r\n    CheckCanChangeModel(cost)
+    {\r\n        return this.mPlayerManager.CheckCanChangeModel(cost);\r\n    }\r\n}\r\nexports.default
+    = GameMain;\r\n/**\r\n * Game Rule Configuration Fields\r\n */\r\nclass GameRule
+    {\r\n}\r\nexports.GameRule = GameRule;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2FtZU1haW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJHYW1lTWFpbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxpREFBcUQ7QUFDckQsdURBQStDO0FBQy9DLHlEQUFpRDtBQUNqRCx5REFBMkU7QUFDM0UsK0RBQXdFO0FBQ3hFLCtEQUF1RDtBQUN2RCw2Q0FBbUY7QUFDbkYsc0VBQThEO0FBRTlELHVEQUE0QztBQUM1QywwQ0FBa0M7QUFDbEMscUVBQTZEO0FBQzdELDZFQUF5RTtBQUN6RSw0RUFBb0U7QUFFcEU7Ozs7O0dBS0c7QUFDSCxNQUFxQixRQUFTLFNBQVEscUNBQXFCO0lBQTNEOztRQWtGWSxlQUFVLEdBQVcsQ0FBQyxDQUFDO0lBdVBuQyxDQUFDO0lBclVVLE1BQU0sS0FBSyxRQUFRO1FBQ3RCLElBQUksQ0FBQyxRQUFRLENBQUMsU0FBUyxFQUFFO1lBQ3JCLE1BQU0sU0FBUyxHQUFHLHdCQUFVLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO1lBQzlDLElBQUksU0FBUztnQkFBRSxRQUFRLENBQUMsU0FBUyxHQUFHLFNBQVMsQ0FBQyxZQUFZLFNBQUMsUUFBUSxFQUFHLENBQUM7U0FDMUU7UUFDRCxPQUFPLFFBQVEsQ0FBQyxTQUFTLENBQUM7SUFDOUIsQ0FBQztJQWtDRCxLQUFLO1FBQ0QsUUFBUSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUM7SUFDOUIsQ0FBQztJQUVELE1BQU07UUFDRixxREFBcUQ7UUFDckQsT0FBTyxDQUFDLEdBQUcsQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO1FBQzlCLElBQUksZUFBZSxHQUFHLDBCQUFnQixDQUFDLFdBQVcsQ0FBQyxpQkFBaUIsQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO1FBQ3pGLGVBQWUsQ0FBQyxJQUFJLEdBQUcsaUJBQWlCLENBQUM7UUFDekMsSUFBSSxVQUFVLEdBQUcsMEJBQWdCLENBQUMsV0FBVyxDQUFDLGlCQUFpQixDQUFDLGFBQWEsQ0FBQyxDQUFDO1FB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","assetPath":"Assets/Scripts/GameMain.ts","manifest":{"properties":[{"assembly":"","name":"mUIManager","type":"D:/Zaizai/Project/new-world/ZZSH_HideAndSeek_Template/Assets/Scripts/GameManager/UIManager.default","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"","name":"mMapManager","type":"D:/Zaizai/Project/new-world/ZZSH_HideAndSeek_Template/Assets/Scripts/GameManager/MapManager.default","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"","name":"mNetManager","type":"D:/Zaizai/Project/new-world/ZZSH_HideAndSeek_Template/Assets/Scripts/GameManager/NetManager.default","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"","name":"mPlayerManager","type":"D:/Zaizai/Project/new-world/ZZSH_HideAndSeek_Template/Assets/Scripts/GameManager/PlayerManager.default","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"","name":"mConfigManager","type":"D:/Zaizai/Project/new-world/ZZSH_HideAndSeek_Template/Assets/Scripts/GameManager/ConfigManager.default","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"","name":"mGameInfo","type":"ZEPETO.Multiplay.Schema.sGameInfo","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"","name":"mRoundResult","type":"ZEPETO.Multiplay.Schema.sRoundResult","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"","name":"mPlayer","type":"ZEPETO.Multiplay.Schema.sPlayer","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]},{"assembly":"","name":"mGameState","type":"GameState","isArray":false,"initValue":[],"enumKeys":["None","GameWait","GameOver","GameRoundOver","GameMatch","GameStart","ConfirmedModel","OpenDoor","PeakMoment"],"enumValues":["-1","0","1","2","3","4","5","6","7"],"attributes":[]},{"assembly":"","name":"mGameRule","type":"D:/Zaizai/Project/new-world/ZZSH_HideAndSeek_Template/Assets/Scripts/GameMain.GameRule","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"SpawnPlayersPoints","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"HideInInspector","args":[]}]}],"name":"GameMain","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 4a738af3c20955221b65d27099ae24b2
+  onlyWriteTrigger: 0

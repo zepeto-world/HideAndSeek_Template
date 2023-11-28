@@ -1,0 +1,102 @@
+fileFormatVersion: 2
+guid: d7943f668aa94ad4bb17ec0f480de50e
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    PlayerManager_1 = require(\\\"../GameManager/PlayerManager\\\");\\r\\nconst UnityEngine_1
+    = require(\\\"UnityEngine\\\");\\r\\nconst UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst
+    AudioController_1 = require(\\\"../GameController/AudioController\\\");\\r\\nconst
+    UIHunterOperation_1 = require(\\\"./UIHunterOperation\\\");\\r\\nconst NetManager_1
+    = require(\\\"../GameManager/NetManager\\\");\\r\\nconst GameMain_1 = require(\\\"../GameMain\\\");\\r\\n/**\\r\\n
+    * Flashlight button\\r\\n * 1\u3001Switch control\\r\\n * 2\u3001Damage range
+    detection\\r\\n */\\r\\nclass UIShootBtn extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    constructor() {\\r\\n        super(...arguments);\\r\\n        this.scaneTime
+    = 0;\\r\\n    }\\r\\n    Start() {\\r\\n        this.GetComponent($typeof(UnityEngine_UI_1.Button)).onClick.AddListener(()
+    => {\\r\\n            console.log(\\\"_PotClick\\\", this.name);\\r\\n           
+    let locPlay = PlayerManager_1.default.Instance.mLocalZepetoNetPlayer;\\r\\n           
+    if (this.name == \\\"Flashlight\\\") {\\r\\n                if (locPlay.LightState
+    == PlayerManager_1.LightState.OFF && locPlay.GetLightBattle() > 0) {\\r\\n                   
+    AudioController_1.default.Instance.PlayOpenLight();\\r\\n                   
+    locPlay.SetLightAction(PlayerManager_1.LightState.ON);\\r\\n                   
+    this.ImgHandLine_off.SetActive(false);\\r\\n                    this.ImgHandLine_on.SetActive(true);\\r\\n               
+    }\\r\\n                else {\\r\\n                    locPlay.SetLightAction(PlayerManager_1.LightState.OFF);\\r\\n                   
+    this.ImgHandLine_off.SetActive(true);\\r\\n                    this.ImgHandLine_on.SetActive(false);\\r\\n               
+    }\\r\\n                PlayerManager_1.default.Instance.SendLightState(locPlay.LightState);\\r\\n               
+    this.mCooldownImg.value = (locPlay.LightBattle / locPlay.MaxLightBattle);\\r\\n               
+    // this.StopCoroutine(this.RunRay());\\r\\n                // this.StartCoroutine(this.RunRay());\\r\\n           
+    }\\r\\n            else if (this.name == \\\"SuperFlashlight\\\") {\\r\\n               
+    // SuperFlashlight\\r\\n                if (locPlay.SuperLightCurTimes > 0) {\\r\\n                   
+    if (locPlay.SuperLightState == PlayerManager_1.LightState.OFF) {\\r\\n                       
+    // AudioController.Instance.PlayOpenLight();\\r\\n                        locPlay.SetSuperLightAction(PlayerManager_1.LightState.ON);\\r\\n                       
+    locPlay.bSuperLightOpen = true;\\r\\n                        locPlay.SuperLightBattle
+    = locPlay.MaxSuperLightBattle;\\r\\n                        this.ImgHandLine_off.SetActive(false);\\r\\n                       
+    this.ImgHandLine_on.SetActive(true);\\r\\n                        // Set ordinary
+    flashlight to turn off\\r\\n                        UIHunterOperation_1.default.Instance.SetSuperFlashImgOff();\\r\\n                       
+    this.mCooldownImg.value = (locPlay.LightBattle / locPlay.MaxLightBattle);\\r\\n                       
+    PlayerManager_1.default.Instance.SendSuperLightState(locPlay.SuperLightState);\\r\\n                       
+    this.Progress.fillAmount = 1;\\r\\n                        locPlay.SuperLightCurTimes--;\\r\\n                       
+    //    if( locPlay.SuperLightCurTimes<=0){\\r\\n                        //    
+    UIHunterOperation.Instance.ObjSuperLight.SetActive(false);\\r\\n                       
+    //    }\\r\\n                        locPlay.SuperLightCurCDTime = 0;\\r\\n                       
+    PlayerManager_1.default.Instance.ShowScaneRound(PlayerManager_1.default.Instance.mLocalZepetoNetPlayer);\\r\\n                   
+    }\\r\\n                }\\r\\n            }\\r\\n        });\\r\\n    }\\r\\n   
+    Update() {\\r\\n        if (GameMain_1.default.Instance.mGameState == NetManager_1.GameState.GameStart
+    && this.name == \\\"SuperFlashlight\\\") {\\r\\n            this.Progress.fillAmount
+    = 1;\\r\\n        }\\r\\n        if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer)
+    {\\r\\n            if (this.name == \\\"Flashlight\\\") {\\r\\n               
+    if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.LightState == PlayerManager_1.LightState.OFF)
+    {\\r\\n                    if (this.mCooldownImg.value < PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.MaxLightBattle)
+    {\\r\\n                        this.mCooldownImg.value += (UnityEngine_1.Time.deltaTime
+    / (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.MaxLightBattle / 2));\\r\\n                   
+    }\\r\\n                }\\r\\n                else if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.LightState
+    == PlayerManager_1.LightState.ON) {\\r\\n                    if (this.mCooldownImg.value
+    > 0) {\\r\\n                        this.mCooldownImg.value -= (UnityEngine_1.Time.deltaTime
+    / PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.MaxLightBattle);\\r\\n                   
+    }\\r\\n                }\\r\\n                PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.LightBattle
+    = this.mCooldownImg.value * PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.MaxLightBattle;\\r\\n               
+    this.mTimer += UnityEngine_1.Time.deltaTime;\\r\\n                if (this.mTimer
+    >= 1) {\\r\\n                    this.mTimer = 0;\\r\\n                    this.ImgHandLine_off.SetActive(PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.LightState
+    == PlayerManager_1.LightState.OFF);\\r\\n                    this.ImgHandLine_on.SetActive(PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.LightState
+    == PlayerManager_1.LightState.ON);\\r\\n                }\\r\\n               
+    this.scaneTime += UnityEngine_1.Time.deltaTime;\\r\\n                if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.LightState
+    == PlayerManager_1.LightState.ON && this.scaneTime > 0.2) {\\r\\n                   
+    this.scaneTime = 0;\\r\\n                    //Flashlight damage range detection\\r\\n                   
+    PlayerManager_1.default.Instance.CheckPlayerInSectorArea(20, 20, 3);\\r\\n               
+    }\\r\\n            }\\r\\n            else {\\r\\n                if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.bSuperLightOpen
+    && this.Progress) {\\r\\n                    if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCurTimes
+    <= 0) {\\r\\n                        this.gameObject.SetActive(false);\\r\\n                   
+    }\\r\\n                    if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightBattle
+    <= 0) {\\r\\n                        PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightBattle
+    = PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.MaxSuperLightBattle;\\r\\n                       
+    PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SetSuperLightAction(PlayerManager_1.LightState.OFF);\\r\\n                   
+    }\\r\\n                }\\r\\n                if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCurCDTime
+    < PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCDTime) {\\r\\n                   
+    UIHunterOperation_1.default.Instance.SetSuperFlashImgOff();\\r\\n                   
+    PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCurCDTime +=
+    UnityEngine_1.Time.deltaTime;\\r\\n                    this.Progress.fillAmount
+    = PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCurCDTime
+    / PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCDTime;\\r\\n                   
+    if (this.Progress.fillAmount == 1) {\\r\\n                        UIHunterOperation_1.default.Instance.SetSuperFlashImgOn();\\r\\n                       
+    PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCurCDTime =
+    PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCDTime;\\r\\n                   
+    }\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n}\\r\\nexports.default
+    = UIShootBtn;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlTaG9vdEJ0bi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlVJU2hvb3RCdG4udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsZ0VBQXdFO0FBQ3hFLDZDQUErQztBQUMvQyxtREFBdUQ7QUFDdkQsdUVBQWdFO0FBQ2hFLDJEQUFvRDtBQUNwRCwwREFBcUQ7QUFDckQsMENBQW1DO0FBQ25DOzs7O0dBSUc7QUFDSCxNQUFxQixVQUFXLFNBQVEscUNBQXFCO0lBQTdEOztRQU9XLGNBQVMsR0FBVyxDQUFDLENBQUM7SUE0R2pDLENBQUM7SUEzR0csS0FBSztRQUNELElBQUksQ0FBQyxZQUFZLFNBQUMsdUJBQU0sR0FBSSxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNqRCxPQUFPLENBQUMsR0FBRyxDQUFDLFdBQVcsRUFBRSxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDcEMsSUFBSSxPQUFPLEdBQUcsdUJBQWEsQ0FBQyxRQUFRLENBQUMscUJBQXFCLENBQUM7WUFDM0QsSUFBSSxJQUFJLENBQUMsSUFBSSxJQUFJLFlBQVksRUFBRTtnQkFDM0IsSUFBSSxPQUFPLENBQUMsVUFBVSxJQUFJLDBCQUFVLENBQUMsR0FBRyxJQUFJLE9BQU8sQ0FBQyxjQUFjLEVBQUUsR0FBRyxDQUFDLEVBQUU7b0JBQ3RFLHlCQUFlLENBQUMsUUFBUSxDQUFDLGFBQWEsRUFBRSxDQUFDO29CQUV6QyxPQUFPLENBQUMsY0FBYyxDQUFDLDBCQUFVLENBQUMsRUFBRSxDQUFDLENBQUM7b0JBRXRDLElBQUksQ0FBQyxlQUFlLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO29CQUN0QyxJQUFJLENBQUMsY0FBYyxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztpQkFDdkM7cUJBQU07b0JBQ0gsT0FBTyxDQUFDLGNBQWMsQ0FBQywwQkFBVSxDQUFDLEdBQUcsQ0FBQyxDQUFDO29CQUN2QyxJQUFJLENBQUMsZUFB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\",\"assetPath\":\"Assets/Scripts/UI/UIShootBtn.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.UI\",\"name\":\"mCooldownImg\",\"type\":\"UnityEngine.UI.Slider\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"mTimer\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"ImgHandLine_on\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"ImgHandLine_off\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"Progress\",\"type\":\"UnityEngine.UI.Image\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"scaneTime\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"0\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"UIShootBtn\",\"description\":\"\",\"hasAnimatorMove\":false},\"isCompiled\":true}"
+  typescriptHash: 3c770ab861e219a12b91b926251d0905
+  onlyWriteTrigger: 0

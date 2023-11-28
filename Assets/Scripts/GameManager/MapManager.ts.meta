@@ -1,0 +1,71 @@
+fileFormatVersion: 2
+guid: 13ffce6f46532d64badd2a0092e98150
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst __UnityEngine__ = require(\"UnityEngine\");\r\nconst
+    BaseManager_1 = require(\"./BaseManager\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    NetManager_1 = require(\"./NetManager\");\r\n/**\r\n * Map Scene Manager\r\n
+    * 1. Scene loading completed\r\n * 2. Dynamic map changes\r\n * 3. Opening and
+    closing doors\r\n */\r\nclass MapManager extends BaseManager_1.default {\r\n   
+    constructor() {\r\n        super(...arguments);\r\n        this.mIsOpenDoor =
+    true;\r\n    }\r\n    static get Instance() {\r\n        return MapManager._instance;\r\n   
+    }\r\n    Awake() {\r\n        MapManager._instance = this;\r\n    }\r\n    OnDisable()
+    {\r\n        if (__UnityEngine__.Object.op_Equality(this.gameObject, null))\r\n           
+    return;\r\n        if (this.mIsOpenDoor && __UnityEngine__.Object.op_Inequality(this.mReadyWall,
+    null)) {\r\n            this.mReadyWall.transform.eulerAngles = this.mEndAngle;\r\n       
+    }\r\n    }\r\n    // Check if the door needs to be opened\r\n    UpdateCheck()
+    {\r\n        if (this.mIsOpenDoor) {\r\n            if (this.mGameState == NetManager_1.GameState.GameStart)
+    {\r\n                this.OnCloseDoor();\r\n            }\r\n        }\r\n       
+    if (this.mGameState == NetManager_1.GameState.OpenDoor && !this.mIsOpenDoor)
+    {\r\n            this.OnOpenDoor();\r\n        }\r\n    }\r\n    /**\r\n    
+    * Open the door\r\n     */\r\n    OnOpenDoor() {\r\n        console.error(\"OnOpenDoor\");\r\n       
+    this.mIsOpenDoor = true;\r\n        this.StartCoroutine(this.IE_DestoryWall());\r\n   
+    }\r\n    /**\r\n     * Close the door\r\n     */\r\n    OnCloseDoor() {\r\n       
+    console.error(\"OnCloseDoor\");\r\n        this.mIsOpenDoor = false;\r\n       
+    this.mReadyWall.transform.eulerAngles = this.mStartAngle;\r\n    }\r\n    *IE_DestoryWall()
+    {\r\n        let timer = 0;\r\n        let animTime = 1;\r\n        while (timer
+    < animTime) {\r\n            timer += UnityEngine_1.Time.deltaTime;\r\n           
+    this.mReadyWall.transform.eulerAngles = UnityEngine_1.Vector3.Lerp(this.mStartAngle,
+    this.mEndAngle, timer);\r\n            yield null;\r\n        }\r\n        this.mReadyWall.transform.eulerAngles
+    = this.mEndAngle;\r\n    }\r\n    /**\r\n     * Scene loading completed\r\n    
+    * @param userId\r\n     * @returns\r\n     */\r\n    OnFinishLoad(userId) {\r\n       
+    let door = UnityEngine_1.GameObject.Find(\"Room_BG/Door\");\r\n        if (__UnityEngine__.Object.op_Inequality(door,
+    null)) {\r\n            this.mStartAngle = door.transform.eulerAngles;\r\n           
+    this.mReadyWall = door;\r\n            this.mReadyWall.transform.eulerAngles
+    = this.mEndAngle;\r\n        }\r\n        // Scenario model configuration that
+    requires dynamic changes\r\n        let dynamicObjContent = UnityEngine_1.GameObject.Find(\"DynamicObjects\");\r\n       
+    if (__UnityEngine__.Object.op_Equality(dynamicObjContent, null)) {\r\n           
+    return;\r\n        }\r\n        if (this.mDynamicModels == null) {\r\n           
+    this.mDynamicModels = new Array();\r\n        }\r\n        let childCount = dynamicObjContent.transform.childCount;\r\n       
+    for (var i = 0; i < childCount; i++) {\r\n            let child = dynamicObjContent.transform.GetChild(i);\r\n           
+    if (child != null) {\r\n                this.mDynamicModels.push(child.gameObject);\r\n           
+    }\r\n        }\r\n        this.DealDynamicMap();\r\n    }\r\n    /**\r\n    
+    * Dynamic map changes\r\n     * @param dynamicMaps\r\n     */\r\n    OnDynamicMapChange(dynamicMaps)
+    {\r\n        this.dynamicMap = dynamicMaps;\r\n    }\r\n    DealDynamicMap()
+    {\r\n        if (this.dynamicMap == null || this.dynamicMap.models == null) {\r\n           
+    console.error(\"There are currently no random models referenced in the scene\");\r\n           
+    return;\r\n        }\r\n        for (var i = 0; i < this.mDynamicModels.length;
+    i++) {\r\n            this.mDynamicModels[i].SetActive(false);\r\n        }\r\n       
+    console.log(this.dynamicMap.models);\r\n        let models = this.dynamicMap.models.split('','');\r\n       
+    for (var i = 0; i < models.length; i++) {\r\n            let index = parseInt(models[i]);\r\n           
+    if (index < this.mDynamicModels.length) {\r\n                this.mDynamicModels[index].SetActive(true);\r\n           
+    }\r\n        }\r\n    }\r\n}\r\nexports.default = MapManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTWFwTWFuYWdlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIk1hcE1hbmFnZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsK0NBQXVDO0FBQ3ZDLDZDQUF3RDtBQUN4RCw2Q0FBd0M7QUFHeEM7Ozs7O0dBS0c7QUFDSCxNQUFxQixVQUFXLFNBQVEscUJBQVc7SUFBbkQ7O1FBd0JZLGdCQUFXLEdBQVksSUFBSSxDQUFDO0lBK0d4QyxDQUFDO0lBbklVLE1BQU0sS0FBSyxRQUFRO1FBRXRCLE9BQU8sVUFBVSxDQUFDLFNBQVMsQ0FBQztJQUNoQyxDQUFDO0lBUUQsS0FBSztRQUNELFVBQVUsQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO0lBQ2hDLENBQUM7SUFVRCxTQUFTO1FBQ0wsMkJBMkcrNk4sV0FBWSxDQTNHdjdOLElBQUksQ0FBQyxVQUFVLEVBQUksSUFBSTtZQUN2QixPQUFPO1FBQ1gsSUFBSSxJQUFJLENBQUMsV0FBVywyQkF5R3UrTixhQUFjLENBekdqL04sSUFBSSxDQUFDLFVBQVUsRUFBSSxJQUFJLENBQUEsRUFBRTtZQUM3QyxJQUFJLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxXQUFXLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQztTQUMxRDtJQUNMLENBQUM7SUFFRCx1Q0FBdUM7SUFDdkMsV0FBVztRQUNQLElBQUksSUFBSSxDQUFDLFdBQVcsRUFBRTtZQUNsQixJQUFJLElBQUksQ0FBQyxVQUFVLElBQUksc0JBQVMsQ0FBQyxTQUFTLEVBQUU7Z0JBQ3hDLElBQUksQ0FBQyxXQUFXLEVBQUUsQ0FBQzthQUN0QjtTQUNKO1FBRUQsSUFBSSxJQUFJLENBQUMsVUFBVSxJQUFJLHNCQUFTLENBQUMsUUFBUSxJQUFJLENBQUMsSUFBSSxDQUFDLFdBQVcsRUFBRTtZQUM1RCxJQUFJLENBQUMsVUFBVSxFQUFFLENBQUM7U0FDckI7SUFDTCxDQUFDO0lBRUQ7O09BRUc7SUFDSCxVQUFVO1FBQ04sT0FBTyxDQUFDLEtBQUss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","assetPath":"Assets/Scripts/GameManager/MapManager.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"mAudioCtrl","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mDynamicModels","type":"UnityEngine.GameObject[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mReadyWall","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mEndAngle","type":"UnityEngine.Vector3","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"MapManager","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: a910505439b07f3df356041e3ed3b008
+  onlyWriteTrigger: 0

@@ -1,0 +1,120 @@
+fileFormatVersion: 2
+guid: 9afd2528bc7cd124b92ed763501033e5
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\n/**\r\n * Transform Tool Class\r\n
+    */\r\nclass TransformHelper extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
+    static LookAtCamera(go) {\r\n        if (go) {\r\n            go.transform.LookAt(UnityEngine_1.Camera.main.transform);\r\n       
+    }\r\n    }\r\n    static LookAtZepetoCamera(go, cam) {\r\n        go.transform.LookAt(cam.transform);\r\n   
+    }\r\n    /**\r\n     * Obtain the relative position relative to the reference
+    object\r\n     * @param targetGameObject\r\n     * @param selfObj\r\n     * @returns\r\n    
+    */\r\n    static GetTargetDirect(targetGameObject, selfObj) {\r\n        // let
+    vectorTarget = targetGameObject.transform.position - selfObj.transform.position;\r\n       
+    let x = targetGameObject.transform.position.x - selfObj.transform.position.x;\r\n       
+    let y = targetGameObject.transform.position.y - selfObj.transform.position.y;\r\n       
+    let z = targetGameObject.transform.position.z - selfObj.transform.position.z;\r\n       
+    var vectorTarget = new UnityEngine_1.Vector3(x, 0, z);\r\n        var vectorForward
+    = selfObj.transform.forward;\r\n        var dotValue = UnityEngine_1.Vector3.Dot(vectorForward.normalized,
+    vectorTarget.normalized);\r\n        var crossValue = UnityEngine_1.Vector3.Cross(vectorForward,
+    vectorTarget);\r\n        var LR;\r\n        var FB;\r\n        if (crossValue.y
+    > 0) {\r\n            LR = \"r\";\r\n        }\r\n        else {\r\n           
+    LR = \"l\";\r\n        }\r\n        if (dotValue > 0) {\r\n            FB = \"f\";\r\n       
+    }\r\n        else {\r\n            FB = \"b\";\r\n        }\r\n        if (LR
+    == \"r\" && FB == \"f\") {\r\n            //Right front (first quadrant)\r\n           
+    return 1;\r\n        }\r\n        else if (LR == \"l\" && FB == \"f\") {\r\n           
+    //Left Front (Second Quadrant)\r\n            return 2;\r\n        }\r\n       
+    else if (LR == \"l\" && FB == \"b\") {\r\n            //Left rear (third quadrant)\r\n           
+    return 3;\r\n        }\r\n        else if (LR == \"r\" && FB == \"b\") {\r\n           
+    //Right rear (fourth quadrant)\r\n            return 4;\r\n        }\r\n    }\r\n   
+    /**\r\n     * Used to detect sector collision areas\r\n     * @param hero\r\n    
+    * @param enemy\r\n     * @param minDistance\r\n     * @param minAngle\r\n    
+    * @returns\r\n     */\r\n    static SectorCheck(hero, enemy, minDistance, minAngle)
+    {\r\n        var avatarPos = hero.transform.position;\r\n        // avatarPos.z
+    = avatarPos.z + 1;\r\n        var enemyPos = enemy.transform.position;\r\n       
+    var distance = UnityEngine_1.Vector3.Distance(avatarPos, enemyPos);\r\n       
+    // The vector of the protagonist relative to the target\r\n        var srcLocalVect
+    = UnityEngine_1.Vector3.op_Subtraction(enemyPos, avatarPos);\r\n        srcLocalVect.y
+    = 0;\r\n        //Obtain a point directly in front of the protagonist\r\n       
+    var forwardLocalPos = UnityEngine_1.Vector3.op_Addition(UnityEngine_1.Vector3.op_Multiply(hero.transform.forward,
+    1), avatarPos);\r\n        //Obtain positive vector\r\n        var forwardLocalVect
+    = UnityEngine_1.Vector3.op_Subtraction(forwardLocalPos, avatarPos);\r\n       
+    forwardLocalVect.y = 0;\r\n        //Calculate angle\r\n        var angle = UnityEngine_1.Vector3.Angle(srcLocalVect,
+    forwardLocalVect);\r\n        // console.log(\"SectorCheck\" + distance + \"
+    :: \" + minDistance + \"  ::\" + angle + \" ::  \" + minAngle);\r\n        if
+    (distance < minDistance && angle < minAngle) {\r\n            return true;\r\n       
+    }\r\n        else {\r\n            return false;\r\n        }\r\n    }\r\n   
+    /**\r\n     * Camera Follow Effect\r\n     * distanceUp  :Vertical height parameter
+    between camera and target\r\n     * distanceAway:Horizontal distance parameter
+    between camera and target\r\n     * smooth:Position Smooth Movement Interpolation
+    Parameter Values\r\n     * camDepthSmooth\r\n     */\r\n    static SetCameraFlower(camera,
+    target, distanceUp = 3, distanceAway = 3, smooth = 3) {\r\n        let disPos
+    = UnityEngine_1.Vector3.op_Subtraction(UnityEngine_1.Vector3.op_Addition(target.position,
+    UnityEngine_1.Vector3.op_Multiply(UnityEngine_1.Vector3.up, distanceUp)), UnityEngine_1.Vector3.op_Multiply(target.forward,
+    distanceAway));\r\n        camera.position = disPos; // Vector3.Lerp(camera.position,
+    disPos, Time.deltaTime * smooth);\r\n        camera.LookAt(target.position);\r\n   
+    }\r\n    /**\r\n     * Set up a third person camera\r\n     * @param camera\r\n    
+    * @param playerTrans\r\n     * @param TarPosV3\r\n     * @param backOffset\r\n    
+    * @param rightOffset\r\n     * @param upOffset\r\n     */\r\n    static SetCameraTPS(camera,
+    playerTrans, TarPosV3, backOffset = 4, rightOffset = 2, upOffset = 2) {\r\n       
+    // 1.Calculate the unit vector towards the back\r\n        var backVec = UnityEngine_1.Vector3.op_Subtraction(playerTrans.position,
+    TarPosV3);\r\n        backVec.Normalize();\r\n        // 2.Calculate super right
+    vectors\r\n        var rightVec = UnityEngine_1.Vector3.Cross(backVec, UnityEngine_1.Vector3.up).normalized;\r\n       
+    // 3.Calculate final position\r\n        var endPos = UnityEngine_1.Vector3.op_Addition(UnityEngine_1.Vector3.op_Addition(UnityEngine_1.Vector3.op_Addition(playerTrans.position,
+    UnityEngine_1.Vector3.op_Multiply(backVec, backOffset)), UnityEngine_1.Vector3.op_Multiply(rightVec,
+    rightOffset)), UnityEngine_1.Vector3.op_Multiply(UnityEngine_1.Vector3.up, upOffset));\r\n       
+    // 4.Trans position\r\n        camera.transform.position = endPos;\r\n       
+    camera.transform.LookAt(TarPosV3);\r\n    }\r\n    static SmoothFlow(target,
+    camera) {\r\n        if (!target)\r\n            return;\r\n        var rotationDamping
+    = 10;\r\n        var heightDamping = 3;\r\n        var height = 3;\r\n       
+    var distance = 5;\r\n        // Calculate the current rotation angles\r\n       
+    var wantedRotationAngle = target.eulerAngles.y;\r\n        var wantedHeight =
+    target.position.y + height;\r\n        var currentRotationAngle = camera.transform.eulerAngles.y;\r\n       
+    var currentHeight = camera.transform.position.y;\r\n        // Damp the rotation
+    around the y-axis\r\n        currentRotationAngle = UnityEngine_1.Mathf.LerpAngle(currentRotationAngle,
+    wantedRotationAngle, rotationDamping * UnityEngine_1.Time.deltaTime);\r\n       
+    // Damp the height\r\n        currentHeight = UnityEngine_1.Mathf.Lerp(currentHeight,
+    wantedHeight, heightDamping * UnityEngine_1.Time.deltaTime);\r\n        // Convert
+    the angle into a rotation\r\n        var currentRotation = UnityEngine_1.Quaternion.Euler(0,
+    currentRotationAngle, 0);\r\n        // Set the position of the camera on the
+    x-z plane to:\r\n        // distance meters behind the target\r\n        camera.transform.position
+    = target.position;\r\n        camera.transform.position = UnityEngine_1.Vector3.op_Subtraction(camera.transform.position,
+    UnityEngine_1.Vector3.op_Multiply(UnityEngine_1.Quaternion.op_Multiply(currentRotation,
+    UnityEngine_1.Vector3.forward), distance));\r\n        // Set the height of the
+    camera\r\n        camera.transform.position = new UnityEngine_1.Vector3(camera.transform.position.x,
+    currentHeight, camera.transform.position.z);\r\n        // Always look at the
+    target\r\n        camera.transform.LookAt(target);\r\n    }\r\n    static SetCameraLookAt(camera,
+    sourTrans, tarTrans) {\r\n        camera.position = sourTrans.transform.position;\r\n       
+    camera.LookAt(tarTrans.position);\r\n    }\r\n    static CheckInView(camera,
+    camTransform, tarPos) {\r\n        if (camTransform == undefined || tarPos ==
+    undefined) {\r\n            return false;\r\n        }\r\n        let viewPos
+    = camera.WorldToViewportPoint(tarPos);\r\n        let dir = (UnityEngine_1.Vector3.op_Subtraction(tarPos,
+    camTransform.position)).normalized;\r\n        let dot = UnityEngine_1.Vector3.Dot(camTransform.forward,
+    dir);\r\n        // Scale-out\r\n        var ViewOff = 0.8;\r\n        if (dot
+    > 0\r\n            && viewPos.x >= 0 - ViewOff\r\n            && viewPos.x <=
+    1 + ViewOff\r\n            && viewPos.y >= 0\r\n            && viewPos.y <= 1)
+    {\r\n            return true;\r\n        }\r\n        else {\r\n            return
+    false;\r\n        }\r\n    }\r\n    static GetTransformInDeep(checkTsfm, name)
+    {\r\n        var trans = checkTsfm.GetComponentsInChildren($typeof(UnityEngine_1.Transform));\r\n       
+    for (let i = 0; i < trans.length; i++) {\r\n            if (trans[i].name ==
+    name) {\r\n                return trans[i];\r\n            }\r\n        }\r\n       
+    return null;\r\n    }\r\n}\r\nexports.default = TransformHelper;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVHJhbnNmb3JtSGVscGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVHJhbnNmb3JtSGVscGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBT3FCO0FBQ3JCLGlEQUFxRDtBQUVyRDs7R0FFRztBQUNILE1BQXFCLGVBQWdCLFNBQVEscUNBQXFCO0lBRTlELE1BQU0sQ0FBQyxZQUFZLENBQUMsRUFBYztRQUM5QixJQUFJLEVBQUUsRUFBRTtZQUNKLEVBQUUsQ0FBQyxTQUFTLENBQUMsTUFBTSxDQUFDLG9CQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO1NBQzlDO0lBQ0wsQ0FBQztJQUVELE1BQU0sQ0FBQyxrQkFBa0IsQ0FBQyxFQUFjLEVBQUUsR0FBVztRQUNqRCxFQUFFLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsU0FBUyxDQUFDLENBQUM7SUFDdkMsQ0FBQztJQUVEOzs7OztPQUtHO0lBQ0gsTUFBTSxDQUFDLGVBQWUsQ0FBQyxnQkFBNEIsRUFBRSxPQUFtQjtRQUNwRSx1RkFBdUY7UUFDdkYsSUFBSSxDQUFDLEdBQUcsZ0JBQWdCLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxDQUFDLEdBQUcsT0FBTyxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO1FBQzdFLElBQUksQ0FBQyxHQUFHLGdCQUFnQixDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsQ0FBQyxHQUFHLE9BQU8sQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQztRQUM3RSxJQUFJLENBQUMsR0FBRyxnQkFBZ0IsQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUMsR0FBRyxPQUFPLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUM7UUFDN0UsSUFBSSxZQUFZLEdBQUcsSUFBSSxxQkFBTyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDeEMsSUFBSSxhQUFh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","assetPath":"Assets/Scripts/Common/TransformHelper.ts","manifest":{"properties":[],"name":"TransformHelper","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 1454703173c092fae537b702288413ac
+  onlyWriteTrigger: 0

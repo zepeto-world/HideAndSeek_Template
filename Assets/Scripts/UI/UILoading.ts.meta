@@ -1,0 +1,54 @@
+fileFormatVersion: 2
+guid: 7ce81efa690276946886739d6f6ef66d
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst __UnityEngine__ = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst
+    UnityEngine = require(\"UnityEngine\");\r\n/**\r\n * Loading interface\r\n */\r\nclass
+    UILoading extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        this.mTipIndex = 0;\r\n    }\r\n   
+    Start() {\r\n        this.mFixedDeltaTime = UnityEngine.Time.fixedDeltaTime;\r\n       
+    this.mLoadingTimer = 0;\r\n        let parentRT = this.mPercentImg.GetComponent($typeof(__UnityEngine__.RectTransform));\r\n       
+    this.mMaxWidth = parentRT.sizeDelta.x;\r\n        this.mDefHeight = parentRT.sizeDelta.y;\r\n       
+    this.mWaitingTime = 0.9 * this.mDefaultLoadingTime;\r\n    }\r\n    OnFinishLoad()
+    {\r\n        this.mIsFinish = true;\r\n    }\r\n    FixedUpdate() {\r\n       
+    if (!this.mIsFinish && this.mLoadingTimer <= this.mWaitingTime) {\r\n           
+    this.mLoadingTimer += this.mFixedDeltaTime;\r\n            let percent = this.mLoadingTimer
+    / this.mDefaultLoadingTime;\r\n            let v = Math.ceil(percent * 100);\r\n           
+    if (v >= 100)\r\n                v = 100;\r\n            this.mPercentText.text
+    = v.toString() + \"%\";\r\n            this.mPercentImg.sizeDelta = new UnityEngine.Vector2(this.mMaxWidth
+    * percent, this.mDefHeight);\r\n        }\r\n        if (this.mIsFinish && this.mLoadingTimer
+    < this.mDefaultLoadingTime) {\r\n            this.mLoadingTimer += this.mFixedDeltaTime;\r\n           
+    let percent = this.mLoadingTimer / this.mDefaultLoadingTime;\r\n            if
+    (percent >= 1)\r\n                percent = 1;\r\n            let v = Math.ceil(percent
+    * 100);\r\n            if (v >= 100)\r\n                v = 100;\r\n           
+    this.mPercentText.text = v.toString() + \"%\";\r\n            this.mPercentImg.sizeDelta
+    = new UnityEngine.Vector2(this.mMaxWidth * percent, this.mDefHeight);\r\n       
+    }\r\n        if (this.mIsFinish && this.mLoadingTimer >= this.mDefaultLoadingTime)
+    {\r\n            this.mPercentText.text = \"100%\";\r\n            this.mPercentImg.sizeDelta
+    = new UnityEngine.Vector2(this.mMaxWidth, this.mDefHeight);\r\n            UnityEngine.GameObject.Destroy(this.gameObject,
+    0.25);\r\n        }\r\n        if (this.mLoadingTimer > this.mTipIndex * this.mTipInterval)
+    {\r\n            let index = (this.mTipIndex) % this.mTipTexts.length;\r\n           
+    this.mTipText.text = \"Tip: \" + this.mTipTexts[index];\r\n            this.mTipIndex++;\r\n       
+    }\r\n    }\r\n}\r\nexports.default = UILoading;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlMb2FkaW5nLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlMb2FkaW5nLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLGlEQUFxRDtBQUNyRCxtREFBNEM7QUFDNUMsMkNBQTJDO0FBRTNDOztHQUVHO0FBQ0gsTUFBcUIsU0FBVSxTQUFRLHFDQUFxQjtJQUE1RDs7UUFVWSxjQUFTLEdBQVcsQ0FBQyxDQUFDO0lBdURsQyxDQUFDO0lBNUNHLEtBQUs7UUFDRCxJQUFJLENBQUMsZUFBZSxHQUFHLFdBQVcsQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDO1FBQ3ZELElBQUksQ0FBQyxhQUFhLEdBQUcsQ0FBQyxDQUFDO1FBQ3ZCLElBQUksUUFBUSxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUMsWUFBWSx5QkFBYSxhQUFhLEVBQUcsQ0FBQztRQUMxRSxJQUFJLENBQUMsU0FBUyxHQUFHLFFBQVEsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDO1FBQ3RDLElBQUksQ0FBQyxVQUFVLEdBQUcsUUFBUSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUM7UUFDdkMsSUFBSSxDQUFDLFlBQVksR0FBRyxHQUFHLEdBQUcsSUFBSSxDQUFDLG1CQUFtQixDQUFDO0lBQ3ZELENBQUM7SUFFTSxZQUFZO1FBQ2YsSUFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUM7SUFDMUIsQ0FBQztJQUVELFdBQVc7UUFDUCxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsSUFBSSxJQUFJLENBQUMsYUFBYSxJQUFJLElBQUksQ0FBQyxZQUFZLEVBQUU7WUFDNUQsSUFBSSxDQUFDLGFBQWEsSUFBSSxJQUFJLENBQUMsZUFBZSxDQUFDO1lBQzNDLElBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDLG1CQUFtQixDQUFDO1lBQzVELElBQUksQ0FBQyxHQUFHLElBQUksQ0FBQyxJQUFJLENBQUMsT0FBTyxHQUFHLEdBQUcsQ0FBQyxDQUFDO1lBQ2pDLElBQUksQ0FBQyxJQUFJLEdBQUc7Z0JBQUUsQ0FBQyxHQUFHLEdBQUcsQ0FBQztZQUN0QixJQUFJLENBQUMsWUFBWSxDQUFDLElBQUksR0FBRyxDQUFDLENBQUMsUUFBUSxFQUFFLEdBQUcsR0FBRyxDQUFDO1lBQzVDLElBQUksQ0FBQyxXQUFXLENBQUMsU0FBUyxHQUFHLElBQUksV0FBVyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsU0FBUyxHQUFHLE9BQU8sRUFBRSxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7U0FDbkc7UUFFRCxJQUFJLElBQUksQ0FBQyxTQUFTLElBQUksSUFBSSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUMsbUJBQW1CLEVBQUU7WUFDakUsSUFBSSxDQUFDLGFBQWEsSUFBSSxJQUFJLENBQUMsZUFBZSxDQUFDO1lBQzNDLElBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDLG1CQUFtQixDQUFDO1lBQzVELElBQUksT0FBTyxJQUFJLENBQUM7Z0JBQUUsT0FBTyxHQUFHLENBQUMsQ0FBQztZQUM5QixJQUFJLENBQUMsR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDLE9BQU8sR0FBRyxHQUFHLENBQUMsQ0FBQztZQUNqQyxJQUFJLENBQUMsSUFBSSxHQUFHO2dCQUFFLENBQUMsR0FBRyxHQUFHLENBQUM7WUFDdEIsSUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLEdBQUcsQ0FBQyxDQUFDLFFBQVEsRUFBRSxHQUFHLEdBQUcsQ0FBQztZQUM1QyxJQUFJLENBQUMsV0FBVyxDQUFDLFNBQVMsR0FBRyxJQUFJLFdBQVcsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFNBQVMsR0FBRyxPQUFPLEVBQUUsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO1NBQ25HO1FBRUQsSUFBSSxJQUFJLENBQUMsU0FBUyxJQUFJLElBQUksQ0FBQyxhQUFhLElBQUksSUFBSSxDQUFDLG1CQUFtQixFQUFFO1lBQ2xFLElBQUksQ0FBQyxZQUFZLENBQUMsSUFBSSxHQUFHLE1BQU0sQ0FBQztZQUNoQyxJQUFJLENBQUMsV0FBVyxDQUFDLFNBQVMsR0FBRyxJQUFJLFdBQVcsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFNBQVMsRUFBRSxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7WUFDdEYsV0FBVyxDQUFDLFVBQVUsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFVBQVUsRUFBRSxJQUFJLENBQUMsQ0FBQztTQUN6RDtRQUNELElBQUksSUFBSSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxZQUFZLEVBQUU7WUFDekQsSUFBSSxLQUFLLEdBQUcsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxNQUFNLENBQUM7WUFDckQsSUFBSSxDQUFDLFFBQVEsQ0FBQyxJQUFJLEdBQUcsT0FBTyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDckQsSUFBSSxDQUFDLFNBQVMsRUFBRSxDQUFDO1NBQ3BCO0lBQ0wsQ0FBQztDQUNKO0FBakVELDRCQWlFQyJ9","assetPath":"Assets/Scripts/UI/UILoading.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"mTipTexts","type":"System.String[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Tip\""]}]},{"assembly":"UnityEngine.UI","name":"mTipText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"UI\""]}]},{"assembly":"UnityEngine.UI","name":"mPercentText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mPercentImg","type":"UnityEngine.RectTransform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mDefaultLoadingTime","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Default
+    loading time\""]}]},{"assembly":"mscorlib","name":"mTipInterval","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Header","args":["\"Prompt
+    for switching time\""]}]}],"name":"UILoading","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 7e0a7162ccaeb6c9d494add60fbeba61
+  onlyWriteTrigger: 0

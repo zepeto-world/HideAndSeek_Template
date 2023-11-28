@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: 436ca838bead04f419231b6090fa1301
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    GameMain_1 = require(\"../../GameMain\");\r\nconst UIToast_1 = require(\"../../UI/UIToast\");\r\nconst
+    ActNodeBase_1 = require(\"./ActNodeBase\");\r\n/**\r\n * Behavior processing:
+    handling game waiting states\r\n */\r\nclass ActNodeGameWait extends ActNodeBase_1.default
+    {\r\n    Check() {\r\n        // if (GameMain.Instance.GetGameState() == GameState.GameWait)
+    {\r\n        //     this.StopCoroutine(this.CoRun());\r\n        //     return
+    true;\r\n        // }\r\n        return false;\r\n    }\r\n    *CoRun() {\r\n       
+    console.log(\"actnode  gamewait\");\r\n        UIToast_1.default.Instance.ShowGameWait();\r\n       
+    GameMain_1.default.Instance.mUIManager.OnGameWait();\r\n    }\r\n}\r\nexports.default
+    = ActNodeGameWait;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQWN0Tm9kZUdhbWVXYWl0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQWN0Tm9kZUdhbWVXYWl0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUFzQztBQUN0Qyw4Q0FBdUM7QUFDdkMsK0NBQXdDO0FBRXhDOztHQUVHO0FBQ0gsTUFBcUIsZUFBZ0IsU0FBUSxxQkFBVztJQUNwRCxLQUFLO1FBQ0QsZ0VBQWdFO1FBQ2hFLHdDQUF3QztRQUN4QyxtQkFBbUI7UUFDbkIsSUFBSTtRQUNKLE9BQU8sS0FBSyxDQUFDO0lBQ2pCLENBQUM7SUFDRCxDQUFDLEtBQUs7UUFDRixPQUFPLENBQUMsR0FBRyxDQUFDLG1CQUFtQixDQUFDLENBQUM7UUFDakMsaUJBQU8sQ0FBQyxRQUFRLENBQUMsWUFBWSxFQUFFLENBQUM7UUFDaEMsa0JBQVEsQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLFVBQVUsRUFBRSxDQUFDO0lBQzlDLENBQUM7Q0FFSjtBQWRELGtDQWNDIn0=","assetPath":"Assets/Scripts/GameController/ActNode/ActNodeGameWait.ts","manifest":{"properties":[],"name":"ActNodeGameWait","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: cab11c3d6c1e7a0bbd9cf60f3d259687
+  onlyWriteTrigger: 0

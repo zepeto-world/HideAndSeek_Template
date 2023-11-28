@@ -1,0 +1,40 @@
+fileFormatVersion: 2
+guid: 8c56e2f9d6edaa94d9b6a6fffeba1cb5
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine = require(\"UnityEngine\");\r\n/**\r\n * Configuration management\r\n
+    */\r\nclass ConfigManager extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
+    static get Instance() {\r\n        return ConfigManager._instance;\r\n    }\r\n   
+    Awake() {\r\n        ConfigManager._instance = this;\r\n        this.mPlayerInfoVO
+    = JSON.parse(this.mPlayerInfoJson.text);\r\n        this.mModelInfoVO = JSON.parse(this.mModelInfoJson.text);\r\n   
+    }\r\n    /**\r\n     * Obtain configuration information for different faction
+    characters\r\n     * @param playerRole\r\n     * @returns\r\n     */\r\n    GetPlayerInfoVO(playerRole)
+    {\r\n        for (var i = 0; i < this.mPlayerInfoVO.length; i++) {\r\n           
+    if (this.mPlayerInfoVO[i].playerRole == playerRole) {\r\n                return
+    this.mPlayerInfoVO[i];\r\n            }\r\n        }\r\n    }\r\n    /**\r\n    
+    * Obtain configuration information for the model\r\n     * @param name\r\n    
+    * @returns\r\n     */\r\n    GetModelInfoVO(name) {\r\n        for (var i = 0;
+    i < this.mModelInfoVO.length; i++) {\r\n            if (this.mModelInfoVO[i].name
+    === name) {\r\n                return this.mModelInfoVO[i];\r\n            }\r\n       
+    }\r\n    }\r\n}\r\nexports.default = ConfigManager;\r\nConfigManager.GAME_HEART_RATE
+    = 5;\r\nclass PlayerInfoVO {\r\n}\r\nclass ModelInfoVO {\r\n}\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29uZmlnTWFuYWdlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkNvbmZpZ01hbmFnZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsMkNBQTJDO0FBRTNDOztHQUVHO0FBQ0gsTUFBcUIsYUFBYyxTQUFRLHFDQUFxQjtJQWVyRCxNQUFNLEtBQUssUUFBUTtRQUN0QixPQUFPLGFBQWEsQ0FBQyxTQUFTLENBQUM7SUFDbkMsQ0FBQztJQUVELEtBQUs7UUFDRCxhQUFhLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQztRQUMvQixJQUFJLENBQUMsYUFBYSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUMzRCxJQUFJLENBQUMsWUFBWSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUM3RCxDQUFDO0lBRUQ7Ozs7T0FJRztJQUNJLGVBQWUsQ0FBQyxVQUFrQjtRQUNyQyxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDaEQsSUFBSSxJQUFJLENBQUMsYUFBYSxDQUFDLENBQUMsQ0FBQyxDQUFDLFVBQVUsSUFBSSxVQUFVLEVBQUU7Z0JBQ2hELE9BQU8sSUFBSSxDQUFDLGFBQWEsQ0FBQyxDQUFDLENBQUMsQ0FBQzthQUNoQztTQUNKO0lBQ0wsQ0FBQztJQUVEOzs7O09BSUc7SUFDSSxjQUFjLENBQUMsSUFBWTtRQUM5QixLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDL0MsSUFBSSxJQUFJLENBQUMsWUFBWSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksS0FBSyxJQUFJLEVBQUU7Z0JBQ3BDLE9BQU8sSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUMsQ0FBQzthQUMvQjtTQUNKO0lBQ0wsQ0FBQzs7QUFqREwsZ0NBa0RDO0FBekNVLDZCQUFlLEdBQUcsQ0FBQyxDQUFDO0FBMkMvQixNQUFNLFlBQVk7Q0FNakI7QUFFRCxNQUFNLFdBQVc7Q0FLaEIifQ==","assetPath":"Assets/Scripts/GameManager/ConfigManager.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"mPlayerInfoJson","type":"UnityEngine.TextAsset","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mModelInfoJson","type":"UnityEngine.TextAsset","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ConfigManager","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: ec3616cc69c8ed84adca0cd252290d22
+  onlyWriteTrigger: 0

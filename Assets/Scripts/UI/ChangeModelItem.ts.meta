@@ -1,0 +1,37 @@
+fileFormatVersion: 2
+guid: dddeaefe62e09044e943e07af88e6b8c
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\n/**\r\n
+    * Change the UI component of the transformed item\r\n */\r\nclass ChangeModelItem
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n       
+    super(...arguments);\r\n        this.OnClickEvent = null;\r\n    }\r\n    Start()
+    {\r\n        this.mClickBtn.onValueChanged.AddListener((value) => {\r\n           
+    if (this.mClickBtn.isOn) {\r\n                this.mSelectBorder?.SetActive(value);\r\n               
+    if (this.OnClickEvent != null) {\r\n                    this.OnClickEvent.Invoke(this.mId);\r\n               
+    }\r\n            }\r\n            else {\r\n                this.mSelectBorder?.SetActive(value);\r\n           
+    }\r\n        });\r\n    }\r\n    //id Must correspond to model\r\n    SetData(img,
+    id) {\r\n        this.mId = id;\r\n        this.mImg.sprite = img;\r\n    }\r\n   
+    Show() {\r\n        this.mImg.enabled = true;\r\n    }\r\n    Hide() {\r\n       
+    this.mImg.enabled = false;\r\n    }\r\n}\r\nexports.default = ChangeModelItem;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ2hhbmdlTW9kZWxJdGVtLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQ2hhbmdlTW9kZWxJdGVtLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQWlEO0FBQ2pELG1EQUErQztBQUMvQyxpREFBcUQ7QUFHckQ7O0dBRUc7QUFDSCxNQUFxQixlQUFnQixTQUFRLHFDQUFxQjtJQUFsRTs7UUFNVyxpQkFBWSxHQUFzQixJQUFJLENBQUM7SUEyQmxELENBQUM7SUExQkcsS0FBSztRQUNELElBQUksQ0FBQyxTQUFTLENBQUMsY0FBYyxDQUFDLFdBQVcsQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1lBQ2hELElBQUksSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLEVBQUU7Z0JBQ3JCLElBQUksQ0FBQyxhQUFhLEVBQUUsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO2dCQUNyQyxJQUFJLElBQUksQ0FBQyxZQUFZLElBQUksSUFBSSxFQUFFO29CQUMzQixJQUFJLENBQUMsWUFBWSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7aUJBQ3RDO2FBQ0o7aUJBQ0k7Z0JBQ0QsSUFBSSxDQUFDLGFBQWEsRUFBRSxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7YUFDeEM7UUFDTCxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFDRCw2QkFBNkI7SUFDdEIsT0FBTyxDQUFDLEdBQVcsRUFBRSxFQUFVO1FBQ2xDLElBQUksQ0FBQyxHQUFHLEdBQUcsRUFBRSxDQUFDO1FBQ2QsSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLEdBQUcsR0FBRyxDQUFDO0lBQzNCLENBQUM7SUFFTSxJQUFJO1FBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDO0lBQzdCLENBQUM7SUFFTSxJQUFJO1FBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDO0lBQzlCLENBQUM7Q0FDSjtBQWpDRCxrQ0FpQ0MifQ==","assetPath":"Assets/Scripts/UI/ChangeModelItem.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"mId","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mSelectBorder","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mImg","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mClickBtn","type":"UnityEngine.UI.Toggle","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"OnClickEvent","type":"UnityEngine.Events.UnityEvent$1","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ChangeModelItem","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 9b1d9c9fecf39f15c842c7af94735c1d
+  onlyWriteTrigger: 0

@@ -1,0 +1,37 @@
+fileFormatVersion: 2
+guid: 9a544d5862661ef40aeb30b9cf4083e8
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst PlayerManager_1 = require(\"../GameManager/PlayerManager\");\r\n/**\r\n
+    * Scan detection component\r\n */\r\nclass RadarController extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.mTimer
+    = 0;\r\n        this.mSessionId = \"\";\r\n    }\r\n    Update() {\r\n       
+    this.mTimer += UnityEngine_1.Time.deltaTime;\r\n        if (this.mTimer > this.mRepateRate)
+    {\r\n            this.mTimer = 0;\r\n            this.CheckRadar();\r\n       
+    }\r\n    }\r\n    CheckRadar() {\r\n        let result = PlayerManager_1.default.Instance.CheckRadar(this.transform.position,
+    this.mRadius, this.mSessionId);\r\n        this.mNormalFX.transform.localPosition
+    = result ? UnityEngine_1.Vector3.op_Multiply(UnityEngine_1.Vector3.right, 10000)
+    : UnityEngine_1.Vector3.zero;\r\n        this.mFoundFX.transform.localPosition
+    = !result ? UnityEngine_1.Vector3.op_Multiply(UnityEngine_1.Vector3.right, 10000)
+    : UnityEngine_1.Vector3.zero;\r\n    }\r\n}\r\nexports.default = RadarController;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmFkYXJDb250cm9sbGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiUmFkYXJDb250cm9sbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUF3RDtBQUN4RCxnRUFBd0Q7QUFFeEQ7O0dBRUc7QUFDSCxNQUFxQixlQUFnQixTQUFRLHFDQUFxQjtJQUFsRTs7UUFRWSxXQUFNLEdBQVcsQ0FBQyxDQUFDO1FBRXBCLGVBQVUsR0FBVyxFQUFFLENBQUM7SUFlbkMsQ0FBQztJQWJHLE1BQU07UUFDRixJQUFJLENBQUMsTUFBTSxJQUFJLGtCQUFJLENBQUMsU0FBUyxDQUFDO1FBQzlCLElBQUksSUFBSSxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUMsV0FBVyxFQUFFO1lBQ2hDLElBQUksQ0FBQyxNQUFNLEdBQUcsQ0FBQyxDQUFDO1lBQ2hCLElBQUksQ0FBQyxVQUFVLEVBQUUsQ0FBQztTQUNyQjtJQUNMLENBQUM7SUFFTSxVQUFVO1FBQ2IsSUFBSSxNQUFNLEdBQUcsdUJBQWEsQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxFQUFFLElBQUksQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO1FBQ3ZHLElBQUksQ0FBQyxTQUFTLENBQUMsU0FBUyxDQUFDLGFBQWEsR0FBRyxNQUFNLENBQUMsQ0FBQyxDQTVCcEMscUJBQU8sQ0ErQm0vcEIsV0FBWSxDQUhqK3BCLHFCQUFPLENBQUMsS0FBSyxFQUFHLEtBQUssRUFBQyxDQUFDLENBQUMscUJBQU8sQ0FBQyxJQUFJLENBQUM7UUFDdkYsSUFBSSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsYUFBYSxHQUFHLENBQUMsTUFBTSxDQUFDLENBQUMsQ0E3QnBDLHFCQUFPLENBK0JtL3BCLFdBQVksQ0FGaitwQixxQkFBTyxDQUFDLEtBQUssRUFBRyxLQUFLLEVBQUMsQ0FBQyxDQUFDLHFCQUFPLENBQUMsSUFBSSxDQUFDO0lBQzNGLENBQUM7Q0FDSjtBQXpCRCxrQ0F5QkMifQ==","assetPath":"Assets/Scripts/GameController/RadarController.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"mNormalFX","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mFoundFX","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mRadius","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mRepateRate","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mSessionId","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"RadarController","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 5fe3ca4b2d4bf9d3d49dffa6446c7e45
+  onlyWriteTrigger: 0

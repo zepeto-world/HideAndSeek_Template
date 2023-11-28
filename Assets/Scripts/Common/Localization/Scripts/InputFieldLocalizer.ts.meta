@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: 25c0fe0afef9949fd8c792feb371adc8
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst Localization_1 = require(\"./Localization\");\r\nclass
+    InputFieldLocalizer extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        this._isInitialized = false;\r\n   
+    }\r\n    UpdateTextContent() {\r\n        //Set Localized Text\r\n        this._uiInputField.text
+    = this._localization.GetLocalizedText(this.localizationKey);\r\n    }\r\n   
+    Start() {\r\n        this._localization = Localization_1.default.Instance;\r\n       
+    if (!this.localizationKey || this.localizationKey == \"\") {\r\n            this._isInitialized
+    = false;\r\n            console.error(`[TextLocalizer] Text Localizer is not
+    initialized. Enter localization key first.(${this.gameObject.name})`);\r\n           
+    return;\r\n        }\r\n        else {\r\n            this._isInitialized = true;\r\n       
+    }\r\n        //When UI text doesn''t exist\r\n        if (!this.gameObject.GetComponent($typeof(Text)))
+    {\r\n            console.error(`[TextLocalizer] Text Localizer is not initialized.
+    There''s no UI Text. (${this.gameObject.name})`);\r\n            return;\r\n       
+    }\r\n        this._uiInputField = this.gameObject.GetComponent($typeof(UnityEngine_UI_1.InputField));\r\n       
+    this.UpdateTextContent();\r\n        this._localization.onLanguageOptionChanged.AddListener(()
+    => {\r\n            this.UpdateTextContent();\r\n        });\r\n    }\r\n}\r\nexports.default
+    = InputFieldLocalizer;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSW5wdXRGaWVsZExvY2FsaXplci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIklucHV0RmllbGRMb2NhbGl6ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxtREFBNEM7QUFDNUMsaURBQXFEO0FBQ3JELGlEQUEwQztBQUUxQyxNQUFxQixtQkFBb0IsU0FBUSxxQ0FBcUI7SUFBdEU7O1FBSVksbUJBQWMsR0FBWSxLQUFLLENBQUM7SUFvQzVDLENBQUM7SUFoQ1csaUJBQWlCO1FBRXJCLG9CQUFvQjtRQUNwQixJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQztJQUN4RixDQUFDO0lBRUQsS0FBSztRQUNELElBQUksQ0FBQyxhQUFhLEdBQUcsc0JBQVksQ0FBQyxRQUFRLENBQUM7UUFFM0MsSUFBSSxDQUFDLElBQUksQ0FBQyxlQUFlLElBQUksSUFBSSxDQUFDLGVBQWUsSUFBSSxFQUFFLEVBQUU7WUFDckQsSUFBSSxDQUFDLGNBQWMsR0FBRyxLQUFLLENBQUM7WUFDNUIsT0FBTyxDQUFDLEtBQUssQ0FBQyxvRkFBb0YsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLEdBQUcsQ0FBQyxDQUFDO1lBQzNILE9BQU87U0FDVjthQUFNO1lBQ0gsSUFBSSxDQUFDLGNBQWMsR0FBRyxJQUFJLENBQUM7U0FDOUI7UUFFRCw0QkFBNEI7UUFDNUIsSUFBSSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsWUFBWSxTQUFDLElBQUksRUFBRyxFQUFFO1lBQ3ZDLE9BQU8sQ0FBQyxLQUFLLENBQUMsMkVBQTJFLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxHQUFHLENBQUMsQ0FBQztZQUNsSCxPQUFPO1NBQ1Y7UUFFRCxJQUFJLENBQUMsYUFBYSxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsWUFBWSxTQUFDLDJCQUFVLEVBQUcsQ0FBQztRQUVoRSxJQUFJLENBQUMsaUJBQWlCLEVBQUUsQ0FBQztRQUV6QixJQUFJLENBQUMsYUFBYSxDQUFDLHVCQUF1QixDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDeEQsSUFBSSxDQUFDLGlCQUFpQixFQUFFLENBQUM7UUFDN0IsQ0FBQyxDQUFDLENBQUE7SUFDTixDQUFDO0NBRUo7QUF4Q0Qsc0NBd0NDIn0=","assetPath":"Assets/Scripts/Common/Localization/Scripts/InputFieldLocalizer.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"localizationKey","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"InputFieldLocalizer","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 3f77b680ad28c434d85d2c28062ff427
+  onlyWriteTrigger: 0

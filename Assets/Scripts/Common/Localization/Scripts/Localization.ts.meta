@@ -1,0 +1,145 @@
+fileFormatVersion: 2
+guid: 6d8fab01ffd0d4954b41c65448a83ec5
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.TextFileOption = exports.LanguageOption = void 0;\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst UnityEngine_Events_1 = require(\"UnityEngine.Events\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nvar LanguageOption;\r\n(function
+    (LanguageOption) {\r\n    LanguageOption[LanguageOption[\"DeviceLanguage\"] =
+    0] = \"DeviceLanguage\";\r\n    LanguageOption[LanguageOption[\"zh-CN-zai\"]
+    = 1] = \"zh-CN-zai\";\r\n    LanguageOption[LanguageOption[\"zh-CN-gl\"] = 2]
+    = \"zh-CN-gl\";\r\n    LanguageOption[LanguageOption[\"zh-TW\"] = 3] = \"zh-TW\";\r\n   
+    LanguageOption[LanguageOption[\"en-US\"] = 4] = \"en-US\";\r\n    LanguageOption[LanguageOption[\"ko-KR\"]
+    = 5] = \"ko-KR\";\r\n    LanguageOption[LanguageOption[\"ja-JP\"] = 6] = \"ja-JP\";\r\n   
+    LanguageOption[LanguageOption[\"th-TH\"] = 7] = \"th-TH\";\r\n    LanguageOption[LanguageOption[\"id-ID\"]
+    = 8] = \"id-ID\";\r\n    LanguageOption[LanguageOption[\"ru-RU\"] = 9] = \"ru-RU\";\r\n   
+    LanguageOption[LanguageOption[\"it-IT\"] = 10] = \"it-IT\";\r\n    LanguageOption[LanguageOption[\"pt-BR\"]
+    = 11] = \"pt-BR\";\r\n    LanguageOption[LanguageOption[\"es-ES\"] = 12] = \"es-ES\";\r\n   
+    LanguageOption[LanguageOption[\"vi-VN\"] = 13] = \"vi-VN\";\r\n    LanguageOption[LanguageOption[\"fr-FR\"]
+    = 14] = \"fr-FR\";\r\n    LanguageOption[LanguageOption[\"tr-TR\"] = 15] = \"tr-TR\";\r\n})(LanguageOption
+    = exports.LanguageOption || (exports.LanguageOption = {}));\r\nvar TextFileOption;\r\n(function
+    (TextFileOption) {\r\n    TextFileOption[TextFileOption[\"CSV\"] = 0] = \"CSV\";\r\n   
+    TextFileOption[TextFileOption[\"JSON\"] = 1] = \"JSON\";\r\n})(TextFileOption
+    = exports.TextFileOption || (exports.TextFileOption = {}));\r\nclass Localization
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    get onLanguageOptionChanged()
+    {\r\n        if (!this._onLanguageOptionChanged) {\r\n            this._onLanguageOptionChanged
+    = new UnityEngine_Events_1.UnityEvent();\r\n        }\r\n        return this._onLanguageOptionChanged;\r\n   
+    }\r\n    ChangeLanguageOption(targetLanguage) {\r\n        this.language = targetLanguage;\r\n       
+    this.SetLanguage();\r\n        this.onLanguageOptionChanged.Invoke();\r\n   
+    }\r\n    /** Returns the localized text value for the given key. */\r\n    GetLocalizedText(key)
+    {\r\n        // If key is invalid\r\n        if (!(key in this._localizationHash))
+    {\r\n            console.error(\"[Localization]: Invalid Key\", key);\r\n           
+    return \"ERROR\";\r\n        }\r\n        // If value is invalid,\r\n       
+    if (!this._localizationHash[key]) {\r\n            console.error(\"[Localization]:
+    Invalid Value, key is \", key);\r\n            return this._localizationHash[key][\"en\"].replace(''<br>'',
+    ''\\n'');\r\n        }\r\n        else {\r\n            return this._localizationHash[key][this._currentLanguageKey].replace(/<br>/gi,
+    ''\\n'');\r\n        }\r\n        return key;\r\n    }\r\n    GetLocalizedTextKeyword(key,
+    word) {\r\n        return this.GetLocalizedText(key).replace(/{(\\d+)}/g, (match,
+    index) => word || '''');\r\n    }\r\n    /** Returns localized text value from
+    give key stirng */\r\n    GetLocalizedTextWithParam(key, args) {\r\n        return
+    this.GetLocalizedText(key).replace(/{(\\d+)}/g, (match, index) => args[index]
+    || '''');\r\n    }\r\n    /** Returns true if there''s a default font set */\r\n   
+    HasDefaultFont() {\r\n        return (this.defaultFont.ToString() != \"null\")
+    ? true : false;\r\n    }\r\n    /** Returns default font. Check with ''HasCurrentFont()''
+    to see if there''s a default font set */\r\n    GetDefaultFont() {\r\n       
+    return this.defaultFont;\r\n    }\r\n    static get Instance() {\r\n        if
+    (!Localization._instance) {\r\n            const targetObj = UnityEngine_1.GameObject.Find(\"Localization\");\r\n           
+    if (targetObj) {\r\n                Localization._instance = targetObj.GetComponent($typeof(Localization));\r\n           
+    }\r\n        }\r\n        return Localization._instance;\r\n    }\r\n    /**
+    Returns a key string that represents currently set language option. */\r\n   
+    get CurrentLanguageKey() {\r\n        return this._currentLanguageKey;\r\n   
+    }\r\n    Initialize() {\r\n        if (!this.textFileToRead) {\r\n           
+    console.error(\"[Localization]: There''s no text file to read.\");\r\n           
+    return;\r\n        }\r\n        if (this.textFileOption == TextFileOption.JSON)
+    {\r\n            this._localizationHash = this.GetObjectFromJSON(this.textFileToRead);\r\n           
+    this.SetLanguage();\r\n            console.log(\"[Localization]: Initializing
+    localization from JSON file\");\r\n        }\r\n        else if (this.textFileOption
+    == TextFileOption.CSV) {\r\n            this._localizationHash = this.GetObjectFromCSV(this.textFileToRead);\r\n           
+    this.SetLanguage();\r\n            console.log(\"[Localization]: Initializing
+    localization from CSV file\");\r\n        }\r\n        else {\r\n           
+    console.error(\"[Localization]: Set text file option first\");\r\n           
+    return;\r\n        }\r\n    }\r\n    SetLanguage() {\r\n        //Set Current
+    Language\r\n        if (this.language == 0) {\r\n            this.SetLanguageFromSystemLanguage();\r\n           
+    console.log(`[Localization] Current Language is set to ${this._currentLanguageKey}
+    by System Language`);\r\n        }\r\n        else {\r\n            this._currentLanguageKey
+    = LanguageOption[this.language].toString();\r\n            console.log(`[Localization]
+    Current Language is set to ${this._currentLanguageKey}, LanguageOption: ${LanguageOption[this.language].toString()},
+    this.language: ${this.language}`);\r\n        }\r\n    }\r\n    SetLanguageFromSystemLanguage()
+    {\r\n        switch (UnityEngine_1.Application.systemLanguage) {\r\n           
+    case UnityEngine_1.SystemLanguage.Korean:\r\n                this._currentLanguageKey
+    = LanguageOption[LanguageOption[''ko-KR'']].toString();\r\n                break;\r\n           
+    case UnityEngine_1.SystemLanguage.English:\r\n                this._currentLanguageKey
+    = LanguageOption[LanguageOption[''en-US'']].toString();\r\n                break;\r\n           
+    case UnityEngine_1.SystemLanguage.Japanese:\r\n                this._currentLanguageKey
+    = LanguageOption[LanguageOption[''ja-JP'']].toString();\r\n                break;\r\n           
+    case UnityEngine_1.SystemLanguage.Chinese:\r\n                this._currentLanguageKey
+    = LanguageOption[LanguageOption[''zh-CN-gl'']].toString();\r\n               
+    break;\r\n            case UnityEngine_1.SystemLanguage.ChineseSimplified:\r\n               
+    this._currentLanguageKey = LanguageOption[LanguageOption[''zh-CN-zai'']].toString();\r\n               
+    break;\r\n            case UnityEngine_1.SystemLanguage.Thai:\r\n               
+    this._currentLanguageKey = LanguageOption[LanguageOption[''th-TH'']].toString();\r\n               
+    break;\r\n            case UnityEngine_1.SystemLanguage.Indonesian:\r\n               
+    this._currentLanguageKey = LanguageOption[LanguageOption[''id-ID'']].toString();\r\n               
+    break;\r\n            case UnityEngine_1.SystemLanguage.Russian:\r\n               
+    this._currentLanguageKey = LanguageOption[LanguageOption[''ru-RU'']].toString();\r\n               
+    break;\r\n            case UnityEngine_1.SystemLanguage.Italian:\r\n               
+    this._currentLanguageKey = LanguageOption[LanguageOption[''it-IT'']].toString();\r\n               
+    break;\r\n            case UnityEngine_1.SystemLanguage.Portuguese:\r\n               
+    this._currentLanguageKey = LanguageOption[LanguageOption[''pt-BR'']].toString();\r\n               
+    break;\r\n            case UnityEngine_1.SystemLanguage.Spanish:\r\n               
+    this._currentLanguageKey = LanguageOption[LanguageOption[''es-ES'']].toString();\r\n               
+    break;\r\n            case UnityEngine_1.SystemLanguage.Vietnamese:\r\n               
+    this._currentLanguageKey = LanguageOption[LanguageOption[''vi-VN'']].toString();\r\n               
+    break;\r\n            case UnityEngine_1.SystemLanguage.ChineseTraditional:\r\n               
+    this._currentLanguageKey = LanguageOption[LanguageOption[''zh-TW'']].toString();\r\n               
+    break;\r\n            case UnityEngine_1.SystemLanguage.French:\r\n               
+    this._currentLanguageKey = LanguageOption[LanguageOption[''fr-FR'']].toString();\r\n               
+    break;\r\n            case UnityEngine_1.SystemLanguage.Turkish:\r\n               
+    this._currentLanguageKey = LanguageOption[LanguageOption[''tr-TR'']].toString();\r\n               
+    break;\r\n            default:\r\n                this._currentLanguageKey =
+    LanguageOption[LanguageOption[''en-US'']].toString();\r\n                break;\r\n       
+    }\r\n    }\r\n    GetObjectFromJSON(targetTextAsset) {\r\n        return JSON.parse(targetTextAsset.ToString());\r\n   
+    }\r\n    GetObjectFromCSV(targetTextAsset) {\r\n        let csv = targetTextAsset.ToString();\r\n       
+    var lines = csv.split(\"\\n\");\r\n        var result = {};\r\n        var headers
+    = lines[0].split(\",\");\r\n        for (let i = 0; i < headers.length; i++)
+    {\r\n            let targetHeader = headers[i];\r\n            if (targetHeader.substring(targetHeader.length
+    - 1, targetHeader.length) == \"\\r\") {\r\n                targetHeader = targetHeader.substring(0,
+    targetHeader.length - 1);\r\n            }\r\n            headers[i] = targetHeader;\r\n       
+    }\r\n        for (let k = 1; k < lines.length; k++) {\r\n            var obj
+    = {};\r\n            var currentline = this.lineSplitter(lines[k]);\r\n           
+    for (var j = 1; j < headers.length; j++) {\r\n                let targetLine
+    = currentline[j];\r\n                if (targetLine != undefined) {\r\n                   
+    if (targetLine.substring(targetLine.length - 1, targetLine.length) == \"\\r\")
+    {\r\n                        targetLine = targetLine.substring(0, targetLine.length
+    - 1);\r\n                    }\r\n                }\r\n                obj[headers[j]]
+    = targetLine;\r\n            }\r\n            result[currentline[0]] = obj;\r\n       
+    }\r\n        let resultString = JSON.stringify(result);\r\n        // JSON\r\n       
+    return JSON.parse(resultString);\r\n    }\r\n    Awake() {\r\n        Localization._instance
+    = this;\r\n        this.Initialize();\r\n    }\r\n    lineSplitter(targetString)
+    {\r\n        let _result = [];\r\n        let _characters = Array.from(targetString);\r\n       
+    let _isInDoubleQuote = false;\r\n        for (let i = 0; i < _characters.length;
+    i++) {\r\n            if (_characters[i] == ''\"'') {\r\n                _characters[i]
+    = \"\";\r\n                _isInDoubleQuote = !_isInDoubleQuote;\r\n           
+    }\r\n            if ((_characters[i] == '','') && !_isInDoubleQuote) {\r\n               
+    _characters[i] = \"%%,%%\";\r\n            }\r\n        }\r\n        let _changedText
+    = _characters.join(\"\");\r\n        _result = _changedText.split(\"%%,%%\");\r\n       
+    return _result;\r\n    }\r\n}\r\nexports.default = Localization;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTG9jYWxpemF0aW9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiTG9jYWxpemF0aW9uLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLDZDQUF1RjtBQUV2RiwyREFBZ0Q7QUFDaEQsaURBQXFEO0FBRXJELElBQVksY0FpQlg7QUFqQkQsV0FBWSxjQUFjO0lBQ3RCLHVFQUFnQixDQUFBO0lBQ2hCLDZEQUFXLENBQUE7SUFDWCwyREFBVSxDQUFBO0lBQ1YscURBQU8sQ0FBQTtJQUNQLHFEQUFPLENBQUE7SUFDUCxxREFBTyxDQUFBO0lBQ1AscURBQU8sQ0FBQTtJQUNQLHFEQUFPLENBQUE7SUFDUCxxREFBTyxDQUFBO0lBQ1AscURBQU8sQ0FBQTtJQUNQLHNEQUFPLENBQUE7SUFDUCxzREFBTyxDQUFBO0lBQ1Asc0RBQU8sQ0FBQTtJQUNQLHNEQUFPLENBQUE7SUFDUCxzREFBTyxDQUFBO0lBQ1Asc0RBQU8sQ0FBQTtBQUNYLENBQUMsRUFqQlcsY0FBYyxHQUFkLHNCQUFjLEtBQWQsc0JBQWMsUUFpQnpCO0FBRUQsSUFBWSxjQUdYO0FBSEQsV0FBWSxjQUFjO0lBQ3RCLGlEQUFHLENBQUE7SUFDSCxtREFBSSxDQUFBO0FBQ1IsQ0FBQyxFQUhXLGNBQWMsR0FBZCxzQkFBYyxLQUFkLHNCQUFjLFFBR3pCO0FBRUQsTUFBcUIsWUFBYSxTQUFRLHFDQUFxQjtJQVMzRCxJQUFXLHVCQUF1QjtRQUM5QixJQUFJLENBQUMsSUFBSSxDQUFDLHdCQUF3QixFQUFFO1lBQ2hDLElBQUksQ0FBQyx3QkFBd0IsR0FBRyxJQUFJLCtCQUFVLEVBQUUsQ0FBQztTQUNwRDtRQUNELE9BQU8sSUFBSSxDQUFDLHdCQUF3QixDQUFDO0lBQ3pDLENBQUM7SUFXTSxvQkFBb0IsQ0FBQyxjQUE4QjtRQUV0RCxJQUFJLENBQUMsUUFBUSxHQUFHLGNBQWMsQ0FBQztRQUMvQixJQUFJLENBQUMsV0FBVyxFQUFFLENBQUM7UUFDbkIsSUFBSSxDQUFDLHVCQUF1QixDQUFDLE1BQU0sRUFBRSxDQUFDO0lBQzFDLENBQUM7SUFFRCwwREFBMEQ7SUFDbkQsZ0JBQWdCLENBQUMsR0FBVztRQUMvQixvQkFBb0I7UUFDcEIsSUFBSSxDQUFDLENBQUMsR0FBRyxJQUFJLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxFQUFFO1lBQ2xDLE9BQU8sQ0FBQyxLQUFLLENBQUMsNkJBQTZCLEVBQUUsR0FBRyxDQUFDLENBQUM7WUFDbEQsT0FBTyxPQUFPLENBQUM7U0FDbEI7UUFFRCx1QkFBdUI7UUFDdkIsSUFBSSxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxHQUFHLENBQUMsRUFBRTtZQUM5QixPQUFPLENBQUMsS0FBSyxDQUFDLHdDQUF3QyxFQUFFLEdBQUcsQ0FBQyxDQUFDO1lBQzdELE9BQU8sSUFBSSxDQUFDLGlCQUFpQixDQUFDLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLE9BQU8sQ0FBQyxNQUFNLEVBQUUsSUFBSSxDQUFDLENBQUM7U0FDbEU7YUFBTTtZQUNILE9BQU8sSUFBSSxDQUFDLGlCQUFpQixDQUFDLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxRQUFRLEVBQUUsSUFBSSxDQUFDLENBQUM7U0FDeEY7UUFDRCxPQUFPLEdBQUcsQ0FBQztJQUNmLENBQUM7SUFFTSx1QkFBdUIsQ0FBQyxHQUFXLEVBQUUsSUFBWTtRQUNwRCxPQUFPLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxHQUFHLENBQUMsQ0FBQyxPQUFPLENBQUMsVUFBVSxFQUFFLENBQUMsS0FBSyxFQUFFLEtBQUssRUFBRSxFQUFFLENBQUMsSUFBSSxJQUFJLEVBQUUsQ0FBQyxDQUFDO0lBQ3hGLENBQUM7SUFFRCx3REFBd0Q7SUFDakQseUJBQXlCLENBQUMsR0FBVyxFQUFFLElBQWM7UUFDeEQsT0FBTyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsR0FBRyxDQUFDLENBQUMsT0FBTyxDQUFDLFVBQVUsRUFBRSxDQUFDLEtBQUssRUFBRSxLQUFLLEVBQUUsRUFBRSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQztJQUMvRixDQUFDO0lBRUQsaURBQWlEO0lBQzFDLGNBQWM7UUFDakIsT0FBTyxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsUUFBUSxFQUFFLElBQUksTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsS0FBSyxDQUFDO0lBQ2xFLENBQUM7SUFFRCwrRkFBK0Y7SUFDeEYsY0FBYztRQUNqQixPQUFPLElBQUksQ0FBQyxXQUFXLENBQUM7SUFDNUIsQ0FBQztJQU1NLE1BQU0sS0FBSyxRQUFRO1FBQ3RCLElBQUksQ0FBQyxZQUFZLENBQUMsU0FBUyxFQUFFO1lBQ3pCLE1BQU0sU0FBUyxHQUFHLHdCQUFVLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxDQUFDO1lBQ2xELElBQUksU0FBUyxFQUFFO2dCQUNYLFlBQVksQ0FBQyxTQUFTLEdBQUcsU0FBUyxDQUFDLFlBQVksU0FBQyxZQUFZLEVBQUcsQ0FBQzthQUNuRTtTQUNKO1FBQ0QsT0FBTyxZQUFZLENBQUMsU0FBUyxDQUFDO0lBQ2xDLENBQUM7SUFFRCwwRUFBMEU7SUFDMUUsSUFBVyxrQkFBa0I7UUFDekIsT0FBTyxJQUFJLENBQUMsbUJBQW1CLENBQUM7SUFDcEMsQ0FBQztJQUVPLFVBQVU7UUFDZCxJQUFJLENBQUMsSUFBSSxDQUFDLGNBQWMsRUFBRTtZQUN0QixPQUFPLENBQUMsS0FBSyxDQUFDLCtDQUErQyxDQUFDLENBQUM7WUFDL0QsT0FBTztTQUNWO1FBRUQsSUFBSSxJQUFJLENBQUMsY0FBYyxJQUFJLGNBQWMsQ0FBQyxJQUFJLEVBQUU7WUFDNUMsSUFBSSxDQUFDLGlCQUFpQixHQUFHLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLENBQUM7WUFDckUsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDO1lBQ25CLE9BQU8sQ0FBQyxHQUFHLENBQUMsMERBQTBELENBQUMsQ0FBQztTQUMzRTthQUFNLElBQUksSUFBSSxDQUFDLGNBQWMsSUFBSSxjQUFjLENBQUMsR0FBRyxFQUFFO1lBQ2xELElBQUksQ0FBQyxpQkFBaUIsR0FBRyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxDQUFDO1lBQ3BFLElBQUksQ0FBQyxXQUFXLEVBQUUsQ0FBQztZQUNuQixPQUFPLENBQUMsR0FBRyxDQUFDLHlEQUF5RCxDQUFDLENBQUM7U0FDMUU7YUFBTTtZQUNILE9BQU8sQ0FBQyxLQUFLLENBQUMsNENBQTRDLENBQUMsQ0FBQztZQUM1RCxPQUFPO1NBQ1Y7SUFDTCxDQUFDO0lBRU8sV0FBVztRQUNmLHNCQUFzQjtRQUN0QixJQUFJLElBQUksQ0FBQyxRQUFRLElBQUksQ0FBQyxFQUFFO1lBQ3BCLElBQUksQ0FBQyw2QkFBNkIsRUFBRSxDQUFDO1lBQ3JDLE9BQU8sQ0FBQyxHQUFHLENBQUMsNkNBQTZDLElBQUksQ0FBQyxtQkFBbUIscUJBQXFCLENBQUMsQ0FBQztTQUMzRzthQUFNO1lBQ0gsSUFBSSxDQUFDLG1CQUFtQixHQUFHLGNBQWMsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsUUFBUSxFQUFFLENBQUM7WUFDcEUsT0FBTyxDQUFDLEdBQUcsQ0FBQyw2Q0FBNkMsSUFBSSxDQUFDLG1CQUFtQixxQkFBcUIsY0FBYyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxRQUFRLEVBQUUsb0JBQW9CLElBQUksQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDO1NBQ3RMO0lBQ0wsQ0FBQztJQUVPLDZCQUE2QjtRQUNqQyxRQUFRLHlCQUFXLENBQUMsY0FBYyxFQUFFO1lBQ2hDLEtBQUssNEJBQWMsQ0FBQyxNQUFNO2dCQUN0QixJQUFJLENBQUMsbUJBQW1CLEdBQUcsY0FBYyxDQUFDLGNBQWMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDO2dCQUM5RSxNQUFNO1lBQ1YsS0FBSyw0QkFBYyxDQUFDLE9BQU87Z0JBQ3ZCLElBQUksQ0FBQyxtQkFBbUIsR0FBRyxjQUFjLENBQUMsY0FBYyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsUUFBUSxFQUFFLENBQUM7Z0JBQzlFLE1BQU07WUFDVixLQUFLLDRCQUFjLENBQUMsUUFBUTtnQkFDeEIsSUFBSSxDQUFDLG1CQUFtQixHQUFHLGNBQWMsQ0FBQyxjQUFjLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztnQkFDOUUsTUFBTTtZQUNWLEtBQUssNEJBQWMsQ0FBQyxPQUFPO2dCQUN2QixJQUFJLENBQUMsbUJBQW1CLEdBQUcsY0FBYyxDQUFDLGNBQWMsQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDO2dCQUNqRixNQUFNO1lBQ1YsS0FBSyw0QkFBYyxDQUFDLGlCQUFpQjtnQkFDakMsSUFBSSxDQUFDLG1CQUFtQixHQUFHLGNBQWMsQ0FBQyxjQUFjLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztnQkFDbEYsTUFBTTtZQUNWLEtBQUssNEJBQWMsQ0FBQyxJQUFJO2dCQUNwQixJQUFJLENBQUMsbUJBQW1CLEdBQUcsY0FBYyxDQUFDLGNBQWMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDO2dCQUM5RSxNQUFNO1lBQ1YsS0FBSyw0QkFBYyxDQUFDLFVBQVU7Z0JBQzFCLElBQUksQ0FBQyxtQkFBbUIsR0FBRyxjQUFjLENBQUMsY0FBYyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsUUFBUSxFQUFFLENBQUM7Z0JBQzlFLE1BQU07WUFDVixLQUFLLDRCQUFjLENBQUMsT0FBTztnQkFDdkIsSUFBSSxDQUFDLG1CQUFtQixHQUFHLGNBQWMsQ0FBQyxjQUFjLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztnQkFDOUUsTUFBTTtZQUNWLEtBQUssNEJBQWMsQ0FBQyxPQUFPO2dCQUN2QixJQUFJLENBQUMsbUJBQW1CLEdBQUcsY0FBYyxDQUFDLGNBQWMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDO2dCQUM5RSxNQUFNO1lBQ1YsS0FBSyw0QkFBYyxDQUFDLFVBQVU7Z0JBQzFCLElBQUksQ0FBQyxtQkFBbUIsR0FBRyxjQUFjLENBQUMsY0FBYyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsUUFBUSxFQUFFLENBQUM7Z0JBQzlFLE1BQU07WUFDVixLQUFLLDRCQUFjLENBQUMsT0FBTztnQkFDdkIsSUFBSSxDQUFDLG1CQUFtQixHQUFHLGNBQWMsQ0FBQyxjQUFjLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztnQkFDOUUsTUFBTTtZQUNWLEtBQUssNEJBQWMsQ0FBQyxVQUFVO2dCQUMxQixJQUFJLENBQUMsbUJBQW1CLEdBQUcsY0FBYyxDQUFDLGNBQWMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDO2dCQUM5RSxNQUFNO1lBQ1YsS0FBSyw0QkFBYyxDQUFDLGtCQUFrQjtnQkFDbEMsSUFBSSxDQUFDLG1CQUFtQixHQUFHLGNBQWMsQ0FBQyxjQUFjLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztnQkFDOUUsTUFBTTtZQUNWLEtBQUssNEJBQWMsQ0FBQyxNQUFNO2dCQUN0QixJQUFJLENBQUMsbUJBQW1CLEdBQUcsY0FBYyxDQUFDLGNBQWMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDO2dCQUM5RSxNQUFNO1lBQ1YsS0FBSyw0QkFBYyxDQUFDLE9BQU87Z0JBQ3ZCLElBQUksQ0FBQyxtQkFBbUIsR0FBRyxjQUFjLENBQUMsY0FBYyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsUUFBUSxFQUFFLENBQUM7Z0JBQzlFLE1BQU07WUFDVjtnQkFDSSxJQUFJLENBQUMsbUJBQW1CLEdBQUcsY0FBYyxDQUFDLGNBQWMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDO2dCQUM5RSxNQUFNO1NBQ2I7SUFDTCxDQUFDO0lBR08saUJBQWlCLENBQUMsZUFBMEI7UUFDaEQsT0FBTyxJQUFJLENBQUMsS0FBSyxDQUFDLGVBQWUsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDO0lBQ2xELENBQUM7SUFFTyxnQkFBZ0IsQ0FBQyxlQUEwQjtRQUMvQyxJQUFJLEdBQUcsR0FBRyxlQUFlLENBQUMsUUFBUSxFQUFFLENBQUM7UUFDckMsSUFBSSxLQUFLLEdBQUcsR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUM1QixJQUFJLE1BQU0sR0FBRyxFQUFFLENBQUM7UUFFaEIsSUFBSSxPQUFPLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUVsQyxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsT0FBTyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUNyQyxJQUFJLFlBQVksR0FBRyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDOUIsSUFBSSxZQUFZLENBQUMsU0FBUyxDQUFDLFlBQVksQ0FBQyxNQUFNLEdBQUcsQ0FBQyxFQUFFLFlBQVksQ0FBQyxNQUFNLENBQUMsSUFBSSxJQUFJLEVBQUU7Z0JBQzlFLFlBQVksR0FBRyxZQUFZLENBQUMsU0FBUyxDQUFDLENBQUMsRUFBRSxZQUFZLENBQUMsTUFBTSxHQUFHLENBQUMsQ0FBQyxDQUFDO2FBQ3JFO1lBQ0QsT0FBTyxDQUFDLENBQUMsQ0FBQyxHQUFHLFlBQVksQ0FBQztTQUM3QjtRQUVELEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxLQUFLLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQ25DLElBQUksR0FBRyxHQUFHLEVBQUUsQ0FBQTtZQUNaLElBQUksV0FBVyxHQUFHLElBQUksQ0FBQyxZQUFZLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFFOUMsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLE9BQU8sQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7Z0JBQ3JDLElBQUksVUFBVSxHQUFHLFdBQVcsQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDaEMsSUFBSSxVQUFVLElBQUksU0FBUyxFQUFFO29CQUN6QixJQUFJLFVBQVUsQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDLE1BQU0sR0FBRyxDQUFDLEVBQUUsVUFBVSxDQUFDLE1BQU0sQ0FBQyxJQUFJLElBQUksRUFBRTt3QkFDeEUsVUFBVSxHQUFHLFVBQVUsQ0FBQyxTQUFTLENBQUMsQ0FBQyxFQUFFLFVBQVUsQ0FBQyxNQUFNLEdBQUcsQ0FBQyxDQUFDLENBQUM7cUJBQy9EO2lCQUNKO2dCQUNELEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUMsR0FBRyxVQUFVLENBQUM7YUFDaEM7WUFDRCxNQUFNLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUcsR0FBRyxDQUFDO1NBQ2hDO1FBRUQsSUFBSSxZQUFZLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUUxQyxPQUFPO1FBQ1AsT0FBTyxJQUFJLENBQUMsS0FBSyxDQUFDLFlBQVksQ0FBQyxDQUFDO0lBQ3BDLENBQUM7SUFHRCxLQUFLO1FBQ0QsWUFBWSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUM7UUFFOUIsSUFBSSxDQUFDLFVBQVUsRUFBRSxDQUFDO0lBQ3RCLENBQUM7SUFFTyxZQUFZLENBQUMsWUFBb0I7UUFDckMsSUFBSSxPQUFPLEdBQWEsRUFBRSxDQUFDO1FBQzNCLElBQUksV0FBVyxHQUFHLEtBQUssQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLENBQUM7UUFFM0MsSUFBSSxnQkFBZ0IsR0FBRyxLQUFLLENBQUM7UUFDN0IsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLFdBQVcsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDekMsSUFBSSxXQUFXLENBQUMsQ0FBQyxDQUFDLElBQUksR0FBRyxFQUFFO2dCQUN2QixXQUFXLENBQUMsQ0FBQyxDQUFDLEdBQUcsRUFBRSxDQUFDO2dCQUNwQixnQkFBZ0IsR0FBRyxDQUFDLGdCQUFnQixDQUFDO2FBQ3hDO1lBRUQsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFDLENBQUMsSUFBSSxHQUFHLENBQUMsSUFBSSxDQUFDLGdCQUFnQixFQUFFO2dCQUM5QyxXQUFXLENBQUMsQ0FBQyxDQUFDLEdBQUcsT0FBTyxDQUFDO2FBRTVCO1NBQ0o7UUFDRCxJQUFJLFlBQVksR0FBRyxXQUFXLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQ3hDLE9BQU8sR0FBRyxZQUFZLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBRXRDLE9BQU8sT0FBTyxDQUFDO0lBQ25CLENBQUM7Q0FFSjtBQW5QRCwrQkFtUEMifQ==","assetPath":"Assets/Scripts/Common/Localization/Scripts/Localization.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"textFileToRead","type":"UnityEngine.TextAsset","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"textFileOption","type":"TextFileOption","isArray":false,"initValue":[],"enumKeys":["CSV","JSON"],"enumValues":["0","1"],"attributes":[]},{"assembly":"","name":"language","type":"LanguageOption","isArray":false,"initValue":[],"enumKeys":["DeviceLanguage","zh-CN-zai","zh-CN-gl","zh-TW","en-US","ko-KR","ja-JP","th-TH","id-ID","ru-RU","it-IT","pt-BR","es-ES","vi-VN","fr-FR","tr-TR"],"enumValues":["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],"attributes":[]},{"assembly":"UnityEngine.TextRenderingModule","name":"defaultFont","type":"UnityEngine.Font","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"Localization","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 22dd94eec80dbf7fd49637afd672fc91
+  onlyWriteTrigger: 0

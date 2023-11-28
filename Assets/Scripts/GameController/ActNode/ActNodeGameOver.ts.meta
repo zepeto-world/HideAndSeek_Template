@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: 493dab85e2b95c342a07e24fb533e5dc
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst GameMain_1 = require(\"../../GameMain\");\r\nconst
+    ActNodeBase_1 = require(\"./ActNodeBase\");\r\nconst AudioController_1 = require(\"../AudioController\");\r\nconst
+    PlayerManager_1 = require(\"../../GameManager/PlayerManager\");\r\n/**\r\n *
+    Behavior handling: handling of the game''s end state\r\n */\r\nclass ActNodeGameOver
+    extends ActNodeBase_1.default {\r\n    Check() {\r\n        // if (GameMain.Instance.GetGameState()
+    == GameState.GameWait) {\r\n        //     this.StopCoroutine(this.CoRun());\r\n       
+    //     return true;\r\n        // }\r\n        return false;\r\n    }\r\n   
+    *CoRun() {\r\n        AudioController_1.default.Instance.PlayReadyBGM();\r\n       
+    GameMain_1.default.Instance.OnGameOver(GameMain_1.default.Instance.mPlayerManager.PlayerInfoMap);\r\n   
+    }\r\n}\r\nexports.default = ActNodeGameOver;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQWN0Tm9kZUdhbWVPdmVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQWN0Tm9kZUdhbWVPdmVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQ0EsNkNBQXNDO0FBRXRDLCtDQUF3QztBQUN4Qyx3REFBaUQ7QUFDakQsbUVBQTREO0FBQzVEOztHQUVHO0FBQ0gsTUFBcUIsZUFBZ0IsU0FBUSxxQkFBVztJQUNwRCxLQUFLO1FBQ0QsZ0VBQWdFO1FBQ2hFLHdDQUF3QztRQUN4QyxtQkFBbUI7UUFDbkIsSUFBSTtRQUNKLE9BQU8sS0FBSyxDQUFDO0lBQ2pCLENBQUM7SUFDRCxDQUFDLEtBQUs7UUFDRix5QkFBZSxDQUFDLFFBQVEsQ0FBQyxZQUFZLEVBQUUsQ0FBQztRQUN4QyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsa0JBQVEsQ0FBQyxRQUFRLENBQUMsY0FBYyxDQUFDLGFBQWEsQ0FBQyxDQUFDO0lBQ2pGLENBQUM7Q0FFSjtBQWJELGtDQWFDIn0=","assetPath":"Assets/Scripts/GameController/ActNode/ActNodeGameOver.ts","manifest":{"properties":[],"name":"ActNodeGameOver","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: c2a95649424db09428ec232bc1653305
+  onlyWriteTrigger: 0

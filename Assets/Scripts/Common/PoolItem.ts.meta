@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: afd3f01aeaae66942a4453f7e5152aca
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine = require(\"UnityEngine\");\r\nconst PoolManager_1 = require(\"../GameManager/PoolManager\");\r\n/**\r\n
+    * Targets in the target pool\r\n */\r\nclass PoolItem extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    OnEnable() {\r\n        if (this.mAutoPlay) {\r\n            if (this.mFX
+    != null)\r\n                this.mFX.Play();\r\n        }\r\n        if (this.mAutoDestory)
+    {\r\n            this.StartCoroutine(this.AutoDestroy(this.mDelayTime));\r\n       
+    }\r\n    }\r\n    OnDisable() {\r\n        this.StopAllCoroutines();\r\n    }\r\n   
+    *AutoDestroy(t) {\r\n        yield new UnityEngine.WaitForSeconds(t);\r\n       
+    PoolManager_1.default.Instance.UnSpawn(this.gameObject);\r\n    }\r\n}\r\nexports.default
+    = PoolItem;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUG9vbEl0ZW0uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJQb29sSXRlbS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCwyQ0FBMkM7QUFDM0MsNERBQW9EO0FBQ3BEOztHQUVHO0FBQ0gsTUFBcUIsUUFBUyxTQUFRLHFDQUFxQjtJQVN2RCxRQUFRO1FBQ0osSUFBSSxJQUFJLENBQUMsU0FBUyxFQUFFO1lBQ2hCLElBQUksSUFBSSxDQUFDLEdBQUcsSUFBSSxJQUFJO2dCQUFFLElBQUksQ0FBQyxHQUFHLENBQUMsSUFBSSxFQUFFLENBQUM7U0FDekM7UUFDRCxJQUFJLElBQUksQ0FBQyxZQUFZLEVBQUU7WUFDbkIsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDO1NBQzFEO0lBQ0wsQ0FBQztJQUVELFNBQVM7UUFDTCxJQUFJLENBQUMsaUJBQWlCLEVBQUUsQ0FBQztJQUM3QixDQUFDO0lBR0QsQ0FBQyxXQUFXLENBQUMsQ0FBUztRQUNsQixNQUFNLElBQUksV0FBVyxDQUFDLGNBQWMsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUN4QyxxQkFBVyxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0lBQ2xELENBQUM7Q0FDSjtBQTNCRCwyQkEyQkMifQ==","assetPath":"Assets/Scripts/Common/PoolItem.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"mAutoDestory","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mDelayTime","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mAutoPlay","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.ParticleSystemModule","name":"mFX","type":"UnityEngine.ParticleSystem","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"PoolItem","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: e87fdeddd329d24302d1415a5b608f39
+  onlyWriteTrigger: 0

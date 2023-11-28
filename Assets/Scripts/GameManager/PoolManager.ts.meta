@@ -1,0 +1,54 @@
+fileFormatVersion: 2
+guid: cb44c45abb3d3ce41a4f1e1947636b43
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst __UnityEngine__ = require(\"UnityEngine\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\n/**\r\n
+    * Object pool\r\n */\r\nclass PoolManager extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this._pool
+    = new Map();\r\n        this.prefabs = [];\r\n    }\r\n    static get Instance()
+    {\r\n        return PoolManager._instance;\r\n    }\r\n    Awake() {\r\n       
+    PoolManager._instance = this;\r\n    }\r\n    Init() {\r\n    }\r\n    /**\r\n    
+    * Get objects from object pool\r\n     * @param prefabName\r\n     * @returns\r\n    
+    */\r\n    Spawn(prefabName) {\r\n        let result;\r\n        if (!this._pool.has(prefabName))
+    {\r\n            this._pool.set(prefabName, []);\r\n        }\r\n        let
+    isGetObject = false;\r\n        for (let i = 0; i < this._pool.get(prefabName).length;
+    i++) {\r\n            let item = this._pool.get(prefabName)[i];\r\n           
+    if (item.activeSelf === false) {\r\n                result = item;\r\n               
+    isGetObject = true;\r\n                break;\r\n            }\r\n        }\r\n       
+    // If not in the object pool, create one\r\n        if (!isGetObject) {\r\n           
+    let prefab;\r\n            for (let i = 0; i < this.prefabs.length; i++) {\r\n               
+    if (this.prefabs[i].name === prefabName) {\r\n                    prefab = this.prefabs[i];\r\n               
+    }\r\n            }\r\n            result = UnityEngine_1.GameObject.Instantiate(prefab);\r\n           
+    result.name = prefabName;\r\n            this._pool.get(prefabName).push(result);\r\n       
+    }\r\n        result.SetActive(true);\r\n        return result;\r\n    }\r\n   
+    /**\r\n     * Recycling objects\r\n     * @param obj\r\n     */\r\n    UnSpawn(obj)
+    {\r\n        if (this._pool.has(obj.name)) {\r\n            obj.transform.SetParent(this.transform);\r\n           
+    obj.SetActive(false);\r\n            this._pool.get(obj.name).push(obj);\r\n       
+    }\r\n    }\r\n    /**\r\n     * Creating Objects with Prefabricated Bodies\r\n    
+    * @param prefabName\r\n     * @returns\r\n     */\r\n    CreatePrefab(prefabName)
+    {\r\n        let prefab = null;\r\n        for (let i = 0; i < this.prefabs.length;
+    i++) {\r\n            if (this.prefabs[i].name === prefabName) {\r\n               
+    prefab = this.prefabs[i];\r\n            }\r\n        }\r\n        if (__UnityEngine__.Object.op_Equality(prefab,
+    null)) {\r\n            console.error(\"prefab is null\");\r\n            return
+    null;\r\n        }\r\n        return UnityEngine_1.GameObject.Instantiate(prefab);\r\n   
+    }\r\n}\r\nexports.default = PoolManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUG9vbE1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJQb29sTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSw2Q0FBd0M7QUFDeEMsaURBQXFEO0FBRXJEOztHQUVHO0FBQ0gsTUFBcUIsV0FBWSxTQUFRLHFDQUFxQjtJQUE5RDs7UUFFWSxVQUFLLEdBQThCLElBQUksR0FBRyxFQUF3QixDQUFDO1FBTzNFLFlBQU8sR0FBaUIsRUFBRSxDQUFDO0lBOEUvQixDQUFDO0lBbEZVLE1BQU0sS0FBSyxRQUFRO1FBQ3RCLE9BQU8sV0FBVyxDQUFDLFNBQVMsQ0FBQztJQUNqQyxDQUFDO0lBSUQsS0FBSztRQUNELFdBQVcsQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO0lBQ2pDLENBQUM7SUFFTSxJQUFJO0lBRVgsQ0FBQztJQUVEOzs7O09BSUc7SUFDSCxLQUFLLENBQUMsVUFBa0I7UUFDcEIsSUFBSSxNQUFrQixDQUFDO1FBQ3ZCLElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxVQUFVLENBQUMsRUFBRTtZQUM3QixJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxVQUFVLEVBQUUsRUFBRSxDQUFDLENBQUM7U0FDbEM7UUFDRCxJQUFJLFdBQVcsR0FBWSxLQUFLLENBQUM7UUFDakMsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLFVBQVUsQ0FBQyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUN4RCxJQUFJLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUN6QyxJQUFJLElBQUksQ0FBQyxVQUFVLEtBQUssS0FBSyxFQUFFO2dCQUMzQixNQUFNLEdBQUcsSUFBSSxDQUFDO2dCQUNkLFdBQVcsR0FBRyxJQUFJLENBQUM7Z0JBQ25CLE1BQU07YUFDVDtTQUNKO1FBQ0Qsd0NBQXdDO1FBQ3hDLElBQUksQ0FBQyxXQUFXLEVBQUU7WUFDZCxJQUFJLE1BQWtCLENBQUM7WUFDdkIsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO2dCQUMxQyxJQUFJLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxLQUFLLFVBQVUsRUFBRTtvQkFDckMsTUFBTSxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7aUJBQzVCO2FBQ0o7WUFDRCxNQUFNLEdBQUcsd0JBQVUsQ0FBQyxXQUFXLENBQWEsTUFBTSxDQUFDLENBQUM7WUFDcEQsTUFBTSxDQUFDLElBQUksR0FBRyxVQUFVLENBQUM7WUFFekIsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsVUFBVSxDQUFDLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1NBQzNDO1FBQ0QsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUN2QixPQUFPLE1BQU0sQ0FBQztJQUNsQixDQUFDO0lBR0Q7OztPQUdHO0lBQ0gsT0FBTyxDQUFDLEdBQWU7UUFDbkIsSUFBSSxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLEVBQUU7WUFDMUIsR0FBRyxDQUFDLFNBQVMsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO1lBQ3hDLEdBQUcsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDckIsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztTQUN0QztJQUNMLENBQUM7SUFFRDs7OztPQUlHO0lBQ0gsWUFBWSxDQUFDLFVBQWtCO1FBQzNCLElBQUksTUFBTSxHQUFlLElBQUksQ0FBQztRQUM5QixLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDMUMsSUFBSSxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksS0FBSyxVQUFVLEVBQUU7Z0JBQ3JDLE1BQU0sR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDO2FBQzVCO1NBQ0o7UUFDRCwyQkFRNC9RLFdBQVksQ0FScGdSLE1BQU0sRUFBSSxJQUFJLEdBQUU7WUFDaEIsT0FBTyxDQUFDLEtBQUssQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO1lBQ2hDLE9BQU8sSUFBSSxDQUFDO1NBQ2Y7UUFDRCxPQUFPLHdCQUFVLENBQUMsV0FBVyxDQUFhLE1BQU0sQ0FBQyxDQUFDO0lBQ3RELENBQUM7Q0FFSjtBQXZGRCw4QkF1RkMifQ==","assetPath":"Assets/Scripts/GameManager/PoolManager.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"prefabs","type":"UnityEngine.GameObject[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"PoolManager","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 9be9949cd3beadaebb11ffd78c0c6b37
+  onlyWriteTrigger: 0

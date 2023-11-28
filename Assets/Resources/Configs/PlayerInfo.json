@@ -1,0 +1,26 @@
+[
+  {
+    "playerRole": 0,
+    "runSpeed": 2.4,
+    "jumpPower": 7,
+    "zoomMin": 2,
+    "zoomMax": 2,
+    "des": "等待"
+  },
+  {
+    "playerRole": 1,
+    "runSpeed": 2.4,
+    "jumpPower": 7,
+    "zoomMin": 3,
+    "zoomMax": 3,
+    "des": "躲藏者"
+  },
+  {
+    "playerRole": 2,
+    "runSpeed": 2.4,
+    "jumpPower": 7,
+    "zoomMin": 2,
+    "zoomMax": 2,
+    "des": "寻找者"
+  }
+]

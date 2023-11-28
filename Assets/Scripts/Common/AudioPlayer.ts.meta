@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: c61cdf48c9dea114e853ac36ea0f3665
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.AudioPlayerOption = void 0;\r\nconst __UnityEngine__
+    = require(\"UnityEngine\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    AudioController_1 = require(\"../GameController/AudioController\");\r\nconst
+    UnityEngine = require(\"UnityEngine\");\r\nvar AudioPlayerOption;\r\n(function
+    (AudioPlayerOption) {\r\n    AudioPlayerOption[AudioPlayerOption[\"PlayOneShot\"]
+    = 0] = \"PlayOneShot\";\r\n    AudioPlayerOption[AudioPlayerOption[\"PlayAtPoint\"]
+    = 1] = \"PlayAtPoint\";\r\n})(AudioPlayerOption = exports.AudioPlayerOption ||
+    (exports.AudioPlayerOption = {}));\r\nclass AudioPlayer extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.mAutoPlay
+    = true;\r\n    }\r\n    OnEnable() {\r\n        if (this.mAutoPlay) {\r\n           
+    this.Play();\r\n        }\r\n    }\r\n    Play() {\r\n        if (__UnityEngine__.Object.op_Equality(this.mAudioClip,
+    null)) {\r\n            // console.error(\"audioclip is null\");\r\n           
+    return;\r\n        }\r\n        switch (this.mPlayMode) {\r\n            case
+    AudioPlayerOption.PlayAtPoint:\r\n                AudioController_1.default.Instance.PlayAtPoint(this.mAudioClip,
+    this.transform.position);\r\n                break;\r\n            default:\r\n               
+    //AudioController.Instance.PlayAtPoint(this.mAudioClip, this.transform.position);\r\n               
+    AudioController_1.default.Instance.PlayOneShot(this.mAudioClip);\r\n               
+    break;\r\n        }\r\n    }\r\n}\r\nexports.default = AudioPlayer;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQXVkaW9QbGF5ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJBdWRpb1BsYXllci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQUEsaURBQXFEO0FBQ3JELHVFQUErRDtBQUMvRCwyQ0FBMkM7QUFFM0MsSUFBWSxpQkFHWDtBQUhELFdBQVksaUJBQWlCO0lBQ3pCLHVFQUFXLENBQUE7SUFDWCx1RUFBVyxDQUFBO0FBQ2YsQ0FBQyxFQUhXLGlCQUFpQixHQUFqQix5QkFBaUIsS0FBakIseUJBQWlCLFFBRzVCO0FBRUQsTUFBcUIsV0FBWSxTQUFRLHFDQUFxQjtJQUE5RDs7UUFHVyxjQUFTLEdBQVksSUFBSSxDQUFDO0lBdUJyQyxDQUFDO0lBckJHLFFBQVE7UUFDSixJQUFJLElBQUksQ0FBQyxTQUFTLEVBQUU7WUFDaEIsSUFBSSxDQUFDLElBQUksRUFBRSxDQUFDO1NBQ2Y7SUFDTCxDQUFDO0lBRUQsSUFBSTtRQUNBLDJCQWM4N1QsV0FBWSxDQWR0OFQsSUFBSSxDQUFDLFVBQVUsRUFBSSxJQUFJLEdBQUU7WUFDekIsc0NBQXNDO1lBQ3RDLE9BQU87U0FDVjtRQUNELFFBQVEsSUFBSSxDQUFDLFNBQVMsRUFBRTtZQUNwQixLQUFLLGlCQUFpQixDQUFDLFdBQVc7Z0JBQzlCLHlCQUFlLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsVUFBVSxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUM7Z0JBQy9FLE1BQU07WUFDVjtnQkFDSSxpRkFBaUY7Z0JBQ2pGLHlCQUFlLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7Z0JBQ3RELE1BQU07U0FDYjtJQUNMLENBQUM7Q0FDSjtBQTFCRCw4QkEwQkMifQ==","assetPath":"Assets/Scripts/Common/AudioPlayer.ts","manifest":{"properties":[{"assembly":"UnityEngine.AudioModule","name":"mAudioClip","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"mPlayMode","type":"AudioPlayerOption","isArray":false,"initValue":[],"enumKeys":["PlayOneShot","PlayAtPoint"],"enumValues":["0","1"],"attributes":[]},{"assembly":"mscorlib","name":"mAutoPlay","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"AudioPlayer","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 39f152032cc4152d11eee22e7b1a0975
+  onlyWriteTrigger: 0

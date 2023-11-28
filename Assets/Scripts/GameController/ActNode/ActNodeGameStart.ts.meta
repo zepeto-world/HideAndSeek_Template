@@ -1,0 +1,35 @@
+fileFormatVersion: 2
+guid: 9f7730deddd859444b766a4983856a29
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    GameMain_1 = require(\"../../GameMain\");\r\nconst UIToast_1 = require(\"../../UI/UIToast\");\r\nconst
+    AudioController_1 = require(\"../AudioController\");\r\nconst ActNodeBase_1 =
+    require(\"./ActNodeBase\");\r\n/**\r\n * Behavior processing: handling the start
+    state of the game\r\n */\r\nclass ActNodeGameStart extends ActNodeBase_1.default
+    {\r\n    Check() {\r\n        return false;\r\n    }\r\n    *CoRun() {\r\n       
+    GameMain_1.default.Instance.mPlayer = GameMain_1.default.Instance.mPlayerManager.GetLocalPlayer();\r\n       
+    GameMain_1.default.Instance.mUIManager.OnGameStart(GameMain_1.default.Instance.mGameInfo,
+    GameMain_1.default.Instance.mGameRule, GameMain_1.default.Instance.mPlayer);\r\n       
+    AudioController_1.default.Instance.PlayStartGameBGM();\r\n        UIToast_1.default.Instance.ShowGameStart(GameMain_1.default.Instance.mPlayer.isHunter,
+    GameMain_1.default.Instance.mGameRule.opendoorDelay);\r\n        GameMain_1.default.Instance.mPlayerManager.OnGameStart();\r\n   
+    }\r\n}\r\nexports.default = ActNodeGameStart;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQWN0Tm9kZUdhbWVTdGFydC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkFjdE5vZGVHYW1lU3RhcnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsNkNBQXNDO0FBQ3RDLDhDQUF1QztBQUN2Qyx3REFBaUQ7QUFDakQsK0NBQXdDO0FBQ3hDOztHQUVHO0FBQ0gsTUFBcUIsZ0JBQWlCLFNBQVEscUJBQVc7SUFDckQsS0FBSztRQUNELE9BQU8sS0FBSyxDQUFDO0lBQ2pCLENBQUM7SUFDRCxDQUFDLEtBQUs7UUFDRixrQkFBUSxDQUFDLFFBQVEsQ0FBQyxPQUFPLEdBQUcsa0JBQVEsQ0FBQyxRQUFRLENBQUMsY0FBYyxDQUFDLGNBQWMsRUFBRSxDQUFDO1FBQzlFLGtCQUFRLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxXQUFXLENBQUMsa0JBQVEsQ0FBQyxRQUFRLENBQUMsU0FBUyxFQUFFLGtCQUFRLENBQUMsUUFBUSxDQUFDLFNBQVMsRUFBRSxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUM5SCx5QkFBZSxDQUFDLFFBQVEsQ0FBQyxnQkFBZ0IsRUFBRSxDQUFDO1FBQzVDLGlCQUFPLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsUUFBUSxFQUFFLGtCQUFRLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxhQUFhLENBQUMsQ0FBQztRQUM5RyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxjQUFjLENBQUMsV0FBVyxFQUFFLENBQUM7SUFDbkQsQ0FBQztDQUVKO0FBWkQsbUNBWUMifQ==","assetPath":"Assets/Scripts/GameController/ActNode/ActNodeGameStart.ts","manifest":{"properties":[],"name":"ActNodeGameStart","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 27af81beeac865eee83cabc49ca2f973
+  onlyWriteTrigger: 0

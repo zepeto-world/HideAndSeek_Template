@@ -1,0 +1,368 @@
+fileFormatVersion: 2
+guid: f288a33f8968edf49bd27a5647a62942
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: 1605504368951765114
+    second: Take 001.001
+  - first:
+      74: -3131750865346148125
+    second: Dummy001|BT_APBOX_01|Take 001|BaseLayer
+  - first:
+      74: -5765896444033786180
+    second: Dummy001|BT_APBOX_01|Take 001|BaseLayer.001
+  - first:
+      74: -5841470923317361124
+    second: Dummy001|BT_APBOX_02|Take 001|BaseLayer
+  - first:
+      74: 4081047446779170416
+    second: Dummy001|BT_APBOX_02|Take 001|BaseLayer.001
+  - first:
+      74: -1224353600156726656
+    second: Dummy001|BT_APBOX_03|Take 001|BaseLayer
+  - first:
+      74: 7703942962770377425
+    second: Dummy001|BT_APBOX_03|Take 001|BaseLayer.001
+  - first:
+      74: -7133912655684578251
+    second: Dummy001|BT_APBOX_04|Take 001|BaseLayer
+  - first:
+      74: -6067240144775881829
+    second: Dummy001|BT_APBOX_04|Take 001|BaseLayer.001
+  - first:
+      74: -5799952908470162380
+    second: Dummy001|BT_BalloonCart|Take 001|BaseLayer
+  - first:
+      74: -808016210904147598
+    second: Dummy001|BT_Burgerstore_001|Take 001|BaseLayer
+  - first:
+      74: 1146831510817842370
+    second: Dummy001|BT_Burgerstore|Take 001|BaseLayer
+  - first:
+      74: -5540523991914421668
+    second: Dummy001|BT_centergarden_flower|Take 001|BaseLayer
+  - first:
+      74: -1995699693542191266
+    second: Dummy001|BT_centergarden_flower|Take 001|BaseLayer.001
+  - first:
+      74: -7827665356744338167
+    second: Dummy001|BT_DGround_02|Take 001|BaseLayer
+  - first:
+      74: -6952908886644131192
+    second: Dummy001|BT_Tree_004|Take 001|BaseLayer
+  - first:
+      74: -1595424939504999940
+    second: Dummy001|Dummy001|Take 001|BaseLayer
+  - first:
+      74: -5157275522144810793
+    second: Dummy001|Dummy001|Take 001|BaseLayer.001
+  - first:
+      74: -1983019585866876058
+    second: Dummy001|Glass|Take 001|BaseLayer
+  - first:
+      74: -6871532945904862943
+    second: Dummy001|insdie|Take 001|BaseLayer
+  - first:
+      74: -345902924583666775
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_APBOX_01|Take 001|BaseLayer
+  - first:
+      74: 8669900931802626553
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_APBOX_01|Take 001|BaseLayer.001
+  - first:
+      74: 9003219854800809956
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_APBOX_01|Take 001|BaseLayer.002
+  - first:
+      74: -1233384786412818673
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_APBOX_01|Take 001|BaseLayer.003
+  - first:
+      74: 2855269352027668425
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_APBOX_01|Take 001|BaseLayer.006
+  - first:
+      74: -8922544166295443386
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_APBOX_02|Take 001|BaseLayer
+  - first:
+      74: 8773090858667320615
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_APBOX_02|Take 001|BaseLayer.001
+  - first:
+      74: 8668083750971682966
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_APBOX_03|Take 001|BaseLayer
+  - first:
+      74: -5284374624835892111
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_APBOX_03|Take 001|BaseLayer.001
+  - first:
+      74: -8941473423328474656
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_APBOX_04|Take 001|BaseLayer
+  - first:
+      74: -8772087829996810619
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_APBOX_04|Take 001|BaseLayer.001
+  - first:
+      74: 7994636728284835978
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_BalloonCart|Take 001|BaseLayer
+  - first:
+      74: 8777609245883398089
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_centergarden_flower|Take 001
+  - first:
+      74: -2610497614729118082
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_centergarden_flower|Take 001|Bas
+  - first:
+      74: -2883014607892826157
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|BT_DGround_02|Take 001|BaseLayer
+  - first:
+      74: 7469838596344589151
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|Glass|Take 001|BaseLayer
+  - first:
+      74: 913596702166757116
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|insdie|Take 001|BaseLayer
+  - first:
+      74: -4628545984708495733
+    second: Dummy001|mod_bh_box_01|mod_bh_box_01|TS_Balloon_002|Take 001|BaseLayer
+  - first:
+      74: 1519055106011388250
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_APBOX_01|Take 001|BaseLayer
+  - first:
+      74: 9026855609203220037
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_APBOX_01|Take 001|BaseLayer.001
+  - first:
+      74: 1088263761218282310
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_APBOX_01|Take 001|BaseLayer.002
+  - first:
+      74: 5044226055750320546
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_APBOX_01|Take 001|BaseLayer.003
+  - first:
+      74: -4449146501044941095
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_APBOX_01|Take 001|BaseLayer.006
+  - first:
+      74: -4714284922093068509
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_APBOX_02|Take 001|BaseLayer
+  - first:
+      74: 5649944188482214794
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_APBOX_02|Take 001|BaseLayer.001
+  - first:
+      74: 4067165010869885245
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_APBOX_03|Take 001|BaseLayer
+  - first:
+      74: -2383444126734023085
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_APBOX_03|Take 001|BaseLayer.001
+  - first:
+      74: -622732220172465504
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_APBOX_04|Take 001|BaseLayer
+  - first:
+      74: 1213659829272111707
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_APBOX_04|Take 001|BaseLayer.001
+  - first:
+      74: 6151794105326730167
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_BalloonCart|Take 001|BaseLayer
+  - first:
+      74: 4521101091878113270
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_centergarden_flower|Take 001
+  - first:
+      74: -3279349965267114397
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_centergarden_flower|Take 001|Bas
+  - first:
+      74: -9123800203407333559
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|BT_DGround_02|Take 001|BaseLayer
+  - first:
+      74: 7462243041075741699
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|Glass|Take 001|BaseLayer
+  - first:
+      74: 7049785989273538015
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|insdie|Take 001|BaseLayer
+  - first:
+      74: -6447482080154629499
+    second: Dummy001|mod_bh_box_03|mod_bh_box_03|TS_Balloon_002|Take 001|BaseLayer
+  - first:
+      74: -8429882817444534805
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_APBOX_01|Take 001|BaseLayer
+  - first:
+      74: -1917904616818358809
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_APBOX_01|Take 001|BaseLayer.001
+  - first:
+      74: -1497062661823733021
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_APBOX_01|Take 001|BaseLayer.002
+  - first:
+      74: -4924222766528338065
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_APBOX_01|Take 001|BaseLayer.003
+  - first:
+      74: 6753376901520632568
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_APBOX_01|Take 001|BaseLayer.006
+  - first:
+      74: 3761695712740061865
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_APBOX_02|Take 001|BaseLayer
+  - first:
+      74: -2027862182992885178
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_APBOX_02|Take 001|BaseLayer.001
+  - first:
+      74: 6283300665028076189
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_APBOX_03|Take 001|BaseLayer
+  - first:
+      74: 3812215436797347164
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_APBOX_03|Take 001|BaseLayer.001
+  - first:
+      74: 3728840388183877889
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_APBOX_04|Take 001|BaseLayer
+  - first:
+      74: -4432335129206248440
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_APBOX_04|Take 001|BaseLayer.001
+  - first:
+      74: 7287307973651217510
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_BalloonCart|Take 001|BaseLayer
+  - first:
+      74: 2943977714293728520
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_centergarden_flower|Take 001
+  - first:
+      74: 4717964131476257051
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_centergarden_flower|Take 001|Bas
+  - first:
+      74: 5985488907051693522
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|BT_DGround_02|Take 001|BaseLayer
+  - first:
+      74: -6102624381678484937
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|Glass|Take 001|BaseLayer
+  - first:
+      74: 5436761986864279755
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|insdie|Take 001|BaseLayer
+  - first:
+      74: -61214597826430974
+    second: Dummy001|mod_bh_box_04|mod_bh_box_04|TS_Balloon_002|Take 001|BaseLayer
+  - first:
+      74: 7043566362389046459
+    second: Dummy001|Take 001.001
+  - first:
+      74: 4928552755797579669
+    second: Dummy001|train_001|Take 001|BaseLayer
+  - first:
+      74: -7352516193706630119
+    second: Dummy001|train_001|Take 001|BaseLayer.001
+  - first:
+      74: -6626389966117759325
+    second: Dummy001|TS_Balloon_002|Take 001|BaseLayer
+  - first:
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects: {}
+  materials:
+    materialImportMode: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 500
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 1
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

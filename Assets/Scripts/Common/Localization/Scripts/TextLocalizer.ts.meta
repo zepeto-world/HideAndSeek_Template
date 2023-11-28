@@ -1,0 +1,60 @@
+fileFormatVersion: 2
+guid: 573da8b6fefc5472ca33b2d7682ea2bf
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.LocalizationTextFontMode = void 0;\r\nconst UnityEngine_UI_1
+    = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    Localization_1 = require(\"./Localization\");\r\nvar LocalizationTextFontMode;\r\n(function
+    (LocalizationTextFontMode) {\r\n    LocalizationTextFontMode[LocalizationTextFontMode[\"UseSystemFont\"]
+    = 0] = \"UseSystemFont\";\r\n    LocalizationTextFontMode[LocalizationTextFontMode[\"UseDefaultFont\"]
+    = 1] = \"UseDefaultFont\";\r\n    LocalizationTextFontMode[LocalizationTextFontMode[\"UseFontForThaiOnly\"]
+    = 2] = \"UseFontForThaiOnly\";\r\n})(LocalizationTextFontMode = exports.LocalizationTextFontMode
+    || (exports.LocalizationTextFontMode = {}));\r\nclass TextLocalizer extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this._isInitialized
+    = false;\r\n    }\r\n    get localizedText() {\r\n        if (!this._localizedText)
+    {\r\n            this._localizedText = \"Not localized yet\";\r\n        }\r\n       
+    return this._localizedText;\r\n    }\r\n    UpdateTextContent() {\r\n       
+    //Set Default Settings when in use\r\n        if (this.defaultFontMode == LocalizationTextFontMode.UseSystemFont)
+    {\r\n        }\r\n        else if (this.defaultFontMode == LocalizationTextFontMode.UseDefaultFont)
+    {\r\n            if (this._localization.HasDefaultFont()) {\r\n               
+    this._uiText.font = this._localization.GetDefaultFont();\r\n            }\r\n       
+    }\r\n        else if (this.defaultFontMode == LocalizationTextFontMode.UseFontForThaiOnly)
+    {\r\n            if (this._localization.CurrentLanguageKey == Localization_1.LanguageOption[Localization_1.LanguageOption[''th-TH'']].toString())
+    {\r\n                if (this._localization.HasDefaultFont()) {\r\n                   
+    this._uiText.font = this._localization.GetDefaultFont();\r\n                }\r\n           
+    }\r\n        }\r\n        if (this.isUsingDefaultSettings) {\r\n            this._uiText.supportRichText
+    = false;\r\n        }\r\n        //Set Localized Text\r\n        let _targetText
+    = this._localization.GetLocalizedText(this.localizationKey);\r\n        this._uiText.text
+    = _targetText;\r\n        this._localizedText = _targetText;\r\n    }\r\n   
+    Start() {\r\n        this._localization = Localization_1.default.Instance;\r\n       
+    if (!this.localizationKey || this.localizationKey == \"\") {\r\n            this._isInitialized
+    = false;\r\n            console.error(`[TextLocalizer] Text Localizer is not
+    initialized. Enter localization key first.(${this.gameObject.name})`);\r\n           
+    return;\r\n        }\r\n        else {\r\n            this._isInitialized = true;\r\n       
+    }\r\n        //When UI text doesn''t exist\r\n        if (!this.gameObject.GetComponent($typeof(UnityEngine_UI_1.Text)))
+    {\r\n            console.error(`[TextLocalizer] Text Localizer is not initialized.
+    There''s no UI Text. (${this.gameObject.name})`);\r\n            return;\r\n       
+    }\r\n        this._uiText = this.gameObject.GetComponent($typeof(UnityEngine_UI_1.Text));\r\n       
+    this.UpdateTextContent();\r\n        this._localization.onLanguageOptionChanged.AddListener(()
+    => {\r\n            this.UpdateTextContent();\r\n        });\r\n    }\r\n}\r\nexports.default
+    = TextLocalizer;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGV4dExvY2FsaXplci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlRleHRMb2NhbGl6ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQ0EsbURBQXNDO0FBQ3RDLGlEQUFxRDtBQUNyRCxpREFBOEQ7QUFFOUQsSUFBWSx3QkFJWDtBQUpELFdBQVksd0JBQXdCO0lBQ2hDLHlGQUFlLENBQUE7SUFDZiwyRkFBZ0IsQ0FBQTtJQUNoQixtR0FBb0IsQ0FBQTtBQUN4QixDQUFDLEVBSlcsd0JBQXdCLEdBQXhCLGdDQUF3QixLQUF4QixnQ0FBd0IsUUFJbkM7QUFFRCxNQUFxQixhQUFjLFNBQVEscUNBQXFCO0lBQWhFOztRQVNZLG1CQUFjLEdBQVksS0FBSyxDQUFDO0lBaUU1QyxDQUFDO0lBM0RHLElBQVcsYUFBYTtRQUNwQixJQUFJLENBQUMsSUFBSSxDQUFDLGNBQWMsRUFBRTtZQUN0QixJQUFJLENBQUMsY0FBYyxHQUFHLG1CQUFtQixDQUFDO1NBQzdDO1FBQ0QsT0FBTyxJQUFJLENBQUMsY0FBYyxDQUFDO0lBQy9CLENBQUM7SUFFTyxpQkFBaUI7UUFDckIsa0NBQWtDO1FBQ2xDLElBQUksSUFBSSxDQUFDLGVBQWUsSUFBSSx3QkFBd0IsQ0FBQyxhQUFhLEVBQUU7U0FFbkU7YUFBTSxJQUFJLElBQUksQ0FBQyxlQUFlLElBQUksd0JBQXdCLENBQUMsY0FBYyxFQUFFO1lBQ3hFLElBQUksSUFBSSxDQUFDLGFBQWEsQ0FBQyxjQUFjLEVBQUUsRUFBRTtnQkFDckMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyxjQUFjLEVBQUUsQ0FBQzthQUMzRDtTQUNKO2FBQU0sSUFBSSxJQUFJLENBQUMsZUFBZSxJQUFJLHdCQUF3QixDQUFDLGtCQUFrQixFQUFFO1lBQzVFLElBQUksSUFBSSxDQUFDLGFBQWEsQ0FBQyxrQkFBa0IsSUFBSSw2QkFBYyxDQUFDLDZCQUFjLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTtnQkFDN0YsSUFBSSxJQUFJLENBQUMsYUFBYSxDQUFDLGNBQWMsRUFBRSxFQUFFO29CQUNyQyxJQUFJLENBQUMsT0FBTyxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLGNBQWMsRUFBRSxDQUFDO2lCQUMzRDthQUNKO1NBQ0o7UUFFRCxJQUFJLElBQUksQ0FBQyxzQkFBc0IsRUFBRTtZQUM3QixJQUFJLENBQUMsT0FBTyxDQUFDLGVBQWUsR0FBRyxLQUFLLENBQUM7U0FDeEM7UUFFRCxvQkFBb0I7UUFDcEIsSUFBSSxXQUFXLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsZUFBZSxDQUFDLENBQUM7UUFDNUUsSUFBSSxDQUFDLE9BQU8sQ0FBQyxJQUFJLEdBQUcsV0FBVyxDQUFDO1FBQ2hDLElBQUksQ0FBQyxjQUFjLEdBQUcsV0FBVyxDQUFDO0lBQ3RDLENBQUM7SUFFRCxLQUFLO1FBQ0QsSUFBSSxDQUFDLGFBQWEsR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQztRQUUzQyxJQUFJLENBQUMsSUFBSSxDQUFDLGVBQWUsSUFBSSxJQUFJLENBQUMsZUFBZSxJQUFJLEVBQUUsRUFBRTtZQUNyRCxJQUFJLENBQUMsY0FBYyxHQUFHLEtBQUssQ0FBQztZQUM1QixPQUFPLENBQUMsS0FBSyxDQUFDLG9GQUFvRixJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksR0FBRyxDQUFDLENBQUM7WUFDM0gsT0FBTztTQUNWO2FBQU07WUFDSCxJQUFJLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQztTQUM5QjtRQUVELDRCQUE0QjtRQUM1QixJQUFJLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLFNBQUMscUJBQUksRUFBRyxFQUFFO1lBQ3ZDLE9BQU8sQ0FBQyxLQUFLLENBQUMsMkVBQTJFLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxHQUFHLENBQUMsQ0FBQztZQUNsSCxPQUFPO1NBQ1Y7UUFFRCxJQUFJLENBQUMsT0FBTyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsWUFBWSxTQUFDLHFCQUFJLEVBQUcsQ0FBQztRQUVwRCxJQUFJLENBQUMsaUJBQWlCLEVBQUUsQ0FBQztRQUV6QixJQUFJLENBQUMsYUFBYSxDQUFDLHVCQUF1QixDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDeEQsSUFBSSxDQUFDLGlCQUFpQixFQUFFLENBQUM7UUFDN0IsQ0FBQyxDQUFDLENBQUE7SUFDTixDQUFDO0NBRUo7QUExRUQsZ0NBMEVDIn0=","assetPath":"Assets/Scripts/Common/Localization/Scripts/TextLocalizer.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"localizationKey","type":"System.String","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"defaultFontMode","type":"LocalizationTextFontMode","isArray":false,"initValue":[],"enumKeys":["UseSystemFont","UseDefaultFont","UseFontForThaiOnly"],"enumValues":["0","1","2"],"attributes":[]},{"assembly":"mscorlib","name":"isUsingDefaultSettings","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"Tooltip","args":["\"Disable
+    Rich Text Option\""]}]}],"name":"TextLocalizer","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: a4cd9a5e6dce60b189dfcab09de35aaf
+  onlyWriteTrigger: 0

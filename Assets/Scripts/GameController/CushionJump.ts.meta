@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: 9867a6729b0588248925f333a275ce93
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst PlayerManager_1 = require(\"../GameManager/PlayerManager\");\r\nconst
+    AudioController_1 = require(\"./AudioController\");\r\nconst ZepetoNetPlayer_1
+    = require(\"../NetTransform/ZepetoNetPlayer\");\r\n/**\r\n * Spring pad jump\r\n
+    */\r\nclass CushionJump extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
+    OnTriggerEnter(collider) {\r\n        if (collider.gameObject.tag != \"Player\")\r\n           
+    return;\r\n        if (PlayerManager_1.default.Instance == null)\r\n           
+    return;\r\n        let netPlayer = collider.gameObject.GetComponent($typeof(ZepetoNetPlayer_1.default));\r\n       
+    if (netPlayer == null)\r\n            return;\r\n        let canJump = PlayerManager_1.default.Instance.CheckCanJump(netPlayer.sessionId);\r\n       
+    if (canJump == false)\r\n            return;\r\n        this._originalJumpPower
+    = netPlayer.mJumpPower;\r\n        this._originalGravity = netPlayer.mGravity;\r\n       
+    netPlayer.mJumpPower = 14;\r\n        netPlayer.mGravity = 2;\r\n        netPlayer.SetJumpOver();\r\n       
+    netPlayer.sessionId;\r\n        netPlayer.Jump();\r\n        AudioController_1.default.Instance.PlayJump();\r\n   
+    }\r\n    OnTriggerExit(collider) {\r\n        if (collider.gameObject.tag !=
+    \"Player\")\r\n            return;\r\n        let netPlayer = collider.gameObject.GetComponent($typeof(ZepetoNetPlayer_1.default));\r\n       
+    if (netPlayer == null)\r\n            return;\r\n        netPlayer.mJumpPower
+    = this._originalJumpPower;\r\n        netPlayer.mGravity = this._originalGravity;\r\n   
+    }\r\n}\r\nexports.default = CushionJump;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ3VzaGlvbkp1bXAuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJDdXNoaW9uSnVtcC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUFtRDtBQUNuRCxpREFBcUQ7QUFDckQsZ0VBQXlEO0FBQ3pELHVEQUFnRDtBQUNoRCxxRUFBOEQ7QUFFOUQ7O0dBRUc7QUFDSCxNQUFxQixXQUFZLFNBQVEscUNBQXFCO0lBSzFELGNBQWMsQ0FBQyxRQUFrQjtRQUM3QixJQUFJLFFBQVEsQ0FBQyxVQUFVLENBQUMsR0FBRyxJQUFJLFFBQVE7WUFBRSxPQUFPO1FBQ2hELElBQUksdUJBQWEsQ0FBQyxRQUFRLElBQUksSUFBSTtZQUM5QixPQUFPO1FBQ1gsSUFBSSxTQUFTLEdBQUcsUUFBUSxDQUFDLFVBQVUsQ0FBQyxZQUFZLFNBQUMseUJBQWUsRUFBRyxDQUFDO1FBQ3BFLElBQUksU0FBUyxJQUFJLElBQUk7WUFBRSxPQUFPO1FBQzlCLElBQUksT0FBTyxHQUFHLHVCQUFhLENBQUMsUUFBUSxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsU0FBUyxDQUFDLENBQUM7UUFDdkUsSUFBSSxPQUFPLElBQUksS0FBSztZQUFFLE9BQU87UUFDN0IsSUFBSSxDQUFDLGtCQUFrQixHQUFHLFNBQVMsQ0FBQyxVQUFVLENBQUM7UUFDL0MsSUFBSSxDQUFDLGdCQUFnQixHQUFHLFNBQVMsQ0FBQyxRQUFRLENBQUM7UUFDM0MsU0FBUyxDQUFDLFVBQVUsR0FBRyxFQUFFLENBQUM7UUFDMUIsU0FBUyxDQUFDLFFBQVEsR0FBRyxDQUFDLENBQUM7UUFDdkIsU0FBUyxDQUFDLFdBQVcsRUFBRSxDQUFDO1FBQ3hCLFNBQVMsQ0FBQyxTQUFTLENBQUE7UUFDbkIsU0FBUyxDQUFDLElBQUksRUFBRSxDQUFDO1FBQ2pCLHlCQUFlLENBQUMsUUFBUSxDQUFDLFFBQVEsRUFBRSxDQUFDO0lBQ3hDLENBQUM7SUFFRCxhQUFhLENBQUMsUUFBa0I7UUFDNUIsSUFBSSxRQUFRLENBQUMsVUFBVSxDQUFDLEdBQUcsSUFBSSxRQUFRO1lBQ25DLE9BQU87UUFDWCxJQUFJLFNBQVMsR0FBRyxRQUFRLENBQUMsVUFBVSxDQUFDLFlBQVksU0FBQyx5QkFBZSxFQUFHLENBQUM7UUFDcEUsSUFBSSxTQUFTLElBQUksSUFBSTtZQUFFLE9BQU87UUFDOUIsU0FBUyxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsa0JBQWtCLENBQUM7UUFDL0MsU0FBUyxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsZ0JBQWdCLENBQUM7SUFDL0MsQ0FBQztDQUdKO0FBakNELDhCQWlDQyJ9","assetPath":"Assets/Scripts/GameController/CushionJump.ts","manifest":{"properties":[],"name":"CushionJump","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: d97e7fbf925ed96f307c3bea8b68a67f
+  onlyWriteTrigger: 0
