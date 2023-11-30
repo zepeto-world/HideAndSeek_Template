@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 1764373675, guid: c9608f3ebf82d477589e728bb3e81780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxClients: 8
+  maxClients: 12
   disableInvite: 0
   disableRoomList: 0
   disablePrivateRoom: 0
