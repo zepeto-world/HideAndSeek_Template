@@ -55,7 +55,7 @@ export default class TransformHelper extends ZepetoScriptBehaviour {
         else {
             FB = "b";
         }
-        
+
         if (LR == "r" && FB == "f") {
             //Right front (first quadrant)
             return 1;
