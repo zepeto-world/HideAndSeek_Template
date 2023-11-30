@@ -70,16 +70,16 @@ crashlytics-build.properties
 # NODE
 node_modules/
 
-package-lock.json
-tsconfig.json
-Packages/packages-lock.json
-ProjectSettings/ProjectVersion.txt
+# package-lock.json
+# tsconfig.json
+# Packages/packages-lock.json
+# ProjectSettings/ProjectVersion.txt
 Assets/FR2_Cache.asset
 Assets/FR2_Cache.asset.meta
-Assets/New Environment.asset
-Assets/New Environment.asset.meta
+# Assets/New Environment.asset
+# Assets/New Environment.asset.meta
 Assets/ParrelSync.meta
 Assets/ParrelSync/
-ProjectSettings/WorldEditorSettings.asset
-ProjectSettings/WorldPlayerSettings.asset
+# ProjectSettings/WorldEditorSettings.asset
+# ProjectSettings/WorldPlayerSettings.asset
 BuildLogs/
