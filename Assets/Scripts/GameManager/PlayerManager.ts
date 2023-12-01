@@ -13,7 +13,7 @@ import IKCtrl from '../Common/IKCtrl';
 import UIToast from '../UI/UIToast';
 import UIHunterOperation from '../UI/UIHunterOperation';
 import RadarController from '../GameController/RadarController';
-import { ItemWeightMap } from '../Data/itemWeight';
+import { ItemWeightMap } from '../Data/ItemWeight';
 import GameMain from '../GameMain';
 import LoadManager from './LoadManager';
 
@@ -139,7 +139,7 @@ export default class PlayerManager extends BaseManager {
 
     /* Sync setting */
     // Continuously moving in a certain direction, synchronizing every x seconds
-    private mKeepMoveInterval: number = 0.05; 
+    private mKeepMoveInterval: number = 0.05;
     private mMoveTimer: number = 0;
     private muiMoveDir: Vector2;
     private mMoveState: MoveState = MoveState.DragEnd;
@@ -441,7 +441,7 @@ export default class PlayerManager extends BaseManager {
     /* Player Character Control Start */
     private mPreCameraAngleY: number = 0;
     // 1 degree error  
-    private mAngleBlance: number = 100;   
+    private mAngleBlance: number = 100;
 
     /**
      * Synchronize player rotation angle
@@ -548,7 +548,7 @@ export default class PlayerManager extends BaseManager {
             this.OnChangeModel(zepetoCharacter, player.model);
             if (sessionId == this.mSessionId) {
                 this.OnChangeModelCamera(player.model);
-            } else if (this.mGameState >= GameState.GameStart) {    
+            } else if (this.mGameState >= GameState.GameStart) {
                 // After the game starts, As a seeker, Synchronize and add outline    
                 let isOk = this.mPlayerSessionMap.get(this.mSessionId).isHunter;
                 if (!isOk && !player.isHunter) {
@@ -955,7 +955,7 @@ export default class PlayerManager extends BaseManager {
     readonly DEF_DIE_MODEL: number = 100;
     OnChangeModelCamera(modelId: number) {
         if (this.mGameState < GameState.GameStart) {
-            if (modelId != this.DEF_MODEL) {  
+            if (modelId != this.DEF_MODEL) {
                 // Item perspective
                 this.mHunterCamera.transform.localPosition = new Vector3(0, 0, -0.5);
                 this.SetHunterCamera(false);
@@ -1006,7 +1006,7 @@ export default class PlayerManager extends BaseManager {
                 for (let i = 0; i < body.childCount; i++) {
                     body.GetChild(i).gameObject.SetActive(false);
                 }
-                if (character != this.GetCharacter(this.mSessionId)) {        
+                if (character != this.GetCharacter(this.mSessionId)) {
                     //Add restrictions to prevent local player character controllers from getting stuck
                     cc.enabled = false;
                 }
@@ -1019,9 +1019,9 @@ export default class PlayerManager extends BaseManager {
                     body.GetChild(i).gameObject.SetActive(false);
                 }
                 // this.mGoods[modelId];
-                let modelPrefab = this.GoodsData.data.get(modelId).name 
+                let modelPrefab = this.GoodsData.data.get(modelId).name
                 //GameObject.Instantiate<GameObject>(modelPrefab, character.transform);
-                modelInst = LoadManager.instance.ResLoad_PrefabObj("Change_Prefab/" + modelPrefab); 
+                modelInst = LoadManager.instance.ResLoad_PrefabObj("Change_Prefab/" + modelPrefab);
                 modelInst.transform.parent = character.transform;
                 modelInst.SetActive(true);
                 modelInst.transform.localEulerAngles = Vector3.zero;
