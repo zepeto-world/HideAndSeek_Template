@@ -1,11 +1,13 @@
+
 fileFormatVersion: 2
-guid: af3ac6d798d94e4582559e02b8ba4afb
-importerOverride: ZEPETO.Multiplay.Script.Editor:ZEPETO.Multiplay.Script.Editor:ZepetoMultiplayResourceImporter
-ScriptedImporter:
-  internalIDToNameTable: []
+guid: dca62eccc032422484353593fbbd5b05
+importerOverride:
+  nativeImporterType: 2089858483
+  scriptedImporterType:
+    serializedVersion: 2
+    Hash: 0e4dac5e3c202b6cd94b5053cf050c2d
+DefaultImporter:
   externalObjects: {}
-  serializedVersion: 2
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-  script: {fileID: 339498544, guid: c9608f3ebf82d477589e728bb3e81780, type: 3}

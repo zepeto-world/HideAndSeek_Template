@@ -123,7 +123,7 @@ TextureImporter:
       213: 648583643790749314
     second: emoji_39
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -140,10 +140,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -182,6 +184,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -193,6 +197,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -205,6 +210,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -217,6 +223,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -229,6 +236,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1084,9 +1092,49 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      emoji_0: -1505182510700090377
+      emoji_1: 6794694004441203341
+      emoji_10: 24436219466069529
+      emoji_11: -7588579163646694775
+      emoji_12: -2321128864049216306
+      emoji_13: -3152626520592653697
+      emoji_14: 5835168519387493071
+      emoji_15: -2215509738740696551
+      emoji_16: -3548149485142763344
+      emoji_17: -4713082337694725034
+      emoji_18: 8546674365579616325
+      emoji_19: 6926256555388298474
+      emoji_2: -5576553338090860792
+      emoji_20: 4507370869919444435
+      emoji_21: -3959000421045433320
+      emoji_22: -593854554085446747
+      emoji_23: -1492860463691651585
+      emoji_24: -6310738583725779791
+      emoji_25: 2623213945479905518
+      emoji_26: 4875031984086644018
+      emoji_27: -4056837002022359700
+      emoji_28: 7566007128683192768
+      emoji_29: 3488546504868170786
+      emoji_3: -7769010004017012179
+      emoji_30: -9008750313939117293
+      emoji_31: 753948345049342178
+      emoji_32: -9170121571011316305
+      emoji_33: 8563148540990465945
+      emoji_34: 7416156223472289365
+      emoji_35: -2122307462329969652
+      emoji_36: -8554376798976988092
+      emoji_37: 146255543098185000
+      emoji_38: 6528393155573263755
+      emoji_39: 648583643790749314
+      emoji_4: -3068465445823258758
+      emoji_5: 7060836189021808496
+      emoji_6: -4634700052965373645
+      emoji_7: -7074781657552897285
+      emoji_8: 7276942657666392820
+      emoji_9: 3308860216770163791
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
